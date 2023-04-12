@@ -3,3 +3,4 @@
 
 1.create_tables 2023-04-12T11:59:24Z Etudiant O'clock <student@teleporter> # création des tables
 2.add_unique_user 2023-04-12T13:47:48Z Etudiant O'clock <student@teleporter> # Ajout contrainte unique sur le mail des utilisateurs
+3.add_table_collection 2023-04-12T13:58:56Z Etudiant O'clock <student@teleporter> # Ajout d'une table d'association user_has_collection
