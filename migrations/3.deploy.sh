@@ -3,4 +3,5 @@ export PGUSER=admin_kshf
 export PGPASSWORD=kshf
 
 # sqitch deploy
-sqitch deploy 1.create_tables
+# sqitch deploy 1.create_tables
+sqitch deploy 2.add_unique_user
