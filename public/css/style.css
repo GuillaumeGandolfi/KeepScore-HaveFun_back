@@ -156,3 +156,47 @@ button {
 #utilisateur-info.show {
   display: block;
 }
+
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Styles pour le titre */
+.title-page {
+  font-size: 3rem;
+  color: #333;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+/* Styles pour les boutons */
+.btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 1rem;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0062cc;
+}
+
+/* Styles pour les boutons "Inscription" et "Connexion" */
+.btn-primary {
+  margin-right: 1rem;
+}
+
+.home-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}

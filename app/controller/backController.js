@@ -1,9 +1,11 @@
-
 const controller = {
-    async getHome(req,res){
+    async getHome(_, res) {
+        res.render("form/home");
+    },
+    async getSignin(_,res){
         res.render("form/signin");
     },
-    async getHome1(req,res){
+    async getSignup(_,res){
         res.render("form/signup");
     },
 };

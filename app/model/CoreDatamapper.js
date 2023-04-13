@@ -1,9 +1,10 @@
 const client = require('../db/database');
 
-
+// Classe qui permet d'intéragir avec la base de données
 class CoreDatamapper {
     tableName;
 
+    // Constructeur de classe qui va initialiser la connexion client (le client créé dans "db/database" et require ici)
     constructor(client) {
         this.client = client;
     }
@@ -13,6 +14,7 @@ class CoreDatamapper {
      * @param {number|number[]} id identifiant ou liste d'identifiants
      * @returns un enregistrement ou une liste d'enregistrement
      */
+    
     async findByPk(id) {
         const preparedQuery = {
             text: `SELECT * FROM "${this.tableName}" WHERE id = $1`,
