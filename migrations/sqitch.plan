@@ -5,3 +5,7 @@
 2.add_unique_user 2023-04-12T13:47:48Z Etudiant O'clock <student@teleporter> # Ajout contrainte unique sur le mail des utilisateurs
 3.add_table_collection 2023-04-12T13:58:56Z Etudiant O'clock <student@teleporter> # Ajout d'une table d'association user_has_collection
 4.modify_transaction 2023-04-13T07:34:17Z Etudiant O'clock <student@teleporter> # Remplacement de input et output par 'operation' + suppression 'accepted' de la table 'user_quest'
+5.modify_collection 2023-04-13T08:23:14Z Etudiant O'clock <student@teleporter> # Ajout d'une catégorie aux items de la collection
+6.modify_shop 2023-04-13T08:35:01Z Etudiant O'clock <student@teleporter> # Ajout de la clé étrangère collection_id dans la table shop
+7.modify_tables 2023-04-13T08:53:42Z Etudiant O'clock <student@teleporter> # Ajout d'une colonne require_level a collection, et ajout d'un role aux utilisateurs
+

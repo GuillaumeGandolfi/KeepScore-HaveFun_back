@@ -1,4 +1,7 @@
 # sqitch add 1.create_tables -n "création des tables"
 # sqitch add 2.add_unique_user -n "Ajout contrainte unique sur le mail des utilisateurs"
 # sqitch add 3.add_table_collection -n "Ajout d'une table d'association user_has_collection"
-sqitch add 4.modify_transaction -n "Remplacement de input et output par 'operation' + suppression 'accepted' de la table 'user_quest'"
+# sqitch add 4.modify_transaction -n "Remplacement de input et output par 'operation' + suppression 'accepted' de la table 'user_quest'"
+# sqitch add 5.modify_collection -n "Ajout d'une catégorie aux items de la collection"
+# sqitch add 6.modify_shop -n "Ajout de la clé étrangère collection_id dans la table shop"
+sqitch add 7.modify_tables -n "Ajout d'une colonne require_level a collection, et ajout d'un role aux utilisateurs"

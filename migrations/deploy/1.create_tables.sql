@@ -10,14 +10,6 @@ CREATE TABLE "user" (
     wallet int NOT NULL DEFAULT 50
 );
 
-CREATE TABLE quest (
-    id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    description TEXT NOT NULL,
-    difficulty int NOT NULL, -- 1 easy 2 medium 3 hard
-    reward_exp int NOT NULL, -- valeur en expérience
-    reward_coin int NOT NULL, -- valeur en or
-    reward_item int REFERENCES collection(id)
-);
 
 CREATE TABLE family (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -45,6 +37,15 @@ CREATE TABLE transaction (
     input int NOT NULL,
     output int NOT NULL,
     user_id int REFERENCES "user"(id)
+);
+
+CREATE TABLE quest (
+    id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    description TEXT NOT NULL,
+    difficulty int NOT NULL, -- 1 easy 2 medium 3 hard
+    reward_exp int NOT NULL, -- valeur en expérience
+    reward_coin int NOT NULL, -- valeur en or
+    reward_item int REFERENCES collection(id)
 );
 
 CREATE TABLE user_has_family (
