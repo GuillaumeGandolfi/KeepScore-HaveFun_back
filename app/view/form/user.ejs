@@ -1,0 +1,45 @@
+<%- include('../partials/header') %>
+
+<div class="left-menu">
+    <a class="active" href="#">Utilisateur</a>
+    <a href="#">Famille</a>
+    <a href="#">Magasin</a>
+    <a href="#">Collection</a>
+    <a href="#">Transaction</a>
+    <a href="#">Quêtes</a>
+  </div>
+
+  <div class="content">
+    <form>
+      <label for="utilisateur">Sélectionnez un utilisateur:</label>
+      <select id="utilisateur" name="utilisateur">
+        <option value="1">John Doe</option>
+        <option value="2">Jane Smith</option>
+        <option value="3">Bob Johnson</option>
+      </select>
+      <br>
+      <div id="utilisateur-info">
+        <label for="nom">Nom:</label>
+        <input type="text" id="nom" name="nom" value="Doe"><br>
+
+        <label for="prenom">Prénom:</label>
+        <input type="text" id="prenom" name="prenom" value="John"><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="johndoe@example.com"><br>
+
+        <label for="niveau">Niveau:</label>
+        <input type="text" id="niveau" name="niveau" value="3"><br>
+
+        <label for="portefeuille">Portefeuille:</label>
+        <input type="text" id="portefeuille" name="portefeuille" value="1000"><br>
+
+        <button type="button" id="modifier">Modifier</button>
+        <button type="button" id="annuler">Annuler</button>
+      </div>
+    </form>
+  </div>
+
+
+
+<%- include('../partials/footer') %>

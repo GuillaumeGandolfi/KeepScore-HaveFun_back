@@ -2,8 +2,8 @@ BEGIN;
 
 CREATE TABLE "user" (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    mail TEXT NOT NULL,
-    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    firstname TEXT NOT NULL,
     lastname TEXT NOT NULL,
     password TEXT NOT NULL,
     level int NOT NULL DEFAULT 1,

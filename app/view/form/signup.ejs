@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+
+<h1>Inscription</h1>
+<form action="/signup" method="post" class="signup-form">
+    <label for="mail">Email </label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="name">Nom </label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="lastname">Prenom </label>
+    <input type="text" id="lastname" name="lastname" required>
+
+    <label for="password">Mot de passe</label>
+    <input type="password" id="password" name="password" required>
+
+    <input type="submit" value="S'inscrire">
+
+</form>
+
+
+
+<%- include('../partials/footer') %>

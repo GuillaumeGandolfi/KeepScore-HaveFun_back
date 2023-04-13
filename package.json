@@ -1,0 +1,29 @@
+{
+  "name": "projet-09-keep-score-and-have-fun-back",
+  "version": "1.0.0",
+  "description": "[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/for-sharks.svg)](http://forthebadge.com)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/O-clock-Ohm/projet-09-keep-score-and-have-fun-back.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/O-clock-Ohm/projet-09-keep-score-and-have-fun-back/issues"
+  },
+  "homepage": "https://github.com/O-clock-Ohm/projet-09-keep-score-and-have-fun-back#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "pg": "^8.10.0"
+  }
+}
