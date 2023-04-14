@@ -1,7 +1,6 @@
 // Variables environnemment
 require("dotenv").config();
 const express = require("express");
-const routerUser = require("./app/router/user");
 const bodyParser = require("body-parser");
 
 // import du module
@@ -32,7 +31,6 @@ app.set('views', './app/view');
 
 app.use(express.static('public'));
 
-app.use(routerUser);
 
 
 
