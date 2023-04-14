@@ -12,5 +12,4 @@ Collection.init({
     tableName: "collection"
 });
 
-module.exports = User;
-
+module.exports = Collection;

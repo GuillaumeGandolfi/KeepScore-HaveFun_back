@@ -2,6 +2,7 @@
 require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
+const router = require("./app/router");
 
 // import du module
 const session = require('express-session')
@@ -27,6 +28,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.set('view engine', 'ejs');
 app.set('views', './app/view');
 
+app.use(router);
 
 
 app.use(express.static('public'));

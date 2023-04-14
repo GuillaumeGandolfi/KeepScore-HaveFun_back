@@ -9,13 +9,11 @@ const Family = require("./Family");
 
 // Family <-> User (One-To-Many)
 User.belongsTo(Family, {
-    through: 'user_has_family',
     foreignKey: 'family_id',
     as: 'family'
 });
 
 Family.hasMany(User, {
-    through: 'user_has_family',
     foreignKey: 'family_id',
     as: 'members'
 });
@@ -87,3 +85,5 @@ Shop.belongsToMany(User, {
     as: "users",
     through: "user_has_shop"
 });
+
+module.exports = { User, Collection, Quest, Shop, Transaction, Family };
