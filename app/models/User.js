@@ -17,3 +17,21 @@ User.init({
 });
 
 module.exports = User;
+
+// email: {
+//     type: DataTypes.TEXT,
+//     allowNull: false,
+//     validate: {
+//       is: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
+//      Je sais pas si la regex est bonne mais on verra plus tard ça
+//     },
+//   },
+
+// Avec cette définition de modèle, Sequelize va générer une table user avec un champ email qui utilise le domaine email_domain 
+// avec la contrainte CHECK définie dans le domaine.
+
+// User.init({
+//     email: {
+//         type: DataTypes.DOMAIN('email_domain'),
+//         allowNull: false
+//     },
