@@ -33,7 +33,7 @@ CREATE TABLE collection (
 
 CREATE TABLE transaction (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    date TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+    date TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     input int NOT NULL,
     output int NOT NULL,
     user_id int REFERENCES "user"(id)
@@ -51,22 +51,29 @@ CREATE TABLE quest (
 CREATE TABLE user_has_family (
     user_id int REFERENCES "user"(id),
     family_id int REFERENCES family(id),
-    date_joined TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    date TIMESTAMPTZ DEFAULT NOW(),
     PRIMARY KEY (user_id, family_id)
 );
 
 CREATE TABLE user_has_friend (
     user_id int REFERENCES "user"(id),
     friend_id int REFERENCES "user"(id),
-    date_joined TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    date TIMESTAMPTZ DEFAULT NOW(),
     PRIMARY KEY (user_id, friend_id)
 );
 
-CREATE TABLE user_quest (
+CREATE TABLE user_has_quest (
     user_id int REFERENCES "user"(id),
     quest_id int REFERENCES quest(id),
     accepted BOOLEAN NOT NULL DEFAULT FALSE,
     PRIMARY KEY (user_id, quest_id)
+);
+
+CREATE TABLE user_has_shop (
+    user_id int REFERENCES "user"(id),
+    shop_id int REFERENCES shop(id),
+    date TIMESTAMPTZ DEFAULT NOW()
+    PRIMARY KEY (user_id, shop_id)
 );
 
 COMMIT;
