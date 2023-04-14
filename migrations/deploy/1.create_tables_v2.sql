@@ -1,13 +1,16 @@
 BEGIN;
 
+-- DROP TABLE IF EXISTS shop,collection,quest,transaction,user_has_friend,user_has_family,"user",family,user_has_collection,user_has_quest,user_has_shop CASCADE;
+
 CREATE TABLE "user" (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    email TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
     firstname TEXT NOT NULL,
     lastname TEXT NOT NULL,
     password TEXT NOT NULL,
     level int NOT NULL DEFAULT 1,
-    wallet int NOT NULL DEFAULT 50
+    wallet int NOT NULL DEFAULT 50,
+    isAdmin BOOLEAN DEFAULT FALSE
 );
 
 
@@ -17,25 +20,23 @@ CREATE TABLE family (
     level int NOT NULL
 );
 
-CREATE TABLE shop (
-    id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    description TEXT NOT NULL,
-    price int NOT NULL
-);
-
 CREATE TABLE collection (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     description TEXT NOT NULL,
-    own BOOLEAN NOT NULL DEFAULT NULL, -- 0 = ne possède pas / 1 = possède
-    active BOOLEAN NOT NULL DEFAULT NULL, -- 0 = pas actif / 1 = actif
-    user_id int REFERENCES "user"(id)
+    category TEXT NOT NULL,
+    require_level INT
+);
+
+CREATE TABLE shop (
+    id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    price int NOT NULL,
+    collection_id INT REFERENCES collection(id)
 );
 
 CREATE TABLE transaction (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     date TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    input int NOT NULL,
-    output int NOT NULL,
+    operation int NOT NULL,
     user_id int REFERENCES "user"(id)
 );
 
@@ -46,6 +47,13 @@ CREATE TABLE quest (
     reward_exp int NOT NULL, -- valeur en expérience
     reward_coin int NOT NULL, -- valeur en or
     reward_item int REFERENCES collection(id)
+);
+
+CREATE TABLE user_has_collection(
+    collection_id int REFERENCES collection(id),
+    user_id int REFERENCES "user"(id),
+    active BOOLEAN DEFAULT NULL,
+    PRIMARY KEY (collection_id, user_id)
 );
 
 CREATE TABLE user_has_family (
@@ -65,14 +73,13 @@ CREATE TABLE user_has_friend (
 CREATE TABLE user_has_quest (
     user_id int REFERENCES "user"(id),
     quest_id int REFERENCES quest(id),
-    accepted BOOLEAN NOT NULL DEFAULT FALSE,
     PRIMARY KEY (user_id, quest_id)
 );
 
 CREATE TABLE user_has_shop (
     user_id int REFERENCES "user"(id),
     shop_id int REFERENCES shop(id),
-    date TIMESTAMPTZ DEFAULT NOW()
+    date TIMESTAMPTZ DEFAULT NOW(),
     PRIMARY KEY (user_id, shop_id)
 );
 
