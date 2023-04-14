@@ -25,9 +25,12 @@ const userController = {
                     {association: "friends"},
                     {association: "quests"},
                     {association: "items_collection"},
-                    {association: "items_shop"}
+                    // {association: "items_shop"}
                 ]
+                
             });
+            res.status(200).json(user);
+            
         } catch (error) {
             console.error(error);
             console.trace(error);

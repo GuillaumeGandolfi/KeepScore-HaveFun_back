@@ -64,7 +64,7 @@ CREATE TABLE quest (
 CREATE TABLE user_has_collection(
     collection_id int REFERENCES collection(id),
     user_id int REFERENCES "user"(id),
-    active BOOLEAN DEFAULT NULL,
+    active BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (collection_id, user_id),
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ
