@@ -3,6 +3,7 @@ const express = require('express');
 /* -------------- Controllers -------------- */
 
 const userController = require('./controllers/userController');
+const familyController = require('./controllers/familyController');
 
 
 /* -------------- Routes -------------- */
@@ -18,6 +19,11 @@ router.delete('/user/:id', userController.deleteUser);
 
 
 
+
+
+router.get('/families', familyController.getAllFamilies);
+router.get('/family/:id', familyController.getOneFamily);
+router.post('/family', familyController.createFamily);
 
 
 module.exports = router;
