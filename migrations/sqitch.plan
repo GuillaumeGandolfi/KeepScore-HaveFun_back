@@ -1,4 +1,5 @@
 %syntax-version=1.0.0
 %project=kshf
 
-1.create_tables_v2 2023-04-14T15:10:19Z Etudiant O'clock <student@teleporter> # création des tables
+1.create_tables_v2 2023-04-17T13:23:42Z Etudiant O'clock <student@teleporter> # création des tables
+2.add_constrainst_delete 2023-04-17T13:23:42Z Etudiant O'clock <student@teleporter> # Ajout des contraintes ON DELETE CASCADE
