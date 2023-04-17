@@ -89,13 +89,13 @@ Shop.belongsToMany(User, {
 // Shop <-> Collection (One-To-Many)
 Shop.belongsTo(Collection, {
     foreignKey: 'collection_id',
-    as: 'shop',
+    as: 'items_collection',
     onDelete: 'CASCADE'
 });
 
 Collection.hasMany(Shop, {
     foreignKey: 'collection_id',
-    as: 'items'
+    as: 'items_shop'
 });
 
 module.exports = { User, Collection, Quest, Shop, Transaction, Family };

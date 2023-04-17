@@ -44,6 +44,9 @@ router.delete('/collection/:id', collectionController.deleteCollection);
 
 /** Shops */
 router.get('/shops', shopController.getAllItemShop);
+router.get('/shop/:id', shopController.getOneItem);
+router.post('/shop/:id', shopController.addItemToShop);
+router.delete('/shop/:id', shopController.deleteItemFromShop);
 
 
 module.exports = router;
