@@ -4,3 +4,4 @@ export PGPASSWORD=KSHF
 
 # sqitch deploy
 sqitch deploy 1.create_tables_v2
+sqitch deploy 2.add_constraint_delete
