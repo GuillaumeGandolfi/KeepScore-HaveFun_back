@@ -25,8 +25,9 @@ const userController = {
                     {association: "friends"},
                     {association: "quests"},
                     {association: "items_collection"},
-                    {association: "items_shop", include:["shop"]}
+                    // {association: "items_shop"}
                 ]
+                
             });
             res.status(200).json(user);
             
@@ -35,7 +36,34 @@ const userController = {
             console.trace(error);
             res.status(500).json(error);
         } 
-    }
+    },
+    createUser: async (req, res) => {
+        try {
+            const { email, firstname, lastname, password } = req.body;
+            const bodyErrors = [];
+
+            if (!email) {
+                bodyErrors.push('email can not be empty');
+            }
+            if (!firstname) {
+                bodyErrors.push('firstname can not be empty');
+            }
+            if (!password) {
+                bodyErrors.push('password can not be empty');
+            }
+            if ( bodyErrors.length) {
+                res.status(400).json(bodyErrors);
+            } else {
+                let newUser = User.build({
+                    email,
+                    firstname,
+                    lastname,
+                    password
+                });
+            }
+
+        }
+    },
 
     // async renderQuizPage(req, res) {
 
