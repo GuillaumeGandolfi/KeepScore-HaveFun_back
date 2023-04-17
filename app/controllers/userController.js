@@ -5,10 +5,7 @@ const Joi = require("joi");
 // Schema du mot de passe
 const schema = Joi.object({
     password: Joi.string()
-      .min(8)
-      .max(30)
-      .pattern(new RegExp('^[a-zA-Z0-9$@$!%*?&_-]+$'))
-      .required()
+        .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
   });
 
 
@@ -64,6 +61,7 @@ const userController = {
                 bodyErrors.push('Cet email est déjà utilisé')
             }
 
+            // TODO! Erreur ici : le mot de passe de se fait pas tester !
             // On test le schéma du mot de passe
             if(!schema.validate(password)){
                 bodyErrors.push('Mot de passe non conforme');
