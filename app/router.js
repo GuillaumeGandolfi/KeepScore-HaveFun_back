@@ -23,8 +23,8 @@ router.delete('/user/:id', userController.deleteUser);
 router.get('/collections', collectionController.getAllCollections);
 router.get('/collection/:id', collectionController.getOneCollection);
 router.post('/collections', collectionController.createCollection);
-// router.put('/user/:id', userController.modifyUser);
-// router.delete('/user/:id', userController.deleteUser);
+router.put('/collection/:id', collectionController.modifyCollection);
+router.delete('/collection/:id', collectionController.deleteCollection);
 
 
 

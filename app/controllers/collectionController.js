@@ -68,6 +68,60 @@ const collectionController = {
             res.status(500).json(error.toString());
         }
     },
+    modifyCollection: async (req, res) => {
+        try {   
+            // On récupère les infos d'une collection : 
+            const collectionId = req.params.id;
+            const collection = await Collection.findByPk(collectionId);
+
+            // On test si la collection existe pour continuer : 
+            if (!collection) {
+                res.status(404).send('Cant find collection ' + collectionId);
+            } else {
+                // On récupère les nouvelles infos dans le body : 
+                const { description, category, require_level } = req.body;
+
+                // Et on change que les params présent dans le body : 
+                if (description) {
+                    collection.description = description;
+                }
+                if (category) {
+                    collection.category = category;
+                }
+                if (require_level) {
+                    collection.require_level = require_level;
+                }
+
+                // Puis on enregistre directement en bdd
+                await collection.save();
+                // Et on renvoie l'instance enregistré en réponse dans le req
+                res.status(200).json(collection);
+
+            }
+
+        } catch (error) {
+            console.trace(error);
+            res.status(500).json(error.toString());
+        }
+    },
+    deleteCollection: async (req, res) => {
+        try {
+            // Je récupère la collection que je souhaite supprimer
+            const collectionId = req.params.id;
+            const collection = await Collection.findByPk(collectionId);
+
+            // // Je supprime dans un premier temps la ligne du shop qui correspond a cette collection
+            // await Shop.destroy({ where: { collection_id: collectionId } });
+            
+            // Une fois la ligne du shop supprimé, on passe a la colleciton
+            await collection.destroy();
+            // Une fois supprimé je le fait savoir au front dans la requete
+            res.status(200).json('Collection deleted');
+        } catch (error) {
+            console.trace(error);
+            res.status(500).json(error.toString());
+        }
+    }
 };
 
 
