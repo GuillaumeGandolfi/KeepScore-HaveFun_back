@@ -66,6 +66,43 @@ const familyController = {
             console.trace(error);
             res.status(500).json(error);
         }
+    },
+
+    modifyFamily: async (req, res) => {
+        try {
+            const familyId = req.params.id;
+            const family = await Family.findByPk(familyId);
+            if (!family) {
+                res.status(404).send('Family with the id: ' + familyId + 'does not exist');
+            } else {
+                const { name } = req.body;
+
+                if (name) {
+                    family.name = name;
+                }
+
+                await family.save();
+
+                res.status(200).json(family);
+            }
+        } catch(error) {
+            console.error(error);
+            console.trace(error);
+            res.status(500).json(error);
+        }
+    },
+
+    deleteFamily: async (req, res) => {
+        try {
+            const familyId = req.params.id;
+            const family = await Family.findByPk(familyId);
+            await family.destroy();
+            res.status(200).json("Family deleted");
+        } catch (error) {
+            console.error(error);
+            console.trace(error);
+            res.status(500).json(error);
+        }
     }
 }
 
