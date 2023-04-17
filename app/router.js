@@ -15,6 +15,7 @@ router.get('/user/:id', userController.getOneUser);
 
 
 router.get('/families', familyController.getAllFamilies);
+router.get('/family/:id', familyController.getOneFamily);
 
 
 module.exports = router;
