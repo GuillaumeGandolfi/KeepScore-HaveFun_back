@@ -61,14 +61,23 @@ const userController = {
                 bodyErrors.push('Cet email est déjà utilisé')
             }
 
-            // TODO! Erreur ici : le mot de passe de se fait pas tester !
+            // // TODO! Erreur ici : le mot de passe de se fait pas tester !
             // On test le schéma du mot de passe
-            if(!schema.validate(password)){
-                bodyErrors.push('Mot de passe non conforme');
+
+            // if(!schema.validate({ password: password })){
+            //     console.log(result.error.details[0].message);
+            //     bodyErrors.push('Mot de passe non conforme');
+            // }
+            const result = schema.validate({ password: password });
+            if (result.error) {
+            bodyErrors.push('Mot de passe non conforme');
+            console.log(result.error.details[0].message); // "Mot de passe doit contenir au moins 3 caractères"
             }
+
 
             // On vérifie si il y a eu des erreurs
             if ( bodyErrors.length) {
+                console.log(bodyErrors)
                 res.status(400).json(bodyErrors);
 
 
@@ -146,9 +155,9 @@ const userController = {
     deleteUser: async (req, res) => {
         try {
             const userId = req.params.id;
-            const user = await user.findByPk(userId); // On instancie la liste a partir de la bdd
+            const user = await User.findByPk(userId); // On instancie la liste a partir de la bdd
             await user.destroy();  // On utilise destroy() pour supprimer l'enregistrement de la bdd
-            res.status(200).json('OK');
+            res.status(200).json('User deleted');
         } catch(error) {
             console.trace(error);
             res.status(500).json(error.toString());
