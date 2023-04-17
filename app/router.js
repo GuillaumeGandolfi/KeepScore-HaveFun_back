@@ -6,6 +6,7 @@ const userController = require('./controllers/userController');
 const familyController = require('./controllers/familyController');
 const questController = require('./controllers/questController');
 const collectionController = require('./controllers/collectionController');
+const transactionController = require('./controllers/transactionController');
 
 
 
@@ -40,6 +41,13 @@ router.get('/collection/:id', collectionController.getOneCollection);
 router.post('/collection', collectionController.createCollection);
 router.put('/collection/:id', collectionController.modifyCollection);
 router.delete('/collection/:id', collectionController.deleteCollection);
+
+/** Transactions */
+router.get('/transactions', transactionController.getAllTransactions);
+router.get('/transaction/:id', transactionController.getOneTransaction);
+router.post('/transaction', transactionController.createTransaction);
+router.put('/transaction/:id', transactionController.modifyTransaction);
+router.delete('/transaction/:id', transactionController.deleteTransaction);
 
 
 module.exports = router;

@@ -110,7 +110,7 @@ const collectionController = {
             const collectionId = req.params.id;
             const collection = await Collection.findByPk(collectionId);
 
-            // Une fois la ligne du shop supprimé, on passe a la colleciton
+            // Puis je supprime l'instance de collection trouvé
             await collection.destroy();
             // Une fois supprimé je le fait savoir au front dans la requete
             res.status(200).json('Collection deleted');

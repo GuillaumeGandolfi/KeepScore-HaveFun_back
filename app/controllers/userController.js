@@ -9,8 +9,6 @@ const schema = Joi.object({
   });
 
 
-
-
 const userController = {
     getAllUsers: async (req, res) => {
         try {
