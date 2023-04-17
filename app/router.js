@@ -28,7 +28,9 @@ router.delete('/family/:id', familyController.deleteFamily);
 /** Quests */
 router.get('/quests', questController.getAllQuests);
 router.get('/quest/:id', questController.getOneQuest);
-router.post('quest', questController.createQuest);
+router.post('/quest', questController.createQuest);
+router.put('/quest/:id', questController.modifyQuest);
+router.delete('/quest/:id', questController.deleteQuest);
 
 
 module.exports = router;

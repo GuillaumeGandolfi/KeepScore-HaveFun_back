@@ -63,7 +63,52 @@ const questController = {
             res.status(500).json(error);
         }
     },
-}
 
+    modifyQuest: async (req, res) => {
+        try {
+            const questId = req.params.id;
+            const quest = await Quest.findByPk(questId);
+            if (!quest) {
+                res.status(404).json('Quest with the id: ' + questId + ' does not exist');
+            } else {
+                const { description, difficulty, reward_exp, reward_coin } = req.body;
+
+                if (description) {
+                    quest.description = description;
+                }
+                if (difficulty) {
+                    quest.difficulty = difficulty;
+                }
+                if(reward_exp) {
+                    quest.reward_exp = reward_exp;
+                }
+                if(reward_coin) {
+                    quest.reward_coin = reward_coin;
+                }
+
+                await quest.save();
+
+                res.status(200).json(quest);
+            }
+        } catch (error) {
+            console.error(error);
+            console.trace(error);
+            res.status(500).json(error);
+        }
+    },
+
+    deleteQuest: async (req, res) => {
+        try {
+            const questId = req.params.id;
+            const quest = await Quest.findByPk(questId);
+            await quest.destroy();
+            res.status(200).json("Quest deleted");
+        } catch (error) {
+            console.error(error);
+            console.trace(error);
+            res.status(500).json(error);
+        }
+    }
+}
 
 module.exports = questController;
