@@ -4,12 +4,9 @@ const express = require('express');
 
 const userController = require('./controllers/userController');
 const familyController = require('./controllers/familyController');
-<<<<<<< HEAD
 const questController = require('./controllers/questController');
-=======
 const collectionController = require('./controllers/collectionController');
 
->>>>>>> dev-controller-collection
 
 
 /* -------------- Routes -------------- */
@@ -19,25 +16,11 @@ const router = express.Router();
 /** Users */
 router.get('/users', userController.getAllUsers);
 router.get('/user/:id', userController.getOneUser);
-router.post('/users', userController.createUser);
+router.post('/user', userController.createUser);
 router.put('/user/:id', userController.modifyUser);
 router.delete('/user/:id', userController.deleteUser);
 
-<<<<<<< HEAD
 /** Families */
-=======
-/** Collections */
-router.get('/collections', collectionController.getAllCollections);
-router.get('/collection/:id', collectionController.getOneCollection);
-router.post('/collections', collectionController.createCollection);
-router.put('/collection/:id', collectionController.modifyCollection);
-router.delete('/collection/:id', collectionController.deleteCollection);
-
-
-
-
-/** Family */
->>>>>>> dev-controller-collection
 router.get('/families', familyController.getAllFamilies);
 router.get('/family/:id', familyController.getOneFamily);
 router.post('/family', familyController.createFamily);
@@ -50,6 +33,13 @@ router.get('/quest/:id', questController.getOneQuest);
 router.post('/quest', questController.createQuest);
 router.put('/quest/:id', questController.modifyQuest);
 router.delete('/quest/:id', questController.deleteQuest);
+
+/** Collections */
+router.get('/collections', collectionController.getAllCollections);
+router.get('/collection/:id', collectionController.getOneCollection);
+router.post('/collection', collectionController.createCollection);
+router.put('/collection/:id', collectionController.modifyCollection);
+router.delete('/collection/:id', collectionController.deleteCollection);
 
 
 module.exports = router;
