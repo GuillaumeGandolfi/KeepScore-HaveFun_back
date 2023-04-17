@@ -86,15 +86,15 @@ Shop.belongsToMany(User, {
     through: "user_has_shop"
 });
 
-// // Shop <-> Collection (One-To-Many)
-// Collection.belongsTo(Shop, {
-//     foreignKey: 'collection_id',
-//     as: 'shop'
-// });
+// Shop <-> Collection (One-To-Many)
+Shop.belongsTo(Collection, {
+    foreignKey: 'collection_id',
+    as: 'shop'
+});
 
-// Shop.hasMany(Collection, {
-//     foreignKey: 'collection_id',
-//     as: 'items'
-// });
+Collection.hasMany(Shop, {
+    foreignKey: 'collection_id',
+    as: 'items'
+});
 
 module.exports = { User, Collection, Quest, Shop, Transaction, Family };

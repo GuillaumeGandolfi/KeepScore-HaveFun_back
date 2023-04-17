@@ -1,4 +1,8 @@
 %syntax-version=1.0.0
 %project=kshf
 
+<<<<<<< HEAD
 1.create_tables_v2 2023-04-14T15:10:19Z Etudiant O'clock <student@teleporter> # création des tables
+=======
+1.create_tables_v2 2023-04-16T15:31:04Z Etudiant O'clock <student@teleporter> # création des tables
+>>>>>>> aa6db6aa54331c681216f85d3fffa82062369862

@@ -5,7 +5,6 @@ const sequelize = require("../database");
 class Shop extends Model { }
 
 Shop.init({
-    description: DataTypes.TEXT,
     price: DataTypes.INTEGER
 }, {
     sequelize,
