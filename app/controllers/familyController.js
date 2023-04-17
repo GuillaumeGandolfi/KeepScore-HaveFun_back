@@ -34,6 +34,38 @@ const familyController = {
             console.trace(error);
             res.status(500).json(error);
         }
+    },
+
+
+    createFamily: async (req, res) => {
+        try {
+            // Ici j'ai mis le level, parce qu'on a pas mis une valeur par défaut
+            // dans la bdd, mais après on va retirer le level et mettre 1 par défaut
+            // ce sera mieux (une famille a peine créer sera forcément level 1)
+            const { name, level } = req.body;
+            const errors = [];
+            if (!name) {
+                errors.push('name can not be empty');
+            }
+            if (!level) {
+                errors.push('level can not be empty');
+            }
+            if (errors.length) {
+                res.status(400).json(errors);
+            } else {
+                let newFamily = Family.build({
+                    name,
+                    level
+                });
+
+                await newFamily.save();
+                res.status(200).json(newFamily);
+            }
+        } catch (error) {
+            console.error(error);
+            console.trace(error);
+            res.status(500).json(error);
+        }
     }
 }
 

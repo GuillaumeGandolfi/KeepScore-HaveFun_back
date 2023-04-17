@@ -16,6 +16,7 @@ router.get('/user/:id', userController.getOneUser);
 
 router.get('/families', familyController.getAllFamilies);
 router.get('/family/:id', familyController.getOneFamily);
+router.post('/family', familyController.createFamily);
 
 
 module.exports = router;
