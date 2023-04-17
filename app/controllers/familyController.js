@@ -91,6 +91,19 @@ const familyController = {
             res.status(500).json(error);
         }
     },
+
+    deleteFamily: async (req, res) => {
+        try {
+            const familyId = req.params.id;
+            const family = await Family.findByPk(familyId);
+            await family.destroy();
+            res.status(200).json("Family deleted");
+        } catch (error) {
+            console.error(error);
+            console.trace(error);
+            res.status(500).json(error);
+        }
+    }
 }
 
 module.exports = familyController;
