@@ -89,8 +89,7 @@ Shop.belongsToMany(User, {
 // Shop <-> Collection (One-To-Many)
 Shop.belongsTo(Collection, {
     foreignKey: 'collection_id',
-    as: 'shop',
-    onDelete: 'CASCADE'
+    as: 'shop'
 });
 
 Collection.hasMany(Shop, {
