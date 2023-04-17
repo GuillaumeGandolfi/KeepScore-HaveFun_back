@@ -4,6 +4,8 @@ const express = require('express');
 
 const userController = require('./controllers/userController');
 const familyController = require('./controllers/familyController');
+const collectionController = require('./controllers/collectionController');
+
 
 
 /* -------------- Routes -------------- */
@@ -17,10 +19,17 @@ router.post('/users', userController.createUser);
 router.put('/user/:id', userController.modifyUser);
 router.delete('/user/:id', userController.deleteUser);
 
+/** Collections */
+router.get('/collections', collectionController.getAllCollections);
+router.get('/collection/:id', collectionController.getOneCollection);
+router.post('/collections', collectionController.createCollection);
+// router.put('/user/:id', userController.modifyUser);
+// router.delete('/user/:id', userController.deleteUser);
 
 
 
 
+/** Family */
 router.get('/families', familyController.getAllFamilies);
 router.get('/family/:id', familyController.getOneFamily);
 router.post('/family', familyController.createFamily);
