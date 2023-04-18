@@ -1,4 +1,4 @@
-const { User, Shop, Transaction, Family, Collection, Quest } = require("../models");
+const { User } = require("../models");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 
@@ -33,7 +33,6 @@ const userController = {
                     {association: "items_collection"},
                     // {association: "items_shop"}
                 ]
-                
             });
             res.status(200).json(user);
             
@@ -88,8 +87,8 @@ const userController = {
                     lastname,
                     password:encodedPassword
                 });
-                await newUser.save()            // On enregistre l'instance crée dans la db
-                res.status(200).json(newUser);
+                await newUser.save();            // On enregistre l'instance crée dans la db
+                res.status(200).json({ newUser });
             }
 
         } catch (error) {

@@ -8,9 +8,12 @@ const questController = require('./controllers/questController');
 const collectionController = require('./controllers/collectionController');
 const shopController = require('./controllers/shopController');
 const transactionController = require('./controllers/transactionController');
+const authController = require('./controllers/authController');
 
 
+/* -------------- Middlewares -------------- */
 
+const tokenMiddleware = require('./middlewares/tokenMiddleware');
 
 /* -------------- Routes -------------- */
 
@@ -56,5 +59,9 @@ router.get('/transaction/:id', transactionController.getOneTransaction);
 router.post('/transaction', transactionController.createTransaction);
 router.put('/transaction/:id', transactionController.modifyTransaction);
 router.delete('/transaction/:id', transactionController.deleteTransaction);
+
+/** Authentification */
+router.post('/signup', authController.signupUser);
+router.post('/login', authController.loginUser);
 
 module.exports = router;
