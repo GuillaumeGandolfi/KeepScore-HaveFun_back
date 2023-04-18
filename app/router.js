@@ -9,7 +9,7 @@ const collectionController = require('./controllers/collectionController');
 const shopController = require('./controllers/shopController');
 const transactionController = require('./controllers/transactionController');
 const authController = require('./controllers/authController');
-
+const adminController = require('./controllers/adminController');
 
 /* -------------- Middlewares -------------- */
 
@@ -63,5 +63,8 @@ router.delete('/transaction/:id', transactionController.deleteTransaction);
 /** Authentification */
 router.post('/signup', authController.signupUser);
 router.post('/login', authController.loginUser);
+
+/** Back office */
+// router.get('/home', adminController.homePage);
 
 module.exports = router;

@@ -55,7 +55,7 @@ const userController = {
             // On vérifie si l'email est déjà prise :
             const unUtilisateur = await User.findOne({ where: {email:email}});
             if(unUtilisateur) {
-                bodyErrors.push('Cet email est déjà utilisé')
+                bodyErrors.push('Cet email est déjà utilisé');
             }
 
             // // TODO! Erreur ici : le mot de passe de se fait pas tester !
