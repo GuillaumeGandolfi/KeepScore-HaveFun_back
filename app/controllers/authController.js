@@ -44,7 +44,7 @@ const authController = {
 
             // On vérifie si il y a eu des erreurs
             if ( bodyErrors.length) {
-                console.log(bodyErrors);s
+                console.log(bodyErrors);
                 res.status(400).json(bodyErrors);
             } else {
                 const encodedPassword = bcrypt.hashSync(password, 5);
