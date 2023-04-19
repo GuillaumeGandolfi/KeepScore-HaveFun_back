@@ -91,8 +91,8 @@ const authController = {
 
             
             const responseWithoutPassword = {...user.dataValues, password:''}
-            console.log('responseWithoutPassword',responseWithoutPassword)
-           
+            console.log('responseWithoutPassword',responseWithoutPassword);
+
             // S'il cet utilisateur n'existe pas
             if (!user) {
                 return res.status(401).json('Incorrect email or password');
@@ -106,6 +106,12 @@ const authController = {
 
             // Et maintenant on créer et on envoie un token pour l'utilisateur
             const token = jwt.sign({ userId: user.id }, 'secret-key');
+
+            /** AUTRE POSSIBILITE, QUI SUPPRIME CARREMENT LE PASSWORD DU RENVOIE
+            const userJson = user.toJSON();
+            delete userJson.password;
+            res.status(200).json({ token, userJson });
+             */
 
             res.status(200).json({ token, responseWithoutPassword });
 
