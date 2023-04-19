@@ -121,6 +121,6 @@ nav ul li a {
 	text-align: center;
 }
 
-.select-option {
-	text-align: center;
+.family-info {
+	display: none;
 }

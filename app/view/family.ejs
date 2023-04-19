@@ -4,14 +4,24 @@
     <div class="select-wrapper">
         <h1 class="family-title">Famille</h1>
         <form method="POST">
-            <select name="family" id="family">
-                <option class="select-option" value="" disabled selected hidden>Sélectionnez une option</option>
+            <select name="family" id="family" class="select">
+                <option value="" disabled selected hidden>-- Sélectionnez une famille --</option>
                 <% families.forEach((family) => { %>
                 <option value="<%= family.id %>"><%= family.name %></option>
                 <% }) %>
             </select>
         </form>
     </div>
+</div>
+
+<div class="family-info">
+    <h2 class="family-name"><%= defaultFamilyName %></h2>
+    <ul class="family-members">
+        <% defaultFamilyMembers.forEach((member) => { %>
+        <li><%= member.lastname %> <%= member.firstname %></li>
+        <% }) %> 
+    </ul>
+    <p class="family-level">Niveau de la famille: <%= defaultFamilyLevel %></p>
 </div>
 
 <%- include('partials/footer') %>
