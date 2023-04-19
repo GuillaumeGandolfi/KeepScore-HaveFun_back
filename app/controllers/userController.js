@@ -9,6 +9,7 @@ const schema = Joi.object({
   });
 
 
+
 const userController = {
     getAllUsers: async (req, res) => {
         try {
@@ -35,7 +36,6 @@ const userController = {
                 ]
             });
             res.status(200).json(user);
-            
         } catch (error) {
             console.error(error);
             console.trace(error);
