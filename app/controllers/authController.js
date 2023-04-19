@@ -67,6 +67,7 @@ const authController = {
     // Méthode pour se logger
     loginUser: async (req, res) => {
         // On récupère les infos soumises dans le body
+        console.log(req.body)
         const { email, password } = req.body;
 
         try {
@@ -76,7 +77,21 @@ const authController = {
             }
 
             // Si c'est ok, on vérifie qu'un utilisateur est associé à l'email saisie dans la bdd
-            const user = await User.findOne({ where: { email } });
+            const user = await User.findOne({
+                where: { email },
+                include: [
+                    "operations",
+                    "family",
+                    {association: "friends"},
+                    {association: "quests"},
+                    {association: "items_collection"},
+                ]
+            });
+
+            
+            const responseWithoutPassword = {...user.dataValues, password:''}
+            console.log('responseWithoutPassword',responseWithoutPassword)
+           
             // S'il cet utilisateur n'existe pas
             if (!user) {
                 return res.status(401).json('Incorrect email or password');
@@ -90,7 +105,7 @@ const authController = {
 
             // Et maintenant on créer et on envoie un token pour l'utilisateur
             const token = jwt.sign({ userId: user.id }, 'secret-key');
-            res.status(200).json({ token, user });
+            res.status(200).json({ token, responseWithoutPassword });
         } catch (error) {
             console.error(error);
             console.trace(error);

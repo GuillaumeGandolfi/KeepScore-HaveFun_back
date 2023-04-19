@@ -1,8 +1,14 @@
 // Variables environnemment
 require("dotenv").config();
 const express = require("express");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 const router = require("./app/router");
+
+const cors = require('cors')
+const multer = require('multer')
+const bodyParser = multer()
+
+
 
 // import du module
 const session = require('express-session')
@@ -19,11 +25,15 @@ const sessionMiddleware = session({
 
 
 const app = express();
+app.use(express.json())
+app.use(cors('*'))
 
 // intégration du middleware pour les sessions
 app.use(sessionMiddleware);
 
-app.use(bodyParser.urlencoded({extended: false}));
+
+
+app.use(bodyParser.none());
 
 app.set('view engine', 'ejs');
 app.set('views', './app/view');
