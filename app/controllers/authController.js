@@ -26,19 +26,19 @@ const authController = {
             // On vérifie si l'email est déjà prise :
             const user = await User.findOne({ where: {email:email}});
             if(user) {
-                bodyErrors.push('email already used');
+                bodyErrors.push('Email already used');
             }
 
             // On vérifie si l'email est conforme : 
             const emailResult = schema.validate({ email: email });
             if (emailResult.error) {
-                bodyErrors.push('Adresse email non conforme');
+                bodyErrors.push('Invalid email address');
                 console.log(emailResult.error.details[0].message) 
             }
 
             const result = schema.validate({ password: password });
             if (result.error) {
-            bodyErrors.push('Mot de passe non conforme');
+            bodyErrors.push('Invalide password');
             console.log(result.error.details[0].message); // "Mot de passe doit contenir au moins 3 caractères"
             }
 
@@ -57,7 +57,8 @@ const authController = {
                 await newUser.save();            // On enregistre l'instance crée dans la db
                 // TODO! Choix route /login front ou back 
                 res.redirect('/login');
-                res.status(200).json({ newUser });
+                // Dans le JSON qu'on envoie, on retire le password
+                res.status(200).json({ newUser: { email, firstname, lastname } });
             }
         } catch (error) {
             console.trace(error);
@@ -90,7 +91,8 @@ const authController = {
 
             // Et maintenant on créer et on envoie un token pour l'utilisateur
             const token = jwt.sign({ userId: user.id }, 'secret-key');
-            res.status(200).json({ token, user });
+            // Pareil que pour signup, on envoie pas le password
+            res.status(200).json({ token, user: { email } });
         } catch (error) {
             console.error(error);
             console.trace(error);
