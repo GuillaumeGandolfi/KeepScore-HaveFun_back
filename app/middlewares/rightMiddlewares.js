@@ -1,6 +1,6 @@
 function isLoggedInMiddleware(requete,reponse,next)
 {
-   
+
     if(typeof requete.session.user == 'undefined' || !requete.session.user)
     {
         reponse.redirect("/")
