@@ -6,7 +6,9 @@ const Joi = require("joi");
 const schema = Joi.object({
     password: Joi.string()
         .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
-  });
+    email: Joi.string()
+        .pattern(new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')),
+});
 
 
 const userController = {
@@ -31,7 +33,7 @@ const userController = {
                     {association: "friends"},
                     {association: "quests"},
                     {association: "items_collection"},
-                    // {association: "items_shop"}
+                    {association: "items_shop"}
                 ]
             });
             res.status(200).json(user);
@@ -53,18 +55,11 @@ const userController = {
             }
 
             // On vérifie si l'email est déjà prise :
-            const unUtilisateur = await User.findOne({ where: {email:email}});
-            if(unUtilisateur) {
+            const user = await User.findOne({ where: {email:email}});
+            if(user) {
                 bodyErrors.push('Cet email est déjà utilisé');
             }
 
-            // // TODO! Erreur ici : le mot de passe de se fait pas tester !
-            // On test le schéma du mot de passe
-
-            // if(!schema.validate({ password: password })){
-            //     console.log(result.error.details[0].message);
-            //     bodyErrors.push('Mot de passe non conforme');
-            // }
             const result = schema.validate({ password: password });
             if (result.error) {
             bodyErrors.push('Mot de passe non conforme');
@@ -80,7 +75,6 @@ const userController = {
 
             } else {
                 const encodedPassword = bcrypt.hashSync(password, 5);
-                // ajouter le bcrypt ici
                 let newUser = User.build({      // On crée une instance avec le .build
                     email,
                     firstname,
