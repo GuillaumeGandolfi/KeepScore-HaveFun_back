@@ -65,6 +65,9 @@ router.post('/signup', authController.signupUser);
 router.post('/login', authController.loginUser);
 
 /** Back office */
-// router.get('/home', adminController.homePage);
+router.get('/admin/home', adminController.homePage);
+router.get('/admin/family', adminController.familyPage);
+router.get('/admin/user', adminController.userPage);
+
 
 module.exports = router;
