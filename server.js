@@ -4,9 +4,11 @@ const express = require("express");
 // const bodyParser = require("body-parser");
 const router = require("./app/router");
 
+
 const cors = require('cors');
 const multer = require('multer');
 const bodyParser = multer();
+
 
 
 
@@ -27,6 +29,7 @@ const sessionMiddleware = session({
 const app = express();
 app.use(express.json())
 app.use(cors('*'));
+
 
 // intégration du middleware pour les sessions
 app.use(sessionMiddleware);
