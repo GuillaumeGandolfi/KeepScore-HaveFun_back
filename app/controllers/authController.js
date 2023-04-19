@@ -107,6 +107,12 @@ const authController = {
             // Et maintenant on créer et on envoie un token pour l'utilisateur
             const token = jwt.sign({ userId: user.id }, 'secret-key');
 
+            /** AUTRE POSSIBILITE, QUI SUPPRIME CARREMENT LE PASSWORD DU RENVOIE
+            const userJson = user.toJSON();
+            delete userJson.password;
+            res.status(200).json({ token, userJson });
+             */
+
             res.status(200).json({ token, responseWithoutPassword });
 
         } catch (error) {
