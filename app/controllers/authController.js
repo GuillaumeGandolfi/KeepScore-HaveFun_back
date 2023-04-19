@@ -26,19 +26,19 @@ const authController = {
             // On vérifie si l'email est déjà prise :
             const user = await User.findOne({ where: {email:email}});
             if(user) {
-                bodyErrors.push('email already used');
+                bodyErrors.push('Email already used');
             }
 
             // On vérifie si l'email est conforme : 
             const emailResult = schema.validate({ email: email });
             if (emailResult.error) {
-                bodyErrors.push('Adresse email non conforme');
+                bodyErrors.push('Invalid email address');
                 console.log(emailResult.error.details[0].message) 
             }
 
             const result = schema.validate({ password: password });
             if (result.error) {
-            bodyErrors.push('Mot de passe non conforme');
+            bodyErrors.push('Invalide password');
             console.log(result.error.details[0].message); // "Mot de passe doit contenir au moins 3 caractères"
             }
 
@@ -57,7 +57,8 @@ const authController = {
                 await newUser.save();            // On enregistre l'instance crée dans la db
                 // TODO! Choix route /login front ou back 
                 res.redirect('/login');
-                res.status(200).json({ newUser });
+                // Dans le JSON qu'on envoie, on retire le password
+                res.status(200).json({ newUser: { email, firstname, lastname } });
             }
         } catch (error) {
             console.trace(error);
@@ -67,6 +68,7 @@ const authController = {
     // Méthode pour se logger
     loginUser: async (req, res) => {
         // On récupère les infos soumises dans le body
+        console.log(req.body)
         const { email, password } = req.body;
 
         try {
@@ -76,7 +78,21 @@ const authController = {
             }
 
             // Si c'est ok, on vérifie qu'un utilisateur est associé à l'email saisie dans la bdd
-            const user = await User.findOne({ where: { email } });
+            const user = await User.findOne({
+                where: { email },
+                include: [
+                    "operations",
+                    "family",
+                    {association: "friends"},
+                    {association: "quests"},
+                    {association: "items_collection"},
+                ]
+            });
+
+            
+            const responseWithoutPassword = {...user.dataValues, password:''}
+            console.log('responseWithoutPassword',responseWithoutPassword);
+
             // S'il cet utilisateur n'existe pas
             if (!user) {
                 return res.status(401).json('Incorrect email or password');
@@ -90,7 +106,15 @@ const authController = {
 
             // Et maintenant on créer et on envoie un token pour l'utilisateur
             const token = jwt.sign({ userId: user.id }, 'secret-key');
-            res.status(200).json({ token, user });
+
+            /** AUTRE POSSIBILITE, QUI SUPPRIME CARREMENT LE PASSWORD DU RENVOIE
+            const userJson = user.toJSON();
+            delete userJson.password;
+            res.status(200).json({ token, userJson });
+             */
+
+            res.status(200).json({ token, responseWithoutPassword });
+
         } catch (error) {
             console.error(error);
             console.trace(error);

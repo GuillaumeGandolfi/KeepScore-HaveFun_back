@@ -1,0 +1,45 @@
+<%- include('partials/header') %>
+
+<div class="content">
+  <p class="title">UTILISATEUR</p>
+</div>
+
+<!-- SELECT PERMETTANT DE CHOISIR UN USER DE LA BDD -->
+<div class="select-container">
+  <label for="choix" class="select-label">Choisir une option :</label>
+  <select name="choix" id="choix" class="select">
+    <option value="">-- Sélectionnez une option --</option>
+    <% for(const user of usersList) { %>
+    <option value="<%= user.id %>"><%= user.firstname %> <%= user.lastname %></option>
+    <% } %>
+  </select>
+</div>
+
+
+<!-- FORMULAIRE UNE FOIS LE SELECT SELECTIONNE -->
+<form class="user-form" id="user-form">
+  <div class="form-group">
+    <label for="nom" class="form-label">Nom :</label>
+    <input type="text" id="nom" name="lastname" class="form-input" value="" required>
+  </div>
+  <div class="form-group">
+    <label for="prenom" class="form-label">Prénom :</label>
+    <input type="text" id="prenom" name="firstname" class="form-input" value="" required>
+  </div>
+  <div class="form-group">
+    <label for="niveau" class="form-label">Niveau :</label>
+    <input type="number" id="niveau" name="level" class="form-input" min="1" max="100" required>
+  </div>
+  <div class="form-group">
+    <label for="wallet" class="form-label">Portefeuille :</label>
+    <input type="text" id="wallet" name="wallet" class="form-input" value="" required>
+  </div>
+  <div class="form-group">
+    <label for="family" class="form-label">Famille :</label>
+    <input type="text" id="family" name="family" class="form-input" value="" required>
+  </div>
+  </div>
+  <button type="submit" class="form-button">Envoyer</button>
+</form>
+
+<%- include('partials/footer') %>
