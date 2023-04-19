@@ -7,12 +7,6 @@ const familySelect = document.querySelector('#family');
 // On sélectionne la div family-info (caché par défaut)
 const familyInfos = document.querySelector('.family-info');
 
-// On pré-remplit les valeurs des variables dans le fichier EJS 
-// Pour que les éléments HTML soient créés dès le début de l'affichage de la page
-const defaultFamilyName = familyName.textContent;
-const defaultFamilyMembers = Array.from(document.querySelectorAll('.family-members li')).map(member => ({ name: member.textContent }));
-const defaultFamilyLevel = document.querySelector('.family-level').textContent;
-
 // On ajoute un événement à la sélection de la famille 
 familySelect.addEventListener('change', async (event) => {
 
@@ -25,14 +19,13 @@ familySelect.addEventListener('change', async (event) => {
         console.log(selectedFamily);
         
         // On met à jour les valeurs des variables dans le fichier EJS avec ceux de la famille sélectionnée
-        familyName.textContent = `Nom de la famille: ${selectedFamily.name}`;
-        document.querySelector('.family-members').innerHTML='';
+        familyName.textContent += ` ${selectedFamily.name}`;
         selectedFamily.members.forEach(member => {
             const li = document.createElement('li');
             li.textContent = `${member.lastname} ${member.firstname}`;
             document.querySelector('.family-members').appendChild(li);
         });
-        document.querySelector('.family-level').textContent = `Niveau de la famille: ${selectedFamily.level}`;
+        document.querySelector('.family-level').textContent += ` ${selectedFamily.level}`;
         // Et enfin on affiche la div qui était cachée
         familyInfos.style.display = 'block';
     } catch (error) {
