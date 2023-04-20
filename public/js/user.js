@@ -46,11 +46,11 @@ const user = {
                 familyInput.value = selectedFamily.name;
             }
 
-            // on récupère les éléments du formulaire
-            const lastNameInput = form.querySelector('input[name="lastname"]');
-            const firstNameInput = form.querySelector('input[name="firstname"]');
-            const levelInput = form.querySelector('input[name="level"]');
-            const walletInput = form.querySelector('input[name="wallet"]');
+            // // on récupère les éléments du formulaire
+            // const lastNameInput = form.querySelector('input[name="lastname"]');
+            // const firstNameInput = form.querySelector('input[name="firstname"]');
+            // const levelInput = form.querySelector('input[name="level"]');
+            // const walletInput = form.querySelector('input[name="wallet"]');
 
              // on pré-remplit chaque champ avec les informations de l'utilisateur sélectionné
             firstNameInput.value = selectedUser.lastname;
