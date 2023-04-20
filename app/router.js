@@ -62,7 +62,7 @@ router.delete('/transaction/:id', transactionController.deleteTransaction);
 
 /** Authentification */
 router.post('/signup', authController.signupUser);
-router.post('/login', authController.loginUser);
+router.post('/login', tokenMiddleware, authController.loginUser);
 router.post('/token/refresh', authController.refreshToken);
 
 /** Back office */
