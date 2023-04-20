@@ -15,17 +15,10 @@
 </div>
 
 <div class="family-info">
-    <h2 class="family-name">Nom de la famille: <%= defaultFamilyName %></h2>
+    <h2 class="family-name"><%= defaultFamilyName %></h2>
     <ul class="family-members">
-        <li>
-            <span>Nom</span>
-            <span>Prénom</span>
-        </li>
         <% defaultFamilyMembers.forEach((member) => { %>
-        <li>
-            <span><%= member.lastname %></span>
-            <span><%= member.firstname %></span>
-        </li>
+        <li><%= member.lastname %> <%= member.firstname %></li>
         <% }) %> 
     </ul>
     <p class="family-level">Niveau de la famille: <%= defaultFamilyLevel %></p>

@@ -46,9 +46,10 @@ nav ul li a {
 }
 
 .content {
+	background-color: #fff;
 	flex-basis: 80%;
 	padding: 20px;
-	background-color: #fff;
+	background-color: c;
 }
 
 /* *************************** CSS -> USER  ********************************************* */
@@ -110,6 +111,13 @@ nav ul li a {
 
 /* Family */
 
+.family-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .select-wrapper {
     display: flex;
     flex-direction: column;
@@ -122,5 +130,31 @@ nav ul li a {
 }
 
 .family-info {
-	display: none;
+    display: none;
+	background-color: #fff;
+	border-radius: 10px;
+	padding: 20px;
+    margin-top: 20px;
+	text-align: center;
+}
+
+.family-info h2 {
+	font-size: 1.5rem;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.family-info .family-members {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	margin-bottom: 10px;
+}
+
+.family-info .family-members li {
+	margin-bottom: 5px;
+}
+
+.family-info .family-level {
+	margin-top: 10px;
 }
