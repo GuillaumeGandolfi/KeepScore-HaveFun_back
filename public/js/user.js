@@ -57,10 +57,9 @@ const user = {
             lastNameInput.value = selectedUser.firstname;
             levelInput.value = selectedUser.level;
             walletInput.value = selectedUser.wallet;
-            
+        
+            // Et enfin on ré-affiche le formulaire, remplis.
             user.form.style.display = "block"
-            console.log(lastNameInput);
-
 
 
         } catch (error) {
