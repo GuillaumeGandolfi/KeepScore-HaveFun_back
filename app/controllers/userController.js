@@ -153,8 +153,29 @@ const userController = {
             console.trace(error);
             res.status(500).json(error.toString());
         }
+    },
+
+    addFriend: async (req, res) => {
+        try {
+            // On récupère l'utilisateur qui fait la requête
+            const currentUser = await User.findByPk(req.userId);
+
+            // On récupère l'utilisateur à ajouter en ami à partir de l'email passé dans le body de la requête
+            const friend = await User.findOne({ where: { email: req.body.email } });
+
+            if (!friend) {
+                return res.status(404).json('User not found');
+            }
+
+            // On ajoute l'utilisateur en ami
+            await currentUser.addFriend(friend);
+
+            res.status(200).json('User added as friend');
+        } catch (error) {
+            console.error(error);
+            res.status(500).json('Error adding friend');
+        }
     }
-  
 };
 
 module.exports = userController;
