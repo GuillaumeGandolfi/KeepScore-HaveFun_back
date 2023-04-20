@@ -1,3 +1,6 @@
+const showFamilyInfoBtn = document.querySelector('#show-family-info-btn');
+const selectWrapper = document.querySelector('.select-wrapper');
+
 // Je veux d'abord récupérer les élements HTML dont j'ai besoin
 const familyName = document.querySelector('.family-name');
 
@@ -6,6 +9,19 @@ const familySelect = document.querySelector('#family');
 
 // On sélectionne la div family-info (caché par défaut)
 const familyInfos = document.querySelector('.family-info');
+
+showFamilyInfoBtn.addEventListener('click', () => {
+    if (selectWrapper.style.display === 'flex') {
+        // Si selectWrapper est déjà affiché, on le cache à nouveau et on réinitialise les éléments d'affichage des infos
+        selectWrapper.style.display = 'none';
+        familyInfos.style.display = 'none';
+        familyName.textContent = '';
+        familySelect.selectedIndex = 0;
+    } else {
+        // Sinon on affiche selectWrapper
+        selectWrapper.style.display = 'flex';
+    }
+});
 
 // On ajoute un événement à la sélection de la famille 
 familySelect.addEventListener('change', async (event) => {
