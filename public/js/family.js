@@ -15,6 +15,7 @@ familySelect.addEventListener('change', async (event) => {
         const familyId = parseInt(event.target.value);
         const families = await fetch('/families');
         const data = await families.json();
+        console.log(data);
         const selectedFamily = data.find((family) => family.id === familyId);
         console.log(selectedFamily);
 
