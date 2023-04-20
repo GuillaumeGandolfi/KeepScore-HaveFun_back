@@ -28,8 +28,10 @@ const transactionController = {
     },
     createTransaction: async (req, res) => {
         try {
-            // console.log(req.body)
-            const { label , operation, user_id } = req.body;
+            console.log(req.body)
+            
+            const { label ,operation, user_id } = req.body;
+            console.log(label, operation, user_id)
             // Je crée un array qui récupère mes erreurs : 
             const bodyErrors = [];
 
