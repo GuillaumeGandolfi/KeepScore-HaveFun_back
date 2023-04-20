@@ -20,11 +20,13 @@ const tokenMiddleware = require('./middlewares/tokenMiddleware');
 const router = express.Router();
 
 /** Users */
-router.get('/users', userController.getAllUsers);
-router.get('/user/:id', userController.getOneUser);
-router.post('/user', userController.createUser);
-router.put('/user/:id', userController.modifyUser);
-router.delete('/user/:id', userController.deleteUser);
+router.get('/users', tokenMiddleware, userController.getAllUsers);
+router.get('/user/:id', tokenMiddleware, userController.getOneUser);
+router.post('/user', tokenMiddleware, userController.createUser);
+router.put('/user/:id', tokenMiddleware, userController.modifyUser);
+router.delete('/user/:id', tokenMiddleware, userController.deleteUser);
+router.post('/user/add-friend', tokenMiddleware, userController.addFriend);
+
 
 /** Families */
 router.get('/families', familyController.getAllFamilies);
