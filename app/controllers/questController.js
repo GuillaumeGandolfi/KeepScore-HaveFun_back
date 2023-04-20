@@ -30,7 +30,11 @@ const questController = {
 
     createQuest: async (req, res) => {
         try {
+            console.log('ICIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII');
+
+            console.log(req.body);
             const { description, difficulty, reward_exp, reward_coin } = req.body;
+            console.log(description);
             const errors = [];
             if (!description) {
                 errors.push('description can not be empty');

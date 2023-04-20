@@ -7,7 +7,7 @@
 <!-- SELECT PERMETTANT DE CHOISIR UN USER DE LA BDD -->
 <div class="select-container">
   <label for="choix" class="select-label">Choisir une option :</label>
-  <select name="choix" id="choix" class="select">
+  <select name="choix" id="user-choice" class="select">
     <option value="">-- Sélectionnez une option --</option>
     <% for(const user of usersList) { %>
     <option value="<%= user.id %>"><%= user.firstname %> <%= user.lastname %></option>

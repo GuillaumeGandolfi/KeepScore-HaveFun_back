@@ -1,9 +1,9 @@
 const user = {
-    select : document.getElementById('choix'),
+    select : document.getElementById('user-choice'),
     form : document.getElementById('user-form'),
     init: function() {
+        console.log('init function user')
         user.select.addEventListener('change', user.handleFormUser);
-        console.log('init function')
     },
     handleFormUser: async function(event) {
         console.log('HandleFormUser')

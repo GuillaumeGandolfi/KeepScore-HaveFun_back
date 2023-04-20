@@ -68,6 +68,9 @@ router.post('/login', authController.loginUser);
 router.get('/admin/home', adminController.homePage);
 router.get('/admin/family', adminController.familyPage);
 router.get('/admin/user', adminController.userPage);
+router.get('/admin/quest', adminController.questPage);
+
+
 
 
 module.exports = router;

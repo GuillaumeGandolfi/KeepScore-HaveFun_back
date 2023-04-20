@@ -31,6 +31,16 @@ const adminController = {
         }
     },
 
+    questPage: async (req, res) => {
+        try {
+            const quests = await Quest.findAll();
+            const collections = await Collection.findAll();
+            res.render("quest", { quests, collections })
+        } catch(error) {
+            console.trace(error);
+        }
+    },
+
 }
 
 module.exports = adminController;
