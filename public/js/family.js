@@ -17,15 +17,16 @@ familySelect.addEventListener('change', async (event) => {
         const data = await families.json();
         const selectedFamily = data.find((family) => family.id === familyId);
         console.log(selectedFamily);
-        
+
         // On met à jour les valeurs des variables dans le fichier EJS avec ceux de la famille sélectionnée
-        familyName.textContent += ` ${selectedFamily.name}`;
+        familyName.textContent = `Nom de la famille: ${selectedFamily.name}`;
+        document.querySelector('.family-members').innerHTML='';
         selectedFamily.members.forEach(member => {
             const li = document.createElement('li');
             li.textContent = `${member.lastname} ${member.firstname}`;
             document.querySelector('.family-members').appendChild(li);
         });
-        document.querySelector('.family-level').textContent += ` ${selectedFamily.level}`;
+        document.querySelector('.family-level').textContent = `Niveau de la famille: ${selectedFamily.level}`;
         // Et enfin on affiche la div qui était cachée
         familyInfos.style.display = 'block';
     } catch (error) {
