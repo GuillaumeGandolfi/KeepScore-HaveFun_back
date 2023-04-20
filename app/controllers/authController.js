@@ -104,8 +104,12 @@ const authController = {
                 return res.status(401).json('Incorrect email or password');
             }
 
-            // Et maintenant on créer et on envoie un token pour l'utilisateur
-            const token = jwt.sign({ userId: user.id }, 'secret-key');
+            // Et maintenant on créer et on envoie un token pour l'utilisateur (token d'accès)
+            const token = jwt.sign({ userId: user.id }, 'secret-key', { expiresIn: '30m' });
+            // Puis un token de rafraichissement, qui va être utilisé pour obtenir un nouveau token d'accès 
+            // lorsque le précédent va expirer. Il doit avoir une durée de vie plus longue et peut être utilisé pour
+            // renouveler plusieurs fois le token d'accès
+            const refreshToken = jwt.sign({ userId: user.id }, 'refresh-secret-key', { expiresIn: '30d' });
 
             /** AUTRE POSSIBILITE, QUI SUPPRIME CARREMENT LE PASSWORD DU RENVOIE
             const userJson = user.toJSON();
@@ -113,12 +117,44 @@ const authController = {
             res.status(200).json({ token, userJson });
              */
 
-            res.status(200).json({ token, responseWithoutPassword });
+            res.status(200).json({ token, refreshToken, responseWithoutPassword });
 
         } catch (error) {
             console.error(error);
             console.trace(error);
             res.status(500).json(error);
+        }
+    },
+
+
+    refreshToken: async (req, res) => {
+        // On récupère le token de refresh dans le body
+        const refreshToken = req.body.refreshToken;
+
+        // On vérifie que le token de refresh existe, sinon on envoie un code 400 avec un message d'erreur
+        if (!refreshToken) {
+            return res.status(400).json('Refresh token is required');
+        }
+
+        try {
+            const decodedRefreshToken = jwt.verify(refreshToken, 'refresh-secret-key');
+
+            // On vérifie que le token est valide et qu'il correspond bien à un utilisateur de la bdd
+            const user = await User.findByPk(decodedRefreshToken.userId);
+
+            // Si on ne trouve pas d'utilisateur correspondant on envoie un code 401
+            if (!user) {
+                return res.status(401).json('Invalid refresh token');
+            }
+
+            // Sinon on génère un nouveau token d'accès avec par exemple toujours une durée de 30 minutes
+            const token = jwt.sign({ userId: user.id }, 'secret-key', { expiresIn: '30m'});
+
+            // On renvoie le nouveau token d'accès au client
+            res.status(200).json({ token });
+        } catch (error) {
+            console.error(error);
+            res.status(401).json('error');
         }
     }
 }
