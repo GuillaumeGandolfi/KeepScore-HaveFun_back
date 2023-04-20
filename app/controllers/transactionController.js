@@ -28,7 +28,8 @@ const transactionController = {
     },
     createTransaction: async (req, res) => {
         try {
-            const { operation } = req.body;
+            // console.log(req.body)
+            const { label , operation, user_id } = req.body;
             // Je crée un array qui récupère mes erreurs : 
             const bodyErrors = [];
 
@@ -39,7 +40,11 @@ const transactionController = {
             if (bodyErrors.length) {
                 res.status(404).json(bodyErrors);
             } else {
-                let newTransaction = Transaction.build({ operation });
+                let newTransaction = Transaction.build({ 
+                    operation,
+                    label,
+                    user_id
+                 });
 
                 await newTransaction.save();
                 res.status(200).json(newTransaction);

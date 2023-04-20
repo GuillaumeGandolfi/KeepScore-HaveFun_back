@@ -16,40 +16,37 @@ const quest = {
         quest.formAdd.classList.toggle("is-hidden");
         const addButton = document.getElementById('form-add-button');
         const formData = new FormData(quest.formAdd);
-        console.log(formData)
-
         quest.formAdd.addEventListener('submit', quest.addQuestInData)
         // addButton.addEventListener('submit', quest.addQuestInData )
     },
 
     addQuestInData: async function(event) {
         // quest.formAdd.classList.toggle("is-hidden");
+
         event.preventDefault();
-        // console.log(event.target)
+        // Je récupère les data du formulaire
         const formData = new FormData(event.target);
-        console.log(formData.get('description'))
-        console.log(formData.get('reward_coin'))
-        console.log(formData.get('reward_exp'))
-        console.log(formData.get('reward_item'))
-        console.log(formData.get('difficulty'))
+        // Je crée un objet vide qui acceuillera la donnée du formulaire
         const formObject = {};
+        // Je crée un objet json dans mon objet vide crée au dessus
         formData.forEach((value, key) => formObject[key] = value);
         const json = JSON.stringify(formObject);
-        // const jsonParse = json.parse()
-        console.log(json)
-        // console.log(jsonParse)
+        
+        if(!confirm("Voulez-vous vraiment ajouter cette quête ?")) { return };
 
         try {
             const response = await fetch(`http://localhost:3000/quest`, {
-                method: 'POST',
-                body: {"description":"fzef", "reward_coin":500, "reward_exp":500, "difficulty":1},
-                headers : { "Content-Type": "application/json"}
+            method: 'POST',
+            body: json,
+            headers : { "Content-Type": "application/json"}
             });
             const jsonData = await response.json();
-            console.log('jsonData',jsonData)
             if(!response.ok) {throw new Error("Impossible de créer la quête !")}
+            console.log('Quête ajoutée')
+
         } catch (error) {
             console.log(error);
+            alert(error);
         }
 
 

@@ -12,6 +12,11 @@ VALUES ('echterhoff.a@gmail.com', 'echterhoff', 'alexandre', 'azerty', true, 1),
 ('abdelaziz@gmail.com', 'abdel', 'aziz', 'azerty', false, 2),
 ('peterMounier@gmail.com', 'peter', 'mounier', 'azerty', false, 2),
 ('sondes@gmail.com', 'sondes', 'nefzi', 'azerty', false, 2);
+('john@johndoe.com', 'john', 'doe', '$2b$05$i6Hb8iqIYUPNDEeKZ5VX5uEeLkmDwKcdUYFlu/60jvX4pKeGVB/b.', false, 1),
+('john@johndoee.com', 'john', 'doee', '$2b$05$qGANHBWteT9Ffwdr56RbzuDHIBihNhUGBAxMi6nkBAL5OjJ07y5k2', false, 1);
+-- Les deux johndoe mdp = azerty
+
+
 
 
 

@@ -44,6 +44,7 @@ CREATE TABLE shop (
 CREATE TABLE transaction (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     date TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    label text,
     operation int NOT NULL,
     user_id int REFERENCES "user"(id),
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
