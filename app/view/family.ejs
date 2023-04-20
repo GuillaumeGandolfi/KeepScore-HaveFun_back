@@ -1,8 +1,9 @@
 <%- include('partials/header') %>
 
-<div class="content">
+<div class="content family-container">
+    <h1 class="family-title">Famille</h1>
+    <button id=""></button>
     <div class="select-wrapper">
-        <h1 class="family-title">Famille</h1>
         <form method="POST">
             <select name="family" id="family" class="select">
                 <option value="" disabled selected hidden>-- Sélectionnez une famille --</option>
@@ -15,18 +16,11 @@
 </div>
 
 <div class="family-info">
-    <h2 class="family-name">Nom de la famille: <%= defaultFamilyName %></h2>
+    <h2 class="family-name"><%= defaultFamilyName %></h2>
     <ul class="family-members">
-        <li>
-            <span>Nom</span>
-            <span>Prénom</span>
-        </li>
         <% defaultFamilyMembers.forEach((member) => { %>
-        <li>
-            <span><%= member.lastname %></span>
-            <span><%= member.firstname %></span>
-        </li>
-        <% }) %> 
+        <li><%= member.lastname %> <%= member.firstname %></li>
+        <% }) %>
     </ul>
     <p class="family-level">Niveau de la famille: <%= defaultFamilyLevel %></p>
 </div>

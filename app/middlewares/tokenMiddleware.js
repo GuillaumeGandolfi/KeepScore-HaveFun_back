@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
+const { User } = require('../models');
 
-const tokenMiddleware = (req, res, next) => {
+const tokenMiddleware = async (req, res, next) => {
     // On vérifie que le header Autorization est présent dans la requête
     // De ce que j'ai compris, les en-têtes d'une requête http contiennent des infos 
     // comme les identifians de connexion. Du coup dans headers.authorization, dans notre cas
@@ -22,10 +23,16 @@ const tokenMiddleware = (req, res, next) => {
         // On ajoute les données décodées dans l'objet req pour les utiliser dans la suite de la requête
         req.userId = decodedToken.userId;
 
+        // On vérifie si l'user a le droit de se connecter
+        const user = await User.findByPk(decodedToken.userId);
+        if (!user) {
+            return res.status(403).json('Forbidden');
+        }
+
         next();
     } catch (error) {
         console.error(error);
-        res.status(500).json(error);
+        res.status(401).json('Unauthorized');
     }
 }
 
