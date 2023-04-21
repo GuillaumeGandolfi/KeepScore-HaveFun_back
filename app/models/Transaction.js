@@ -6,7 +6,8 @@ class Transaction extends Model { }
 
 Transaction.init({
     date: DataTypes.DATE,
-    operation: DataTypes.INTEGER
+    operation: DataTypes.INTEGER,
+    label: DataTypes.TEXT
 
 }, {
     sequelize,
