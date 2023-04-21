@@ -20,12 +20,12 @@ const tokenMiddleware = require('./middlewares/tokenMiddleware');
 const router = express.Router();
 
 /** Users */
-router.get('/users', tokenMiddleware, userController.getAllUsers);
-router.get('/user/:id', tokenMiddleware, userController.getOneUser);
-router.post('/user', tokenMiddleware, userController.createUser);
-router.put('/user/:id', tokenMiddleware, userController.modifyUser);
-router.delete('/user/:id', tokenMiddleware, userController.deleteUser);
-router.post('/user/add-friend', tokenMiddleware, userController.addFriend);
+router.get('/users',  userController.getAllUsers);
+router.get('/user/:id',  userController.getOneUser);
+router.post('/user',  userController.createUser);
+router.put('/user/:id',  userController.modifyUser);
+router.delete('/user/:id',  userController.deleteUser);
+router.post('/user/add-friend',  userController.addFriend);
 
 
 /** Families */
@@ -66,7 +66,7 @@ router.delete('/transaction/:id', tokenMiddleware, transactionController.deleteT
 router.post('/signup', authController.signupUser);
 router.post('/login', authController.loginUser);
 router.post('/token/refresh', authController.refreshToken);
-router.post('/logout', authController.logout);
+router.post('/logout', authController.deleteToken)
 
 /** Back office */
 router.get('/admin/home', adminController.homePage);

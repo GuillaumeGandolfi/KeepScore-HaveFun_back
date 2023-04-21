@@ -156,31 +156,16 @@ const authController = {
             console.error(error);
             res.status(401).json('error');
         }
-    }, 
+    },
 
-    logout: async (req, res) => {
-        try  {
-            let userToken = req.headers.authorization.split(' ')[1];
-
-            const decodedUserToken = jwt.verify(userToken, 'secret-key');
-
-            // On vérifie si l'utilisateur existe 
-            const user = await User.findByPk(decodedUserToken.userId);
-
-            // S'il n'existe pas 
-            if (!user) {
-                return res.status(404).json('User not found');
-            }
-            
-            // On supprime le token
-            userToken = '';
-
-            // On retire le password de la response
-            const responseWithoutPassword = {...user.dataValues, password:''}
-
-            res.status(200).json({ responseWithoutPassword, userToken, message: 'User deconnected' });
-        } catch (error) {
-            res.status(500).json(error);
+    deleteToken: async  (req, res) => {
+        // Je vérifie que l'utilisateur est connecté
+        console.log(req.session, req.session.user)
+        if ( req.session && req.session.user) {
+            // Je supprime le token de l'utilisateur 
+            delete req.session.user.token
+        } else {
+            res.redirect('/signup')
         }
     }
 }
