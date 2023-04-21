@@ -27,6 +27,7 @@ const userController = {
     getOneUser: async (req, res) => {
         try {
             const userId = req.params.id;
+            console.log(userId)
             const user = await User.findByPk(userId, {
                 include: [
                     "operations",

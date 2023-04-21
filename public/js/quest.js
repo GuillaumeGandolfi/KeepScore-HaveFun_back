@@ -7,10 +7,13 @@ const quest = {
     buttonModify : document.getElementById('modify-button'), // le btn pour faire afficher le formulaire de modification
 
     init: function() {
-        console.log('init function quest')
-        quest.buttonAdd.addEventListener('click', quest.handleAddForm);
-        quest.buttonModify.addEventListener('click', quest.handleSelect);
-        quest.selectQuests.addEventListener('change', quest.handleModifyForm);
+        if (document.body.classList.contains('quest-page')) {
+
+            console.log('init function quest')
+            quest.buttonAdd.addEventListener('click', quest.handleAddForm);
+            quest.buttonModify.addEventListener('click', quest.handleSelect);
+            quest.selectQuests.addEventListener('change', quest.handleModifyForm);
+        }
     },
     handleAddForm: function(event) {
         console.log('handleAddForm')
@@ -50,7 +53,6 @@ const quest = {
     },
 
     handleSelect: function(event) {
-        console.log('ok');
         quest.divSelect.classList.toggle("is-hidden")
     },
 
