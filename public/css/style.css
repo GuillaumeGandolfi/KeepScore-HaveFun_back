@@ -15,7 +15,9 @@ body {
 	max-width: 1200px;
 	margin: 0 auto;
 	padding: 20px;
+	justify-content: center;
 }
+
 /* *************************** CSS MENU NAV ********************************************* */
 nav {
 	background-color: #333;
@@ -54,30 +56,30 @@ nav ul li a {
 /* *************************** CSS -> USER  ********************************************* */
 
 /* Style du formulaire */
-.user-form  {
+.user-form {
 	width: 400px;
 	margin: 50px auto;
 	display: none;
-  }
-  
-  .form-group {
+}
+
+.form-group {
 	margin-bottom: 20px;
-  }
-  
-  .form-label {
+}
+
+.form-label {
 	display: block;
 	margin-bottom: 5px;
 	font-weight: bold;
-  }
-  
-  .form-input {
+}
+
+.form-input {
 	width: 100%;
 	padding: 8px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
-  }
-  
-  .form-button {
+}
+
+.form-button {
 	display: block;
 	width: 100%;
 	padding: 10px;
@@ -87,15 +89,17 @@ nav ul li a {
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
-  }
+}
 
-  .div-choice-button {
+.div-choice-button {
 	display: flex;
-	gap: 10px;
+	gap: 30px;
 	text-align: center;
-  }
+	justify-content: center;
+	margin-top: 30px;
+}
 
-  .choice-button {
+.choice-button {
 	display: block;
 	width: 20%;
 	padding: 10px;
@@ -106,45 +110,55 @@ nav ul li a {
 	border-radius: 4px;
 	cursor: pointer;
 	text-align: center;
-  }
-  
-  /* Style du select */
-  .select-container {
+}
+
+/* Style du select */
+.select-container {
 	width: 400px;
 	margin: 0 auto;
-  }
-  
-  .select-label {
+}
+
+.select-label {
 	display: block;
 	margin-bottom: 5px;
 	font-weight: bold;
-  }
-  
-  .select {
+}
+
+.select {
 	width: 100%;
 	padding: 8px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
-  }
-
-/* Family */
-
-.family-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
 }
 
-.select-wrapper {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  /* *************************** CSS -> QUEST  ********************************************* */
+
+.quest-form-add {
+	width: 400px;
+	margin: 50px auto;
+}
+.quest-form-modify {
+	width: 400px;
+	margin: 50px auto;
+}
+
+.is-hidden {
 	display: none;
 }
 
+/* *************************** CSS -> FAMILY  ********************************************* */
+
+.select-wrapper {
+	display: none;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.family-block {
+	display: flex;
+	justify-content: center;
+}
 .family-title {
-	margin-bottom: 1rem;
 	text-align: center;
 }
 
@@ -159,7 +173,6 @@ nav ul li a {
 	width: 50%;
 }
 
-<<<<<<< HEAD
 /* *************************** CSS -> QUEST  ********************************************* */
 
 .quest-form-add {
@@ -174,7 +187,8 @@ nav ul li a {
 
 .is-hidden {
 	display: none;
-=======
+}
+
 .family-info h2 {
 	font-size: 1.5rem;
 	font-weight: bold;
@@ -199,5 +213,4 @@ nav ul li a {
 	font-weight: bold;
 	text-transform: uppercase;
 	color: #666;
->>>>>>> b31af179e61b2069bb23b1085ba208a5d6ad5475
 }

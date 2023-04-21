@@ -38,6 +38,9 @@ const transactionController = {
             if (!operation) {
                 bodyErrors.push('operation can not be empty');
             }
+            if (!user_id){
+                bodyErrors.push('user_id can not be empty');
+            }
 
             if (bodyErrors.length) {
                 res.status(404).json(bodyErrors);
