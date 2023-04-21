@@ -66,14 +66,13 @@ router.delete('/transaction/:id', transactionController.deleteTransaction);
 router.post('/signup', authController.signupUser);
 router.post('/login', authController.loginUser);
 router.post('/token/refresh', authController.refreshToken);
+router.post('/logout', authController.logout);
 
 /** Back office */
 router.get('/admin/home', adminController.homePage);
 router.get('/admin/family', adminController.familyPage);
 router.get('/admin/user', adminController.userPage);
 router.get('/admin/quest', adminController.questPage);
-
-
 
 
 module.exports = router;
