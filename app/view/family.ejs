@@ -1,6 +1,5 @@
 <%- include('partials/header') %>
-<body class="family-page">
-  <%- include('partials/nav') %>
+<%- include('partials/nav') %>
 
 <div class="content">
     <h1 class="family-title">Famille</h1>
@@ -52,5 +51,19 @@
         </form>
     </div>
 </div>
+
+<!-- ---------- SUPPRIMER UNE FAMILLE ---------- -->
+
+<div class="select-wrapper-delete">
+    <select name="family-select" id="family-select">
+        <option value="">-- Sélectionnez une famille --</option>
+        <% families.forEach(family => { %>
+            <option value="<%= family.id %>"><%= family.name %></option>
+        <% }); %>
+    </select>
+    <button type="button" class="delete-family-select-btn">Supprimer la famille</button>
+</div>
+
+
 
 <%- include('partials/footer') %>

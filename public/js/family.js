@@ -11,6 +11,9 @@ const createForm = document.querySelector('.create-family');
 const familyLevelInput = document.querySelector('#family-level');
 const familyNameInput = document.querySelector('#family-name');
 
+const familySelectDelete = document.querySelector('#family-select');
+const deleteFamilyBtn = document.querySelector('.delete-family-select-btn');
+
 
 showFamilyInfoBtn.addEventListener('click', () => {
     if (selectWrapper.style.display === 'flex') {
@@ -104,9 +107,40 @@ createForm.addEventListener('submit', async (event) => {
             // On actualise la page pour que la nouvelle famille soit prise en compte dans la liste des familles
             window.location.reload();
         } else {
-            console.error('Erreur lors de la création de la famille');
+            console.error('Error creating family');
         }
     } catch (error) {
         console.error(error);
     }
 });
+
+/* ----- SUPPRIMER UNE FAMILLE ----- */
+
+// EventListener sur le bouton "supprimer"
+familySelectDelete.addEventListener('change', (event) => {
+    const familyId = parseInt(event.target.value);
+    console.log(event.target.value);
+    console.log(familyId);
+    confirmDelete(familyId);
+});
+
+
+// Fonction pour confirmer la suppression
+const confirmDelete = async (familyId) => {
+    const confirmed = confirm("Do you confirm the deletion of the family?");
+
+    if (confirmed) {
+        try {
+            const response = await fetch(`/family/${familyId}`, { method: 'DELETE'});
+            if (response.ok) {
+                console.log('Deleted family');
+                // Rechargement de la page pour mettre à jour la liste des familles
+                window.location.reload();
+            } else {
+                console.error('Error deleting family')
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+};
