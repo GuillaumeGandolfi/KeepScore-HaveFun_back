@@ -10,6 +10,8 @@
     <button class="choice-button" id="create-button">Créer une famille</button>
     <button class="choice-button" id="delete-button">Supprimer une famille</button>
 </div>
+
+<!-- ---------- INFOS DES FAMILLES ---------- -->
 <div class="select-wrapper">
     <form method="POST">
         <select name="family" id="family" class="select">
@@ -30,6 +32,24 @@
             <% }) %>
         </ul>
         <p class="family-level">Niveau de la famille: <%= defaultFamilyLevel %></p>
+    </div>
+</div>
+
+
+<!-- ---------- CREER UNE FAMILLE ---------- -->
+<div class="create-family">
+    <div class="form-create">
+        <form class="family-form-add">
+            <div class="form-group">
+                <label for="family-name" class="form-label">Nom de la famille</label>
+                <input class="form-input" type="text" id="family-name" name="family-name">
+            </div>
+            <div class="form-group">
+                <label for="family-level" class="form-label">Niveau de la famille</label>
+                <input class="form-input" type="number" id="family-level" name="family-level" min="1" max="20" value="1">
+            </div>
+            <button type="submit" class="form-button">Créer la famille</button>
+        </form>
     </div>
 </div>
 

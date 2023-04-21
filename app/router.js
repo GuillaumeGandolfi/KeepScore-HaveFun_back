@@ -29,11 +29,11 @@ router.post('/user/add-friend',  userController.addFriend);
 
 
 /** Families */
-router.get('/families', tokenMiddleware, familyController.getAllFamilies);
-router.get('/family/:id', tokenMiddleware, familyController.getOneFamily);
-router.post('/family', tokenMiddleware, familyController.createFamily);
-router.put('/family/:id', tokenMiddleware, familyController.modifyFamily);
-router.delete('/family/:id', tokenMiddleware, familyController.deleteFamily);
+router.get('/families', familyController.getAllFamilies);
+router.get('/family/:id', familyController.getOneFamily);
+router.post('/family', familyController.createFamily);
+router.put('/family/:id', familyController.modifyFamily);
+router.delete('/family/:id', familyController.deleteFamily);
 
 /** Quests */
 router.get('/quests', tokenMiddleware, questController.getAllQuests);
