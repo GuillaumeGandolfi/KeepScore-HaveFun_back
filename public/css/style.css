@@ -159,7 +159,6 @@ nav ul li a {
 	width: 50%;
 }
 
-<<<<<<< HEAD
 /* *************************** CSS -> QUEST  ********************************************* */
 
 .quest-form-add {
@@ -174,7 +173,8 @@ nav ul li a {
 
 .is-hidden {
 	display: none;
-=======
+}
+
 .family-info h2 {
 	font-size: 1.5rem;
 	font-weight: bold;
@@ -199,5 +199,4 @@ nav ul li a {
 	font-weight: bold;
 	text-transform: uppercase;
 	color: #666;
->>>>>>> b31af179e61b2069bb23b1085ba208a5d6ad5475
 }
