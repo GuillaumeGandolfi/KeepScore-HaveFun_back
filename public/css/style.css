@@ -232,9 +232,20 @@ cursor: pointer;
 
 .family-form-add {
 	width: 400px;
-	margin: 50px auto;
 }
 
 .form-create {
 	margin-top: 10px;
+}
+
+.select-wrapper-delete {
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.delete-family-select-btn {
+	margin-top: 20px;
 }

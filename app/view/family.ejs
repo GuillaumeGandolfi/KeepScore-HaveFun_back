@@ -55,12 +55,14 @@
 <!-- ---------- SUPPRIMER UNE FAMILLE ---------- -->
 
 <div class="select-wrapper-delete">
-    <select name="family-select" id="family-select">
-        <option value="">-- Sélectionnez une famille --</option>
-        <% families.forEach(family => { %>
+    <form method="POST">
+        <select name="family-select" id="family-select" class="select">
+            <option value="" disabled selected hidden>-- Sélectionnez une famille --</option>
+            <% families.forEach(family => { %>
             <option value="<%= family.id %>"><%= family.name %></option>
-        <% }); %>
-    </select>
+            <% }); %>
+        </select>
+    </form>
     <button type="button" class="delete-family-select-btn">Supprimer la famille</button>
 </div>
 

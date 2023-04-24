@@ -1,6 +1,7 @@
 // Sélection des éléments du DOM
 const showFamilyInfoBtn = document.querySelector('#show-family-info-btn');
 const createButton = document.querySelector('#create-button');
+const deleteButton = document.querySelector('#delete-button');
 
 const selectWrapper = document.querySelector('.select-wrapper');
 const familySelect = document.querySelector('#family');
@@ -13,6 +14,7 @@ const familyNameInput = document.querySelector('#family-name');
 
 const familySelectDelete = document.querySelector('#family-select');
 const deleteFamilyBtn = document.querySelector('.delete-family-select-btn');
+const showFamilyDeleteBtn = document.querySelector('.select-wrapper-delete');
 
 
 showFamilyInfoBtn.addEventListener('click', () => {
@@ -28,6 +30,8 @@ showFamilyInfoBtn.addEventListener('click', () => {
         createForm.style.display = 'none';
         familyLevelInput.value = 1;
         familyNameInput.value = '';
+        showFamilyDeleteBtn.style.display = 'none';
+        familySelectDelete.selectedIndex = 0;
     }
 });
 
@@ -69,7 +73,9 @@ createButton.addEventListener('click', () => {
         selectWrapper.style.display = 'none';
         familyName.textContent = '';
         familySelect.selectedIndex = 0;
+        familySelectDelete.selectedIndex = 0;
         familyInfos.style.display = 'none';
+        showFamilyDeleteBtn.style.display = 'none';
     }
 });
 
@@ -116,12 +122,37 @@ createForm.addEventListener('submit', async (event) => {
 
 /* ----- SUPPRIMER UNE FAMILLE ----- */
 
+// EventListener sur le bouton "Supprimer une famille"
+deleteButton.addEventListener('click', () => {
+    if (showFamilyDeleteBtn.style.display === 'flex') {
+        showFamilyDeleteBtn.style.display = 'none';
+        selectWrapper.style.display = 'none';
+        familyInfos.style.display = 'none';
+        createForm.style.display = 'none';
+        familyLevelInput.value = 1;
+        familyNameInput.value = '';
+        familyName.textContent = '';
+        familySelect.selectedIndex = 0;
+        familySelectDelete.selectedIndex = 0;
+    } else {
+        showFamilyDeleteBtn.style.display = 'flex';
+        createForm.style.display = 'none';
+        familyLevelInput.value = 1;
+        familyNameInput.value = '';
+        selectWrapper.style.display = 'none';
+        familyName.textContent = '';
+        familySelect.selectedIndex = 0;
+        familyInfos.style.display = 'none';
+
+    }
+});
+
 // EventListener sur le bouton "supprimer"
 familySelectDelete.addEventListener('change', (event) => {
     const familyId = parseInt(event.target.value);
-    console.log(event.target.value);
-    console.log(familyId);
-    confirmDelete(familyId);
+    deleteFamilyBtn.addEventListener('click', () => {
+        confirmDelete(familyId);
+    })
 });
 
 
