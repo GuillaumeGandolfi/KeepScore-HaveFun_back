@@ -82,10 +82,7 @@ nav ul li a {
 	border-radius: 4px;
 }
 
-.form-button {
-  }
-  
-  .form-button-modify {
+.form-button-modify {
 	display: block;
 	width: 100%;
 	padding: 10px;
@@ -246,6 +243,21 @@ cursor: pointer;
 	margin-top: 20px;
 }
 
-.delete-family-select-btn {
+.delete-family-btn {
 	margin-top: 20px;
+	background-color: red;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.create-family-btn {
+	background-color: green;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
 }
