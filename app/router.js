@@ -29,38 +29,38 @@ router.post('/user/add-friend',  userController.addFriend);
 
 
 /** Families */
-router.get('/families', tokenMiddleware, familyController.getAllFamilies);
-router.get('/family/:id', tokenMiddleware, familyController.getOneFamily);
-router.post('/family', tokenMiddleware, familyController.createFamily);
-router.put('/family/:id', tokenMiddleware, familyController.modifyFamily);
-router.delete('/family/:id', tokenMiddleware, familyController.deleteFamily);
+router.get('/families',  familyController.getAllFamilies);
+router.get('/family/:id',  familyController.getOneFamily);
+router.post('/family',  familyController.createFamily);
+router.put('/family/:id',  familyController.modifyFamily);
+router.delete('/family/:id',  familyController.deleteFamily);
 
 /** Quests */
-router.get('/quests', tokenMiddleware, questController.getAllQuests);
-router.get('/quest/:id', tokenMiddleware, questController.getOneQuest);
-router.post('/quest', tokenMiddleware, questController.createQuest);
-router.put('/quest/:id', tokenMiddleware, questController.modifyQuest);
-router.delete('/quest/:id', tokenMiddleware, questController.deleteQuest);
+router.get('/quests',  questController.getAllQuests);
+router.get('/quest/:id',  questController.getOneQuest);
+router.post('/quest',  questController.createQuest);
+router.put('/quest/:id',  questController.modifyQuest);
+router.delete('/quest/:id',  questController.deleteQuest);
 
 /** Collections */
-router.get('/collections', tokenMiddleware, collectionController.getAllCollections);
-router.get('/collection/:id', tokenMiddleware, collectionController.getOneCollection);
-router.post('/collection', tokenMiddleware,collectionController.createCollection);
-router.put('/collection/:id', tokenMiddleware,collectionController.modifyCollection);
-router.delete('/collection/:id', tokenMiddleware,collectionController.deleteCollection);
+router.get('/collections',  collectionController.getAllCollections);
+router.get('/collection/:id',  collectionController.getOneCollection);
+router.post('/collection', collectionController.createCollection);
+router.put('/collection/:id', collectionController.modifyCollection);
+router.delete('/collection/:id', collectionController.deleteCollection);
 
 /** Shops */
-router.get('/shops', tokenMiddleware, shopController.getAllItemShop);
-router.get('/shop/:id', tokenMiddleware,shopController.getOneItem);
-router.post('/shop/:id', tokenMiddleware,shopController.addItemToShop);
-router.delete('/shop/:id', tokenMiddleware, shopController.deleteItemFromShop);
+router.get('/shops',  shopController.getAllItemShop);
+router.get('/shop/:id', shopController.getOneItem);
+router.post('/shop/:id', shopController.addItemToShop);
+router.delete('/shop/:id',  shopController.deleteItemFromShop);
 
 /** Transactions */
-router.get('/transactions', tokenMiddleware, transactionController.getAllTransactions);
-router.get('/transaction/:id', tokenMiddleware, transactionController.getOneTransaction);
-router.post('/transaction', tokenMiddleware, transactionController.createTransaction);
-router.put('/transaction/:id', tokenMiddleware,transactionController.modifyTransaction);
-router.delete('/transaction/:id', tokenMiddleware, transactionController.deleteTransaction);
+router.get('/transactions',  transactionController.getAllTransactions);
+router.get('/transaction/:id',  transactionController.getOneTransaction);
+router.post('/transaction',  transactionController.createTransaction);
+router.put('/transaction/:id', transactionController.modifyTransaction);
+router.delete('/transaction/:id',  transactionController.deleteTransaction);
 
 /** Authentification */
 router.post('/signup', authController.signupUser);

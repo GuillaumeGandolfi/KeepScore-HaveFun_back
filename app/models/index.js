@@ -6,6 +6,7 @@ const Quest = require("./Quest");
 const Shop = require("./Shop");
 const Transaction = require("./Transaction");
 const Family = require("./Family");
+const Budget = require("./Budget");
 
 // Family <-> User (One-To-Many)
 User.belongsTo(Family, {
@@ -28,16 +29,28 @@ User.belongsToMany(User, {
 });
 
 
-// Transaction <-> User (One-To-Many)
-Transaction.belongsTo(User, {
+// Budget <-> User (One-To-Many)
+Budget.belongsTo(User, {
     foreignKey: 'user_id',
     as: 'user'
 });
 
-User.hasMany(Transaction, {
+User.hasMany(Budget, {
     foreignKey: 'user_id',
+    as: 'budget'
+});
+
+// Transaction <-> Budget (One-To-Many)
+Transaction.belongsTo(Budget, {
+    foreignKey: 'budget_id',
+    as: 'budget'
+});
+
+Budget.hasMany(Transaction, {
+    foreignKey: 'budget_id',
     as: 'operations'
 });
+
 
 // User <-> Quest (Many-To-Many)
 User.belongsToMany(Quest, {
@@ -98,4 +111,4 @@ Collection.hasMany(Shop, {
     as: 'items_shop'
 });
 
-module.exports = { User, Collection, Quest, Shop, Transaction, Family };
+module.exports = { User, Collection, Quest, Shop, Transaction, Budget, Family };

@@ -89,16 +89,13 @@ const user = {
             walletInput.value = selectedUser.wallet;
 
             
-            console.log(user.formModify)
             // Et enfin on ré-affiche le formulaire, remplis.
             user.formModify.classList.toggle("is-hidden")
             user.divSelect.classList.toggle('is-hidden')
 
-            // console.log(user.modifyButton)
-            
+            // Je met un écouteur d'evennement sur les deux boutons du formulaire
             user.cancelButton.addEventListener('click', user.hideForm )
             user.formModify.addEventListener('submit', user.changeUserInData)
-            // user.modifyButton.addEventListener('click', user.changeUserInData);
 
         } catch (error) {
             console.trace(error);
@@ -139,8 +136,8 @@ const user = {
                 console.log('Utilisateur modifié')
                 alert("Utilisateur modifié !")
                 window.location.reload();
-                user.formModify.style.display ='none'
-                user.divSelect.classList.toggle("is-hidden");
+                // user.formModify.style.display ='none'
+                // user.divSelect.classList.toggle("is-hidden");
             } catch (error) {
                 console.trace(error);
             }
