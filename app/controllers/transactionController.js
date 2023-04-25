@@ -12,6 +12,29 @@ const transactionController = {
             res.status(500).json(error.toString());
         }
     },
+    getAllTransactionsOfBudget: async (req, res) => {
+        try {
+            const budgetId = req.params.id;
+            const transactions = await Transaction.findAll({
+                where: {
+                    '$budget.id$': budgetId
+                  },
+                  include: [{
+                    model: Budget,
+                    as: 'budget',
+                    include: [{
+                      model: User,
+                      as: 'user',
+                      attributes: []
+                    }]
+                  }]
+              });
+              res.status(200).json(transactions)
+        } catch (error) {
+            console.trace(error);
+            res.status(500).json(error.toString());
+        }
+    },
     getOneTransaction: async (req, res) => {
         try {
             const transactionId = req.params.id;
@@ -71,10 +94,16 @@ const transactionController = {
                 res.status(404).send('Cant find transaction ' + transactionId);
             } else {
                 // On récupère les nouvelles infos dans le body :
-                const { operation } = req.body;
+                const { operation, label, budget_id} = req.body;
                 // Et on change que les params présent dans le body :
                 if (operation) {
                     transaction.operation = operation;
+                }
+                if (label) {
+                    transaction.label = label;
+                }
+                if (budget_id) {
+                    transaction.budget_id = budget_id;
                 }
                  // Puis on enregistre directement en bdd
                 await transaction.save();
@@ -142,10 +171,9 @@ const transactionController = {
 
             // Trouver la date du lundi le plus proche avant la date actuelle
             const startOfWeek = dayjs().startOf('week').add(1, 'day').startOf('day');
-            console.log('start of week',startOfWeek)
+            // console.log('start of week',startOfWeek)
             const endOfWeek = dayjs().endOf('week').add(1, 'day').toDate();
-            // const endOfWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay() + 7);
-            console.log('end of week',endOfWeek)
+            // console.log('end of week',endOfWeek)
             const weeklyTransaction = await Transaction.findAll({
                 where: {
                   '$budget.user_id$': userId,
@@ -206,6 +234,43 @@ const transactionController = {
             res.status(500).json(error.toString());
         }
     },
+    getTransactionOfYear: async (req, res) => {
+        try {
+          const userId = req.params.id;
+          const now = new Date();
+      
+          // Trouver la date du premier jour de l'année courante
+          const startOfYear = dayjs(now).startOf('year').toDate();
+      
+          // Trouver la date du dernier jour de l'année courante
+          const endOfYear = dayjs(now).endOf('year').toDate();
+      
+          const yearlyTransactions = await Transaction.findAll({
+            where: {
+              '$budget.user_id$': userId,
+              created_at: {
+                [Op.gte]: startOfYear.toISOString(),
+                [Op.lt]: endOfYear.toISOString()
+              }
+            },
+            include: [{
+              model: Budget,
+              as: 'budget',
+              include: [{
+                model: User,
+                as: 'user',
+                attributes: []
+              }]
+            }]
+          });
+      
+          res.status(200).json(yearlyTransactions);
+        } catch (error) {
+          console.trace(error);
+          res.status(500).json(error.toString());
+        }
+    },
+      
 };
 
 module.exports = transactionController;
