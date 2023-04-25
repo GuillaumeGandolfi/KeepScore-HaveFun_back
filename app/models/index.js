@@ -19,7 +19,6 @@ Family.hasMany(User, {
     as: 'members'
 });
 
-
 // User <-> Friend (Many-To-Many)
 User.belongsToMany(User, {
     foreignKey: "user_id",
@@ -28,6 +27,10 @@ User.belongsToMany(User, {
     through: "user_has_friend"
 });
 
+// // User <-> Transaction (One-To-Many)
+// User.belongsTo(Transaction, {
+//     foreignKey:
+// })
 
 // Budget <-> User (One-To-Many)
 Budget.belongsTo(User, {

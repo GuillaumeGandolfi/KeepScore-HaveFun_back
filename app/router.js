@@ -58,6 +58,9 @@ router.delete('/shop/:id',  shopController.deleteItemFromShop);
 /** Transactions */
 router.get('/transactions',  transactionController.getAllTransactions);
 router.get('/transaction/:id',  transactionController.getOneTransaction);
+router.get('/transaction/day/:id', transactionController.getTransactionOfToday)
+router.get('/transaction/week/:id', transactionController.getTransactionOfWeek)
+
 router.post('/transaction',  transactionController.createTransaction);
 router.put('/transaction/:id', transactionController.modifyTransaction);
 router.delete('/transaction/:id',  transactionController.deleteTransaction);
