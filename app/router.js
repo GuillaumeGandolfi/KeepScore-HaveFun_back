@@ -58,7 +58,12 @@ router.delete('/shop/:id',  shopController.deleteItemFromShop);
 
 /** Transactions */
 router.get('/transactions',  transactionController.getAllTransactions);
+router.get('/transactions/budget/:id', transactionController.getAllTransactionsOfBudget);
 router.get('/transaction/:id',  transactionController.getOneTransaction);
+router.get('/transaction/day/:id', transactionController.getTransactionOfToday);
+router.get('/transaction/week/:id', transactionController.getTransactionOfWeek);
+router.get('/transaction/month/:id', transactionController.getTransactionOfMonth);
+router.get('/transaction/year/:id', transactionController.getTransactionOfYear);
 router.post('/transaction',  transactionController.createTransaction);
 router.put('/transaction/:id', transactionController.modifyTransaction);
 router.delete('/transaction/:id',  transactionController.deleteTransaction);
@@ -74,13 +79,15 @@ router.delete('/budget/:id', budgetController.deleteBudget);
 router.post('/signup', authController.signupUser);
 router.post('/login', authController.loginUser);
 router.post('/token/refresh', authController.refreshToken);
-router.post('/logout', authController.deleteToken)
+router.post('/logout', authController.deleteToken);
 
 /** Back office */
 router.get('/admin/home', adminController.homePage);
 router.get('/admin/family', adminController.familyPage);
 router.get('/admin/user', adminController.userPage);
 router.get('/admin/quest', adminController.questPage);
+router.get('/admin/shop', adminController.shopPage);
+
 
 
 module.exports = router;

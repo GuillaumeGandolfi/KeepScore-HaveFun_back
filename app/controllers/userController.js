@@ -30,7 +30,11 @@ const userController = {
             console.log(userId)
             const user = await User.findByPk(userId, {
                 include: [
-                    "operations",
+                    {association: "budget",
+                    include: [
+                        {
+                            association:"operations"
+                        }]},
                     "family",
                     {association: "friends"},
                     {association: "quests"},
