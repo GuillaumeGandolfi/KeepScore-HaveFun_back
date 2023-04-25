@@ -81,11 +81,16 @@ const authController = {
             const user = await User.findOne({
                 where: { email },
                 include: [
-                    "operations",
+                    {association: "budget",
+                    include: [
+                        {
+                            association:"operations"
+                        }]},
                     "family",
                     {association: "friends"},
                     {association: "quests"},
                     {association: "items_collection"},
+                    {association: "items_shop"}
                 ]
             });
 
