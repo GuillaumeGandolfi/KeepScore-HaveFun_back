@@ -154,10 +154,7 @@ nav ul li a {
 	border-radius: 4px;
 }
 
-.form-button {
-  }
-  
-  .form-button-modify {
+.form-button-modify {
 	display: block;
 	width: 100%;
 	padding: 10px;
@@ -318,14 +315,27 @@ cursor: pointer;
 	margin-top: 20px;
 }
 
-.delete-family-select-btn {
+.delete-family-btn {
 	margin-top: 20px;
+	background-color: red;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
 }
 
+.create-family-btn {
+	background-color: green;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
 
   /* *************************** CSS -> SHOP  ********************************************* */
-
-
+  
 .list {
 	width: 100%;
 	max-width: 768px;
@@ -338,7 +348,6 @@ cursor: pointer;
 	padding: 15px;
 	border-bottom: 1px solid #CCC;
 	cursor: pointer;
-
 }
 
 .list .item:last-of-type {
@@ -384,13 +393,3 @@ cursor: pointer;
 	background-color: #44EEAA;
 	box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2)
 }
-
-
-
-
-
-
-
-
-
-

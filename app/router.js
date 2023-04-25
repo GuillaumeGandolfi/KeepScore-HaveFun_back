@@ -10,6 +10,7 @@ const shopController = require('./controllers/shopController');
 const transactionController = require('./controllers/transactionController');
 const authController = require('./controllers/authController');
 const adminController = require('./controllers/adminController');
+const budgetController = require('./controllers/budgetController');
 
 /* -------------- Middlewares -------------- */
 
@@ -66,6 +67,13 @@ router.get('/transaction/year/:id', transactionController.getTransactionOfYear);
 router.post('/transaction',  transactionController.createTransaction);
 router.put('/transaction/:id', transactionController.modifyTransaction);
 router.delete('/transaction/:id',  transactionController.deleteTransaction);
+
+/** Budget */
+router.get('/budgets', budgetController.getAllBudgets);
+router.get('/budget/:id', budgetController.getOneBudget);
+router.post('/budget', budgetController.createBudget);
+router.put('/budget/:id', budgetController.modifyBudget);
+router.delete('/budget/:id', budgetController.deleteBudget);
 
 /** Authentification */
 router.post('/signup', authController.signupUser);
