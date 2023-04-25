@@ -23,7 +23,8 @@ const adminController = {
     userPage: async (req, res) => {
         try {
             const users = await User.findAll();
-            res.render("user", {usersList: users});
+            const families = await Family.findAll()
+            res.render("user", {usersList: users, familiesList: families});
         } catch (error) {
             console.error(error);
             console.trace(error);

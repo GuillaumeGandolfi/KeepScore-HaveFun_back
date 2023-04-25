@@ -156,6 +156,17 @@ const authController = {
             console.error(error);
             res.status(401).json('error');
         }
+    },
+
+    deleteToken: async  (req, res) => {
+        // Je vérifie que l'utilisateur est connecté
+        console.log(req.session, req.session.user)
+        if ( req.session && req.session.user) {
+            // Je supprime le token de l'utilisateur 
+            delete req.session.user.token
+        } else {
+            res.redirect('/signup')
+        }
     }
 }
 

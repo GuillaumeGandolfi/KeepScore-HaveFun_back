@@ -1,6 +1,6 @@
 BEGIN;
 
-TRUNCATE "user", quest, family, shop, collection, transaction, user_has_friend, user_has_collection, user_has_quest, user_has_shop RESTART IDENTITY;
+TRUNCATE "user", quest, family, shop, collection, budget, transaction, user_has_friend, user_has_collection, user_has_quest, user_has_shop RESTART IDENTITY;
 
 INSERT INTO family(name,level)
 VALUES ('teamdevback', 1),
@@ -47,13 +47,23 @@ INSERT INTO shop(price, collection_id) VALUES
 INSERT INTO user_has_collection(collection_id,user_id) 
 VALUES (1,1),(2,1),(3,2),(4,2),(5,2);
 
-INSERT INTO transaction(operation, user_id) VALUES
-(150, 1),
-(440, 1),
-(-80, 1),
-(500, 2),
-(500, 2),
-(-277, 2);
+INSERT INTO budget(label, value, user_id) VALUES
+('Voiture', 1000, 6),
+('Courses', 750, 6),
+('Vacances', 2000, 6);
+
+
+INSERT INTO transaction(label, operation, budget_id) VALUES
+('Auchan', 150, 2),
+('Leclerc',85, 2),
+('Intermarché', 100, 2),
+('Frein',150, 1),
+('Climatisation',80, 1),
+('Billet avion',800, 3);
+
+
+
+
 
 INSERT INTO user_has_quest(user_id, quest_id) VALUES
 (1,1),

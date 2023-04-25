@@ -2,15 +2,15 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require("../database");
 
 
-class Transaction extends Model { }
+class Budget extends Model { }
 
-Transaction.init({
-    operation: DataTypes.INTEGER,
+Budget.init({
+    value: DataTypes.INTEGER,
     label: DataTypes.TEXT
 
 }, {
     sequelize,
-    tableName: "transaction"
+    tableName: "budget"
 });
 
-module.exports = Transaction;
+module.exports = Budget;
