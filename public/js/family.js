@@ -1,177 +1,186 @@
-// Sélection des éléments du DOM
-const showFamilyInfoBtn = document.querySelector('#show-family-info-btn');
-const createButton = document.querySelector('#create-button');
-const deleteButton = document.querySelector('#delete-button');
+document.addEventListener("DOMContentLoaded", function () {
 
-const selectWrapper = document.querySelector('.select-wrapper');
-const familySelect = document.querySelector('#family');
-const familyInfos = document.querySelector('.family-info');
-const familyName = document.querySelector('.family-name');
+    const Family = {
 
-const createForm = document.querySelector('.create-family');
-const familyLevelInput = document.querySelector('#family-level');
-const familyNameInput = document.querySelector('#family-name');
+        /* ---------- Propriétés ---------- */
+        // Boutons
+        showFamilyInfoBtn: document.querySelector('#show-family-info-btn'),
+        createButton: document.querySelector('#create-button'),
+        deleteButton: document.querySelector('#delete-button'),
 
-const familySelectDelete = document.querySelector('#family-select');
-const deleteFamilyBtn = document.querySelector('.delete-family-select-btn');
-const showFamilyDeleteBtn = document.querySelector('.select-wrapper-delete');
+        // Infos des familles
+        selectWrapper: document.querySelector('.select-wrapper'),
+        familySelect: document.querySelector('#family'),
+        familyInfos: document.querySelector('.family-info'),
+        familyName: document.querySelector('.family-name'),
 
+        // Création d'une famille 
+        createForm: document.querySelector('.create-family'),
+        familyLevelInput: document.querySelector('#family-level'),
+        familyNameInput: document.querySelector('#family-name'),
 
-showFamilyInfoBtn.addEventListener('click', () => {
-    if (selectWrapper.style.display === 'flex') {
-        // Si selectWrapper est déjà affiché, on le cache à nouveau et on réinitialise les éléments d'affichage des infos
-        selectWrapper.style.display = 'none';
-        familyInfos.style.display = 'none';
-        familyName.textContent = '';
-        familySelect.selectedIndex = 0;
-    } else {
-        // Sinon on affiche selectWrapper
-        selectWrapper.style.display = 'flex';
-        createForm.style.display = 'none';
-        familyLevelInput.value = 1;
-        familyNameInput.value = '';
-        showFamilyDeleteBtn.style.display = 'none';
-        familySelectDelete.selectedIndex = 0;
-    }
-});
+        // Supprimer une famille
+        familySelectDelete: document.querySelector('#family-select'),
+        deleteFamilyBtn: document.querySelector('.delete-family-btn'),
+        showFamilyDeleteBtn: document.querySelector('.select-wrapper-delete'),
 
-// On ajoute un événement à la sélection de la famille 
-familySelect.addEventListener('change', async (event) => {
+        /* ---------- CSS & HTML ---------- */
+        resetFamilyInfos: function () {
+            this.selectWrapper.style.display = 'none';
+            this.familyInfos.style.display = 'none';
+            this.familyName.textContent = '';
+            this.familySelect.selectedIndex = 0; 
+        },
 
-    try {
-        // On récupère l'id de la famille sélectionnée
-        const familyId = parseInt(event.target.value);
-        const families = await fetch('/families');
-        const data = await families.json();
-        const selectedFamily = data.find((family) => family.id === familyId);
+        resetCreateFamily: function () {
+            this.createForm.style.display = 'none';
+            this.familyLevelInput.value = 1;
+            this.familyNameInput.value = '';
+        },
 
-        // On met à jour les valeurs des variables dans le fichier EJS avec ceux de la famille sélectionnée
-        familyName.textContent = `Nom de la famille: ${selectedFamily.name}`;
-        document.querySelector('.family-members').innerHTML='';
-        selectedFamily.members.forEach(member => {
-            const li = document.createElement('li');
-            li.textContent = `${member.lastname} ${member.firstname}`;
-            document.querySelector('.family-members').appendChild(li);
-        });
-        document.querySelector('.family-level').textContent = `Niveau de la famille: ${selectedFamily.level}`;
-        // Et enfin on affiche la div qui était cachée
-        familyInfos.style.display = 'block';
-    } catch (error) {
-        console.error(error);
-    }
-});
+        resetDeleteFamily: function () {
+            this.showFamilyDeleteBtn.style.display = 'none';
+            this.familySelectDelete.selectedIndex = 0;
+        },
 
-/* ----- CREER UNE FAMILLE ----- */
+        /* ---------- Méthodes ---------- */
+        init: function () {
+            // Informations des familles
+            this.showFamilyInfoBtn.addEventListener('click', this.showFamilyWrapper.bind(this));
+            this.familySelect.addEventListener('change', this.handleSelectFamily.bind(this));
 
-createButton.addEventListener('click', () => {
-    if (createForm.style.display === 'flex') {
-        createForm.style.display = 'none';
-        familyLevelInput.value = 1;
-        familyNameInput.value = '';
-    } else {
-        createForm.style.display = 'flex';
-        selectWrapper.style.display = 'none';
-        familyName.textContent = '';
-        familySelect.selectedIndex = 0;
-        familySelectDelete.selectedIndex = 0;
-        familyInfos.style.display = 'none';
-        showFamilyDeleteBtn.style.display = 'none';
-    }
-});
+            // Création d'une famille
+            this.createButton.addEventListener('click', this.showFormCreateFamily.bind(this));
+            this.createForm.addEventListener('submit', this.handleCreateFamily.bind(this));
 
-// Maintenant que le formulaire s'affiche au click, il faut créer la famille
+            // Suppression d'une famille
+            this.deleteButton.addEventListener('click', this.showDeleteFamily.bind(this));
+            this.familySelectDelete.addEventListener('change', this.handleDeleteFamily.bind(this));
+        },
 
-createForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    if (parseInt(familyLevelInput.value) > 20) {
-        familyLevelInput.value = 20;
-    }
-    if (parseInt(familyLevelInput.value) < 1) {
-        familyLevelInput.value = 1;
-    }
-
-    const data = {
-        name: familyNameInput.value,
-        level: parseInt(familyLevelInput.value),
-        members: []
-    };
-
-    try  {
-        const response = await fetch('/family', {
-            method: "POST",
-            headers: {
-                'Content-Type':  'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (response.ok) {
-            console.log('Successfully created family');
-            // On remasque le form après la création
-            createForm.style.display = 'none';
-            // On actualise la page pour que la nouvelle famille soit prise en compte dans la liste des familles
-            window.location.reload();
-        } else {
-            console.error('Error creating family');
-        }
-    } catch (error) {
-        console.error(error);
-    }
-});
-
-/* ----- SUPPRIMER UNE FAMILLE ----- */
-
-// EventListener sur le bouton "Supprimer une famille"
-deleteButton.addEventListener('click', () => {
-    if (showFamilyDeleteBtn.style.display === 'flex') {
-        showFamilyDeleteBtn.style.display = 'none';
-        selectWrapper.style.display = 'none';
-        familyInfos.style.display = 'none';
-        createForm.style.display = 'none';
-        familyLevelInput.value = 1;
-        familyNameInput.value = '';
-        familyName.textContent = '';
-        familySelect.selectedIndex = 0;
-        familySelectDelete.selectedIndex = 0;
-    } else {
-        showFamilyDeleteBtn.style.display = 'flex';
-        createForm.style.display = 'none';
-        familyLevelInput.value = 1;
-        familyNameInput.value = '';
-        selectWrapper.style.display = 'none';
-        familyName.textContent = '';
-        familySelect.selectedIndex = 0;
-        familyInfos.style.display = 'none';
-
-    }
-});
-
-// EventListener sur le bouton "supprimer"
-familySelectDelete.addEventListener('change', (event) => {
-    const familyId = parseInt(event.target.value);
-    deleteFamilyBtn.addEventListener('click', () => {
-        confirmDelete(familyId);
-    })
-});
-
-
-// Fonction pour confirmer la suppression
-const confirmDelete = async (familyId) => {
-    const confirmed = confirm("Do you confirm the deletion of the family?");
-
-    if (confirmed) {
-        try {
-            const response = await fetch(`/family/${familyId}`, { method: 'DELETE'});
-            if (response.ok) {
-                console.log('Deleted family');
-                // Rechargement de la page pour mettre à jour la liste des familles
-                window.location.reload();
+        showFamilyWrapper: function () {
+            if (this.selectWrapper.style.display === 'flex') {
+                this.resetFamilyInfos();
             } else {
-                console.error('Error deleting family')
+                this.resetCreateFamily();
+                this.resetDeleteFamily();
+                this.selectWrapper.style.display = 'flex';
             }
-        } catch (error) {
-            console.error(error);
-        }
-    }
-};
+        },
+
+        handleSelectFamily: async function (event) {
+            try {
+                // Récupération de l'id de la famille 
+                const familyId = parseInt(event.target.value);
+                // On va chercher la liste des familles gràce à une des routes de notre API
+                const families = await fetch('/families');
+                // On extrait les données JSON de la réponse
+                const data = await families.json();
+                // Puis on utilise find() pour rechercher la famille sélectionnée
+                const selectedFamily = data.find((family) => family.id === familyId);
+
+                // On met à jour les valeurs des variables dans le fichier EJS avec ceux de la famille sélectionnée
+                this.familyName.textContent = `Nom de la famille: ${selectedFamily.name}`;
+                document.querySelector('.family-members').innerHTML = '';
+                selectedFamily.members.forEach(member => {
+                    const li = document.createElement('li');
+                    li.textContent = `${member.lastname} ${member.firstname}`;
+                    document.querySelector('.family-members').appendChild(li);
+                });
+                document.querySelector('.family-level').textContent = `Niveau de la famille: ${selectedFamily.level}`;
+                // Et enfin on affiche la div qui était cachée
+                this.familyInfos.style.display = 'block';
+            } catch (error) {
+                console.error(error);
+            }
+        },
+
+        showFormCreateFamily: function () {
+            if (this.createForm.style.display === 'flex') {
+                this.resetCreateFamily();
+            } else {
+                this.resetFamilyInfos();
+                this.resetDeleteFamily();
+                this.createForm.style.display = 'flex';
+
+            }
+        },
+
+        handleCreateFamily: async function (event) {
+            event.preventDefault();
+
+            // Valeurs possible (ici j'ai fait en sorte qu'un niveau de famille soit compris entre 1 et 20)
+            if (parseInt(this.familyLevelInput.value) > 20) {
+                this.familyLevelInput.value = 20;
+            }
+            if (parseInt(this.familyLevelInput.value) < 1) {
+                this.familyLevelInput.value = 1;
+            }
+
+            const data = {
+                name: this.familyNameInput.value,
+                level: parseInt(this.familyLevelInput.value),
+                members: []
+            };
+
+            try  {
+                const response = await fetch('/family', {
+                    method: "POST",
+                    headers: {
+                        'Content-Type':  'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+        
+                if (response.ok) {
+                    console.log('Successfully created family');
+                    // On remasque le form après la création
+                    this.createForm.style.display = 'none';
+                    // On actualise la page pour que la nouvelle famille soit prise en compte dans la liste des familles
+                    window.location.reload();
+                } else {
+                    console.error('Error creating family');
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        },
+
+        showDeleteFamily: function () {
+            if (this.showFamilyDeleteBtn.style.display === 'flex') {
+                this.resetDeleteFamily();
+            } else {
+                this.resetFamilyInfos();
+                this.resetCreateFamily();
+                this.showFamilyDeleteBtn.style.display = 'flex';
+            }
+        },
+
+        handleDeleteFamily: function (event) {
+            const familyId = parseInt(event.target.value);
+            this.deleteFamilyBtn.addEventListener('click', () => {
+                this.confirmDelete(familyId);
+            });
+        },
+
+        confirmDelete: async function (familyId) {
+            const confirmed = confirm("Do you confirm the deletion of the family?");
+            if (confirmed) {
+                try {
+                    const response = await fetch(`/family/${familyId}`, { method: 'DELETE'});
+                    if (response.ok) {
+                        console.log('Deleted family');
+                        // Rechargement de la page pour mettre à jour la liste des familles
+                        window.location.reload();
+                    } else {
+                        console.error('Error deleting family')
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        },
+
+    };
+    Family.init();
+});
