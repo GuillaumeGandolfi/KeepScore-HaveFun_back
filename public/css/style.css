@@ -174,55 +174,112 @@ cursor: pointer;
 
 /* *************************** CSS -> FAMILY  ********************************************* */
 
-.select-wrapper {
-	display: none;
-	justify-content: center;
-	margin-top: 20px;
-}
-
-.family-block {
-	display: flex;
-	justify-content: center;
-}
 .family-title {
 	text-align: center;
 }
 
 .family-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.family-name {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	list-style-type: none;
+	margin-top: 5px;
+}
+
+.family-name li {
+	padding: 10px;
+	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+	background-color: #f1f1f1;
+	border-radius: 5px;
+	transition: box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.family-name li:hover {
+	cursor: pointer;
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+	background-color: #D4D4D4;
+}
+
+.family-name li:nth-child(even) {
+	background-color: #E9EBEE;
+}
+
+.family-name li:nth-child(odd) {
+	background-color: #F5F7FA;
+}
+
+.family-block {
 	display: none;
 	background-color: #fff;
 	border-radius: 10px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 	padding: 20px;
-	margin-top: 20px;
-	text-align: center;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	width: 50%;
+	margin: 20px auto;
+	max-width: 800px;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s ease;
 }
 
-.family-info h2 {
-	font-size: 1.5rem;
+.family-block:hover {
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.family-block-name {
+	font-size: 24px;
 	font-weight: bold;
-	margin-bottom: 10px;
-	text-transform: uppercase;
+	margin: 10px 0;
 }
 
-.family-info .family-members {
+.family-block h2 {
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+.family-block p {
+	font-size: 18px;
+	margin-bottom: 20px;
+}
+
+.family-block ul {
 	list-style: none;
 	padding: 0;
 	margin: 0;
+}
+
+.family-block li {
+	font-size: 16px;
 	margin-bottom: 10px;
 }
 
-.family-info .family-members li {
-	margin-bottom: 5px;
+.family-block li strong {
+	margin-right: 10px;
 }
 
-.family-info .family-level {
-	margin-top: 10px;
-	font-size: 1.2rem;
-	font-weight: bold;
-	text-transform: uppercase;
-	color: #666;
+.family-members {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.family-members li {
+	margin: 5px 0;
+}
+
+.family-level {
+	font-style: italic;
+	margin: 10px 0;
 }
 
 .create-family {
@@ -273,6 +330,31 @@ cursor: pointer;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.pagination button {
+	background-color: #fff;
+	color: #333;
+	border: 1px solid #ccc;
+	padding: 8px 16px;
+	margin: 0 4px;
+	border-radius: 4px;
+	font-size: 16px;
+	cursor: pointer;
+	text-decoration: none;
+	transition: background-color 0.3s ease-in-out;
+}
+
+.pagination button:hover {
+	background-color: #ccc;
+	color: #fff;
 }
 
   /* *************************** CSS -> SHOP  ********************************************* */
