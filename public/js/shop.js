@@ -17,7 +17,7 @@ const shop = {
             collections = await fetch('/collections');
             // Je la rend exploitable
             const data = await collections.json();
-            // console.log(data);
+            console.log('data',data);
             // Ensuite j'affiche la donnée grace a displayList 
             shop.DisplayList(data, shop.list_element, shop.rows, shop.current_page);
             shop.SetupPagination(data, shop.pagination_element, shop.rows)
