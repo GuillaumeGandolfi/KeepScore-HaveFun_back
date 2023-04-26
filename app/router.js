@@ -26,7 +26,7 @@ router.get('/user/:id',  userController.getOneUser);
 router.post('/user',  userController.createUser);
 router.put('/user/:id',  userController.modifyUser);
 router.delete('/user/:id',  userController.deleteUser);
-router.post('/user/add-friend',  userController.addFriend);
+router.post('/user/add-friend', tokenMiddleware,  userController.addFriend);
 
 
 /** Families */
@@ -60,10 +60,10 @@ router.delete('/shop/:id',  shopController.deleteItemFromShop);
 router.get('/transactions',  transactionController.getAllTransactions);
 router.get('/transactions/budget/:id', transactionController.getAllTransactionsOfBudget);
 router.get('/transaction/:id',  transactionController.getOneTransaction);
-router.get('/transaction/day', transactionController.getTransactionOfToday);
-router.get('/transaction/week', transactionController.getTransactionOfWeek);
-router.get('/transaction/month', transactionController.getTransactionOfMonth);
-router.get('/transaction/year', transactionController.getTransactionOfYear);
+router.get('/transaction/day/:id', transactionController.getTransactionOfToday);
+router.get('/transaction/week/:id', transactionController.getTransactionOfWeek);
+router.get('/transaction/month/:id', transactionController.getTransactionOfMonth);
+router.get('/transaction/year/:id', transactionController.getTransactionOfYear);
 router.post('/transaction',  transactionController.createTransaction);
 router.put('/transaction/:id', transactionController.modifyTransaction);
 router.delete('/transaction/:id',  transactionController.deleteTransaction);
