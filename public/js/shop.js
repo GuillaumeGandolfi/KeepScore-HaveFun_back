@@ -3,7 +3,9 @@ const shop = {
     rows : 5,
     list_element : document.getElementById('list'),
     pagination_element : document.getElementById('pagination'),
-    
+    modal : document.getElementById('modal'),
+    modifyForm : document.getElementById('modal-form'),
+    elementId: '',
     init: function() {
         if (document.body.classList.contains('shop-page')) {
             console.log('Init shop !')
@@ -36,18 +38,59 @@ const shop = {
         let end = start + rows_per_page;
         let paginatedItems = items.slice(start, end);
 
+        
         for (let i = 0; i < paginatedItems.length; i++) {
             let item = paginatedItems[i];
-            // console.log(item)
             let item_element = document.createElement('div');
             item_element.classList.add('item');
-            item_element.innerText = item.description; // Ici on choisi de renvoyer que le nom de l'item
 
-            // Ajouter un écouteur d'evennement pour chaque element 
-            item_element.addEventListener('click', function(event) {
-            let id = item.id;
-            console.log(id)
+            // Ajoute la description
+            let description = document.createElement('div');
+            description.classList.add('description');
+            description.innerText = item.description;
+            item_element.appendChild(description);
+
+            // Ajoute la catégorie
+            let category = document.createElement('div');
+            category.classList.add('category');
+            category.innerText = item.category;
+            item_element.appendChild(category);
+
+            // Ajoute le niveau requis
+            let level = document.createElement('div');
+            level.classList.add('level');
+            level.innerText = `Niveau requis : ${item.level}`;
+            item_element.appendChild(level);
+
+            // Ajoute le bouton Supprimer
+            let delete_button = document.createElement('button');
+            delete_button.classList.add('delete-button');
+            delete_button.innerText = 'Supprimer';
+            delete_button.addEventListener('click', async function(event) {
+                console.log('Supprimer', item.id);
+                if (confirm("Voulez vous vraiment supprimer cet élément ?")){
+                    try {
+                        const response = await fetch(`http://localhost:3000/collection/${item.id}`, {
+                            method: 'DELETE',
+                        });
+                        if(!response.ok){throw new Error("Impossible de supprimer l'élément")};
+                        alert("Element supprimé !")
+                        window.location.reload();
+
+                    } catch (error) {
+
+                    }
+                };
             });
+            item_element.appendChild(delete_button);
+
+            // Ajoute le bouton Modifier
+            let edit_button = document.createElement('button');
+            edit_button.classList.add('edit-button');
+            edit_button.innerText = 'Modifier';
+            edit_button.addEventListener('click', shop.handleModifyForm);
+            item_element.appendChild(edit_button);
+
             wrapper.appendChild(item_element);
         }
 
@@ -83,6 +126,17 @@ const shop = {
             button.classList.add('active');
         })
         return button
+    },
+    handleModifyForm: async function(event){
+        console.log("handleModifyForm")
+        // on récupère les éléments du formulaire
+        // const descriptionInput = shop.modifyForm.querySelector('input[name="description"]');
+        // const categoryInput = shop.modifyForm.querySelector('input[name="category"]');
+        // const require_levelInput = shop.modifyForm.querySelector('input[name="require_level"]');
+        console.log('event',event)
+
+        console.log('event.target.value',event.target)
+        
     }
     
 

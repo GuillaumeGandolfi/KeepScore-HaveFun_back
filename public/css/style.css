@@ -65,6 +65,65 @@ nav ul li a {
 	flex-basis: 80%;
 	padding: 20px;
 }
+/* *************************** CSS -> MODAL  ********************************************* */
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 9999;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content {
+	background-color: white;
+	margin: 15% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	max-width: 600px;
+	border-radius: 5px;
+  }
+  
+  .modal-content h2 {
+	margin-top: 0;
+  }
+  
+  .modal-buttons {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+  }
+  
+  .modal-buttons button {
+	padding: 10px;
+	border-radius: 5px;
+	border: none;
+	font-weight: bold;
+	cursor: pointer;
+  }
+  
+  .modal-buttons button[type="submit"] {
+	background-color: #0077FF;
+	color: white;
+  }
+  
+  .modal-buttons button[type="button"] {
+	background-color: #EEE;
+	color: #333;
+  }
+  
+  .modal-buttons button:focus {
+	outline: none;
+  }
+  
+  .modal-buttons button:active {
+	transform: translateY(1px);
+  }
+  
 
 /* *************************** CSS -> USER  ********************************************* */
 

@@ -87,13 +87,12 @@ const authController = {
                             association:"operations"
                         }]},
                     "family",
-                    {association: "friends"},
+                    // {association: "friends"},
                     {association: "quests"},
-                    {association: "items_collection"},
-                    {association: "items_shop"}
+                    // {association: "items_collection"},
+                    // {association: "items_shop"}
                 ]
             });
-
             
             const responseWithoutPassword = {...user.dataValues, password:''}
             console.log('responseWithoutPassword',responseWithoutPassword);

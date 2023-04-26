@@ -21,7 +21,7 @@ VALUES ('echterhoff.a@gmail.com', 'echterhoff', 'alexandre', 'azerty', true, 1),
 
 
 INSERT INTO user_has_friend(user_id, friend_id)
-VALUES (1,2),(1,3),(1,4),(1,5),(2,5),(2,4),(2,3);
+VALUES (1,2),(1,3),(1,4),(1,5),(2,5),(2,4),(2,3),(6,1);
 
 INSERT INTO quest(description, difficulty, reward_exp, reward_coin) VALUES 
 ('Mois sans tabac : nous te demanderons pas d arreter de fumer, mais diminue tes dépenses de moitié !', 3, 150, 150),
