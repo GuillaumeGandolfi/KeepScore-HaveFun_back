@@ -68,7 +68,7 @@ nav ul li a {
 /* *************************** CSS -> MODAL  ********************************************* */
 
 .modal {
-	display: none;
+	/* display: none; */
 	position: fixed;
 	z-index: 9999;
 	left: 0;
@@ -341,9 +341,31 @@ cursor: pointer;
 	max-width: 768px;
 	background-color: #fff;
 	border: 1px solid #CCC;
-	margin-top: 25px;
+	margin-top: 38%;
 }
 
+.item {
+	display: flex;
+	justify-content: space-around;
+}
+.title-row {
+	display: flex;
+	justify-content: space-around;
+    background-color: #f2f2f2;
+	border-bottom: 3px solid #ddd;
+
+
+}
+
+.title-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    font-weight: bold;
+}
 .list .item {
 	padding: 15px;
 	border-bottom: 1px solid #CCC;
