@@ -32,14 +32,24 @@ main {
 }
 
 /* *************************** CSS MENU NAV ********************************************* */
-nav {
+/*  Tu peux la remettre comme avant si tu veux, j'ai juste essayé qqchose */
+/* nav {
 	background-color: #333;
 	color: #fff;
 	flex-basis: 20%;
 	position: sticky;
 	top: 0;
-}
+} */
 
+nav {
+	background-color: #333;
+	color: #fff;
+	width: 20%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 23.5vh;
+}
 nav ul {
 	list-style: none;
 	padding: 0;
@@ -53,6 +63,7 @@ nav ul li {
 
 nav ul li:hover {
 	background-color: #666;
+	cursor: pointer;
 }
 
 nav ul li a {
@@ -76,53 +87,77 @@ nav ul li a {
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-content {
+}
+
+.modal-content {
 	background-color: white;
-	margin: 15% auto;
-	padding: 20px;
-	border: 1px solid #888;
+	margin: 10% auto;
+	padding: 30px;
+	border: 1px solid #ccc;
 	width: 80%;
-	max-width: 600px;
-	border-radius: 5px;
-  }
-  
-  .modal-content h2 {
+	max-width: 800px;
+	border-radius: 10px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.modal-content h2 {
 	margin-top: 0;
-  }
-  
-  .modal-buttons {
+	font-size: 24px;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+form label {
+	font-size: 16px;
+	margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="number"] {
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	margin-bottom: 20px;
+	width: 100%;
+	font-size: 16px;
+}
+
+.modal-buttons {
 	display: flex;
 	justify-content: space-between;
 	margin-top: 20px;
-  }
-  
-  .modal-buttons button {
-	padding: 10px;
+}
+
+.modal-buttons button {
+	padding: 10px 20px;
 	border-radius: 5px;
 	border: none;
 	font-weight: bold;
 	cursor: pointer;
-  }
-  
-  .modal-buttons button[type="submit"] {
-	background-color: #0077FF;
+}
+
+.modal-buttons button[type="submit"] {
+	background-color: #0077ff;
 	color: white;
-  }
-  
-  .modal-buttons button[type="button"] {
-	background-color: #EEE;
+}
+
+.modal-buttons button[type="button"] {
+	background-color: #eee;
 	color: #333;
-  }
-  
-  .modal-buttons button:focus {
+}
+
+.modal-buttons button:focus {
 	outline: none;
-  }
-  
-  .modal-buttons button:active {
+}
+
+.modal-buttons button:active {
 	transform: translateY(1px);
-  }
+}
+
   
 
 /* *************************** CSS -> USER  ********************************************* */
@@ -338,7 +373,6 @@ cursor: pointer;
   
 .list {
 	width: 65%;
-	/* max-width: 768px; */
 	background-color: #fff;
 	border: 1px solid #CCC;
 	margin-top: 38%;
@@ -348,18 +382,23 @@ cursor: pointer;
 	width:100%;
 }
 
+
+td, th {
+	flex: 1 1 30%;
+	
+}
+
+
 .item {
 	display: flex;
-	justify-content: space-around;
-	align-items: center;
 }
+
 .title-row {
 	display: flex;
 	justify-content: space-around;
     background-color: #f2f2f2;
 	border-bottom: 3px solid #ddd;
-
-
+	
 }
 
 .title-cell {
