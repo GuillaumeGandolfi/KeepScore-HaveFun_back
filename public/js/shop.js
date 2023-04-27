@@ -85,7 +85,7 @@ const shop = {
             // Ajoute le niveau requis
             let level = document.createElement('td');
             level.classList.add('level');
-            level.innerText = `Niveau requis : ${item.level}`;
+            level.innerText = `Level : ${item.level}`;
             item_element.appendChild(level);
 
             // Ajoute le bouton Supprimer

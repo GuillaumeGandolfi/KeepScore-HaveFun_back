@@ -10,9 +10,7 @@ const adminController = {
             const families = await Family.findAll();
             res.render("family", { 
                 families,
-                defaultFamilyName: "",
-                defaultFamilyMembers: [],
-                defaultFamilyLevel: ""});
+            });
         } catch (error) {
             console.error(error);
             console.trace(error);
