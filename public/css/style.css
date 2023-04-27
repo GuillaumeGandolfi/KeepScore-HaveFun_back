@@ -75,10 +75,6 @@ nav ul li a {
 }
 
 .form-group {
-	/* display: none; */
-  }
-  
-  .form-group {
 	margin-bottom: 20px;
 }
 
@@ -174,9 +170,46 @@ cursor: pointer;
 
 /* *************************** CSS -> FAMILY  ********************************************* */
 
+
+.choice-button-family {
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+	transition: transform 0.3s ease-in-out;
+}
+
+.choice-button-family:before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0);
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, 0.2);
+	z-index: -1;
+	transition: transform 0.3s ease-in-out;
+}
+
+.choice-button-family:hover {
+	transform: translateY(-5px);
+}
+
+.choice-button-family:hover:before {
+	transform: translate(-50%, -50%) scale(15);
+}
+
 .family-title {
 	text-align: center;
 }
+
 
 .family-info {
 	display: flex;
