@@ -7,10 +7,11 @@ const {
     Collection,
     Quest
 } = require("../models");
-const {
-    Op
-} = require('sequelize');
+const { Op } = require('sequelize');
 const dayjs = require('dayjs');
+const jwt = require('jsonwebtoken');
+
+
 
 const transactionController = {
     getAllTransactions: async (req, res) => {
@@ -152,10 +153,12 @@ const transactionController = {
     },
     getTransactionOfToday: async (req, res) => {
         try {
+            // Je récupère l'userId grâce au token d'authentification
             const token = req.headers.authorization.split(' ')[1];
             const decodedToken = jwt.verify(token, 'secret-key');
-
-            const userId = decodedToken.userId;
+            const userId = decodedToken?.userId;
+            
+            
 
             const now = new Date();
             // On instancie une journée
@@ -187,10 +190,11 @@ const transactionController = {
     },
     getTransactionOfWeek: async (req, res) => {
         try {
+            // Je récupère l'userId grâce au token d'authentification
             const token = req.headers.authorization.split(' ')[1];
             const decodedToken = jwt.verify(token, 'secret-key');
+            const userId = decodedToken?.userId;
 
-            const userId = decodedToken.user;
             const now = new Date();
 
             // Trouver la date du lundi le plus proche avant la date actuelle
@@ -224,14 +228,16 @@ const transactionController = {
     },
     getTransactionOfMonth: async (req, res) => {
         try {
+            
+            // Je récupère l'userId grâce au token d'authentification
             const token = req.headers.authorization.split(' ')[1];
             const decodedToken = jwt.verify(token, 'secret-key');
-
-            const userId = decodedToken.userId;
+            const userId = decodedToken?.userId;
+            
             const now = new Date();
 
             // Trouver la date du premier jour du mois courant
-            const startOfMonth = dayjs(now).startOfMonth('month').toDate();
+            const startOfMonth = dayjs(now).startOf('month').toDate();
 
             // Trouver la date du dernier jour du mois courant
             const endOfMonth = dayjs(now).endOf('month').toDate();
@@ -263,10 +269,11 @@ const transactionController = {
     },
     getTransactionOfYear: async (req, res) => {
         try {
+            // Je récupère l'userId grâce au token d'authentification
             const token = req.headers.authorization.split(' ')[1];
             const decodedToken = jwt.verify(token, 'secret-key');
+            const userId = decodedToken?.userId;
 
-            const userId = decodedToken.userId;
             const now = new Date();
 
             // Trouver la date du premier jour de l'année courante
