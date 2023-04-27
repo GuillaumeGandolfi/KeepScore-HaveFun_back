@@ -8,11 +8,9 @@ const adminController = {
     familyPage: async (req, res) => {
         try {
             const families = await Family.findAll();
-            res.render("family_test", { 
+            res.render("family", { 
                 families,
-                defaultFamilyName: "",
-                defaultFamilyMembers: [],
-                defaultFamilyLevel: ""});
+            });
         } catch (error) {
             console.error(error);
             console.trace(error);
