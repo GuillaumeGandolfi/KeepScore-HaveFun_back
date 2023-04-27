@@ -453,11 +453,12 @@ cursor: pointer;
 	border: none;
 	border-radius: 3px;
 	cursor: pointer;
-	transition: background-color 0.3s ease;
+	transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .form-button-family:hover {
 	background-color: #247e00e3;
+	transform: scale(1.1);
 }
 
 .family-form-add {
@@ -470,14 +471,43 @@ cursor: pointer;
 	background-color: #f2f2f2;
 	border-radius: 5px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
+	/* animation */
+	animation-name: slideIn;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .select-wrapper-delete {
+	position: relative;
 	display: none;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	margin-top: 20px;
+	animation: fade-in 1s ease-out;
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+		transform: translateY(50%);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 .select-family-delete {
@@ -501,6 +531,7 @@ cursor: pointer;
 }
 
 .delete-family-select-btn {
+	position: relative;
 	display: inline-block;
 	padding: 10px 20px;
 	font-size: 16px;
@@ -513,6 +544,18 @@ cursor: pointer;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
 	margin-top: 20px;
+	animation: zoom-in 1s ease-out;
+}
+
+@keyframes zoom-in {
+	from {
+		opacity: 0;
+		transform: scale(0);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
 }
 
 .delete-family-select-btn:hover {
