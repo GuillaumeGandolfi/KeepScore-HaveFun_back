@@ -380,14 +380,14 @@ cursor: pointer;
 
 .item-table {
 	width:100%;
+	border-collapse: collapse;
 }
 
 
 td, th {
-	flex: 1 1 30%;
+	flex: 2 1  30%;
 	
-}
-
+} 
 
 .item {
 	display: flex;

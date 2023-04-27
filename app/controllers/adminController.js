@@ -24,7 +24,7 @@ const adminController = {
         try {
             const users = await User.findAll();
             const families = await Family.findAll()
-            res.render("user", {usersList: users, familiesList: families});
+            res.render("users", {usersList: users, familiesList: families});
         } catch (error) {
             console.error(error);
             console.trace(error);
