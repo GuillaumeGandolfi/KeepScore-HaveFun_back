@@ -45,6 +45,7 @@ const adminController = {
     shopPage: async (req, res) => {
         try {
             const collections = await Collection.findAll();
+            console.log(collections)
             res.render("shop", {collections});
         } catch(error) {
             console.trace(error);

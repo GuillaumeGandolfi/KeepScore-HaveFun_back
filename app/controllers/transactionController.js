@@ -7,9 +7,7 @@ const {
     Collection,
     Quest
 } = require("../models");
-const {
-    Op
-} = require('sequelize');
+const { Op } = require('sequelize');
 const dayjs = require('dayjs');
 const jwt = require('jsonwebtoken');
 
@@ -233,7 +231,7 @@ const transactionController = {
             const token = req.headers.authorization.split(' ')[1];
             const decodedToken = jwt.verify(token, 'secret-key');
             const userId = decodedToken?.userId;
-
+            
             const now = new Date();
 
             // Trouver la date du premier jour du mois courant

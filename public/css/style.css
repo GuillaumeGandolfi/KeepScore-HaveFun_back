@@ -337,16 +337,21 @@ cursor: pointer;
   /* *************************** CSS -> SHOP  ********************************************* */
   
 .list {
-	width: 100%;
-	max-width: 768px;
+	width: 65%;
+	/* max-width: 768px; */
 	background-color: #fff;
 	border: 1px solid #CCC;
 	margin-top: 38%;
 }
 
+.item-table {
+	width:100%;
+}
+
 .item {
 	display: flex;
 	justify-content: space-around;
+	align-items: center;
 }
 .title-row {
 	display: flex;
@@ -359,7 +364,7 @@ cursor: pointer;
 
 .title-cell {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #ddd;
@@ -415,3 +420,4 @@ cursor: pointer;
 	background-color: #44EEAA;
 	box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2)
 }
+

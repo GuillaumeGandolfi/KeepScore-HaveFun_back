@@ -30,7 +30,6 @@ const shop = {
             console.trace(error);
         }
     },
-
     DisplayList: function (items, wrapper, rows_per_page, page) {
         console.log('DisplayList')
         wrapper.innerHTML = "";
@@ -40,50 +39,51 @@ const shop = {
         let end = start + rows_per_page;
         let paginatedItems = items.slice(start, end);
 
-        // Création de la ligne de titre
-        let title_row = document.createElement('div');
-        title_row.classList.add('title-row');
-        let title_cell1 = document.createElement('div');
-        title_cell1.classList.add('title-cell');
-        title_cell1.innerText = "Description";
-        let title_cell2 = document.createElement('div');
-        title_cell2.classList.add('title-cell');
-        title_cell2.innerText = "Catégorie";
-        let title_cell3 = document.createElement('div');
-        title_cell3.classList.add('title-cell');
-        title_cell3.innerText = "Niveau requis";
-        let title_cell4 = document.createElement('div');
-        title_cell4.classList.add('title-cell');
-        title_cell4.innerText = "";
-        let title_cell5 = document.createElement('div');
-        title_cell5.classList.add('title-cell');
-        title_cell5.innerText = "";
-        title_row.appendChild(title_cell1);
-        title_row.appendChild(title_cell2);
-        title_row.appendChild(title_cell3);
-        title_row.appendChild(title_cell4);
-        title_row.appendChild(title_cell5);
-        wrapper.appendChild(title_row);
+        // Création de la table
+        let table = document.createElement('table');
+        table.classList.add('item-table');
 
+        // Création de l'en-tête de table
+        let table_head = document.createElement('thead');
+        let head_row = document.createElement('tr');
+        head_row.classList.add('title-row');
+        let title_cell1 = document.createElement('th');
+        title_cell1.innerText = "Description";
+        let title_cell2 = document.createElement('th');
+        title_cell2.innerText = "Catégorie";
+        let title_cell3 = document.createElement('th');
+        title_cell3.innerText = "Niveau requis";
+        let title_cell4 = document.createElement('th');
+        title_cell5 = document.createElement('th');
+        head_row.appendChild(title_cell1);
+        head_row.appendChild(title_cell2);
+        head_row.appendChild(title_cell3);
+        head_row.appendChild(title_cell4);
+        head_row.appendChild(title_cell5);
+        table_head.appendChild(head_row);
+        table.appendChild(table_head);
+
+        // Création du corps de table
+        let table_body = document.createElement('tbody');
         for (let i = 0; i < paginatedItems.length; i++) {
             let item = paginatedItems[i];
-            let item_element = document.createElement('div');
+            let item_element = document.createElement('tr');
             item_element.classList.add('item');
 
             // Ajoute la description
-            let description = document.createElement('div');
+            let description = document.createElement('td');
             description.classList.add('description');
             description.innerText = item.description;
             item_element.appendChild(description);
 
             // Ajoute la catégorie
-            let category = document.createElement('div');
+            let category = document.createElement('td');
             category.classList.add('category');
             category.innerText = item.category;
             item_element.appendChild(category);
 
             // Ajoute le niveau requis
-            let level = document.createElement('div');
+            let level = document.createElement('td');
             level.classList.add('level');
             level.innerText = `Niveau requis : ${item.level}`;
             item_element.appendChild(level);
@@ -110,7 +110,9 @@ const shop = {
                     }
                 };
             });
-            item_element.appendChild(delete_button);
+            let delete_cell = document.createElement('td');
+            delete_cell.appendChild(delete_button);
+            item_element.appendChild(delete_cell);
 
             // Ajoute le bouton Modifier
             let edit_button = document.createElement('button');
@@ -118,14 +120,16 @@ const shop = {
             edit_button.innerText = 'Modifier';
             edit_button.value = item.id;
             edit_button.addEventListener('click', shop.displayModal);
-            item_element.appendChild(edit_button);
+            let edit_cell = document.createElement('td');
+            edit_cell.appendChild(edit_button);
+            item_element.appendChild(edit_cell);
 
-            wrapper.appendChild(item_element);
+            table_body.appendChild(item_element);
         }
+        table.appendChild(table_body);
 
-
+        wrapper.appendChild(table);
     },
-
     SetupPagination: function (items, wrapper, rows_per_page) {
         console.log('SetupPagination');
         wrapper.innerHTML = '';
