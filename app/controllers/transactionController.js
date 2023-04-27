@@ -156,7 +156,7 @@ const transactionController = {
             // Je récupère l'userId grâce au token d'authentification
             const token = req.headers.authorization.split(' ')[1];
             const decodedToken = jwt.verify(token, 'secret-key');
-            const userId = decodedToken.userId ;
+            const userId = decodedToken?.userId ;
             
             
 
@@ -193,7 +193,7 @@ const transactionController = {
             // Je récupère l'userId grâce au token d'authentification
             const token = req.headers.authorization.split(' ')[1];
             const decodedToken = jwt.verify(token, 'secret-key');
-            const userId = decodedToken.userId;
+            const userId = decodedToken?.userId;
 
 
             // Trouver la date du lundi le plus proche avant la date actuelle
@@ -231,12 +231,12 @@ const transactionController = {
             // Je récupère l'userId grâce au token d'authentification
             const token = req.headers.authorization.split(' ')[1];
             const decodedToken = jwt.verify(token, 'secret-key');
-            const userId = decodedToken.userId;
+            const userId = decodedToken?.userId;
             
             const now = new Date();
 
             // Trouver la date du premier jour du mois courant
-            const startOfMonth = dayjs(now).startOf('month').toDate();
+            const startOfMonth = dayjs().startOf('month').toDate();
 
             // Trouver la date du dernier jour du mois courant
             const endOfMonth = dayjs().endOf('month').toDate();
@@ -271,7 +271,7 @@ const transactionController = {
             // Je récupère l'userId grâce au token d'authentification
             const token = req.headers.authorization.split(' ')[1];
             const decodedToken = jwt.verify(token, 'secret-key');
-            const userId = decodedToken.userId;
+            const userId = decodedToken?.userId;
 
             const now = new Date();
 
