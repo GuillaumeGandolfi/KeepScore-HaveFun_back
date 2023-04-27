@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken')
+
 const {
     User,
     Shop,
@@ -155,7 +157,7 @@ const transactionController = {
             // Je récupère l'userId grâce au token d'authentification
             const token = req.headers.authorization.split(' ')[1];
             const decodedToken = jwt.verify(token, 'secret-key');
-            const userId = decodedToken.userId;
+            const userId = decodedToken?.userId ;
 
             const now = new Date();
             // On instancie une journée
@@ -192,7 +194,6 @@ const transactionController = {
             const decodedToken = jwt.verify(token, 'secret-key');
             const userId = decodedToken.userId;
 
-            const now = new Date();
 
             // Trouver la date du lundi le plus proche avant la date actuelle
             const startOfWeek = dayjs().startOf('week').add(1, 'day').startOf('day');
@@ -233,10 +234,10 @@ const transactionController = {
             const now = new Date();
 
             // Trouver la date du premier jour du mois courant
-            const startOfMonth = dayjs(now).startOfMonth('month').toDate();
+            const startOfMonth = dayjs().startOf('month').toDate();
 
             // Trouver la date du dernier jour du mois courant
-            const endOfMonth = dayjs(now).endOf('month').toDate();
+            const endOfMonth = dayjs().endOf('month').toDate();
 
             const monthlyTransactions = await Transaction.findAll({
                 where: {

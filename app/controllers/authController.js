@@ -109,7 +109,7 @@ const authController = {
             }
 
             // Et maintenant on créer et on envoie un token pour l'utilisateur (token d'accès)
-            const token = jwt.sign({ userId: user.id }, 'secret-key', { expiresIn: '30m' });
+            const token = jwt.sign({ userId: user.id }, 'secret-key', { expiresIn: '1m' });
             // Puis un token de rafraichissement, qui va être utilisé pour obtenir un nouveau token d'accès 
             // lorsque le précédent va expirer. Il doit avoir une durée de vie plus longue et peut être utilisé pour
             // renouveler plusieurs fois le token d'accès
@@ -134,6 +134,7 @@ const authController = {
     refreshToken: async (req, res) => {
         // On récupère le token de refresh dans le body
         const refreshToken = req.body.refreshToken;
+        console.log(refreshToken)
 
         // On vérifie que le token de refresh existe, sinon on envoie un code 400 avec un message d'erreur
         if (!refreshToken) {
@@ -145,7 +146,7 @@ const authController = {
 
             // On vérifie que le token est valide et qu'il correspond bien à un utilisateur de la bdd
             const user = await User.findByPk(decodedRefreshToken.userId);
-
+           
             // Si on ne trouve pas d'utilisateur correspondant on envoie un code 401
             if (!user) {
                 return res.status(401).json('Invalid refresh token');
