@@ -5,4 +5,5 @@ export PGDATABASE=kshf
 
 # Je rempli la bdd
 psql -f ../data/seeding_v2.sql
+#psql -f ../data/seeding_v3.sql
 echo "seed db kshf"
