@@ -27,8 +27,7 @@ const sessionMiddleware = session({
 
 
 const app = express();
-app.use(express.json())
-app.use(cors('*'));
+app.use(express.json());
 
 
 app.use(cors('*')); // On autorise tout les domaines à faire du Cross Origin Resource Sharing.
