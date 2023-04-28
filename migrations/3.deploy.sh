@@ -6,3 +6,4 @@ export PGPASSWORD=kshf
 sqitch deploy 1.create_tables_v2
 sqitch deploy 2.add_constraint_delete
 sqitch deploy 3.rework_transaction_table
+sqitch deploy 4.domain_index_check
