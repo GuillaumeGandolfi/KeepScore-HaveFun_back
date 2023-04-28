@@ -6,6 +6,7 @@ const Quest = require("./Quest");
 const Shop = require("./Shop");
 const Transaction = require("./Transaction");
 const Family = require("./Family");
+const Budget = require("./Budget");
 
 // Family <-> User (One-To-Many)
 User.belongsTo(Family, {
@@ -18,7 +19,6 @@ Family.hasMany(User, {
     as: 'members'
 });
 
-
 // User <-> Friend (Many-To-Many)
 User.belongsToMany(User, {
     foreignKey: "user_id",
@@ -27,17 +27,33 @@ User.belongsToMany(User, {
     through: "user_has_friend"
 });
 
+// // User <-> Transaction (One-To-Many)
+// User.belongsTo(Transaction, {
+//     foreignKey:
+// })
 
-// Transaction <-> User (One-To-Many)
-Transaction.belongsTo(User, {
+// Budget <-> User (One-To-Many)
+Budget.belongsTo(User, {
     foreignKey: 'user_id',
     as: 'user'
 });
 
-User.hasMany(Transaction, {
+User.hasMany(Budget, {
     foreignKey: 'user_id',
+    as: 'budget'
+});
+
+// Transaction <-> Budget (One-To-Many)
+Transaction.belongsTo(Budget, {
+    foreignKey: 'budget_id',
+    as: 'budget'
+});
+
+Budget.hasMany(Transaction, {
+    foreignKey: 'budget_id',
     as: 'operations'
 });
+
 
 // User <-> Quest (Many-To-Many)
 User.belongsToMany(Quest, {
@@ -89,12 +105,13 @@ Shop.belongsToMany(User, {
 // Shop <-> Collection (One-To-Many)
 Shop.belongsTo(Collection, {
     foreignKey: 'collection_id',
-    as: 'shop'
+    as: 'items_collection',
+    onDelete: 'CASCADE'
 });
 
 Collection.hasMany(Shop, {
     foreignKey: 'collection_id',
-    as: 'items'
+    as: 'items_shop'
 });
 
-module.exports = { User, Collection, Quest, Shop, Transaction, Family };
+module.exports = { User, Collection, Quest, Shop, Transaction, Budget, Family };

@@ -36,7 +36,7 @@ CREATE TABLE collection (
 CREATE TABLE shop (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     price int NOT NULL,
-    collection_id INT REFERENCES collection(id),
+    collection_id INT REFERENCES collection(id) ON DELETE CASCADE,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ
 );
@@ -44,6 +44,7 @@ CREATE TABLE shop (
 CREATE TABLE transaction (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     date TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    label text,
     operation int NOT NULL,
     user_id int REFERENCES "user"(id),
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
@@ -62,7 +63,7 @@ CREATE TABLE quest (
 );
 
 CREATE TABLE user_has_collection(
-    collection_id int REFERENCES collection(id),
+    collection_id int REFERENCES collection(id) ON DELETE CASCADE,
     user_id int REFERENCES "user"(id),
     active BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (collection_id, user_id),
@@ -89,7 +90,7 @@ CREATE TABLE user_has_quest (
 
 CREATE TABLE user_has_shop (
     user_id int REFERENCES "user"(id),
-    shop_id int REFERENCES shop(id),
+    shop_id int REFERENCES shop(id) ON DELETE CASCADE,
     date TIMESTAMPTZ DEFAULT NOW(),
     PRIMARY KEY (user_id, shop_id),
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
