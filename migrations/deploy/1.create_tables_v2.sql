@@ -84,6 +84,7 @@ CREATE TABLE user_has_quest (
     user_id int REFERENCES "user"(id),
     quest_id int REFERENCES quest(id),
     PRIMARY KEY (user_id, quest_id),
+    state int CHECK (state IN (1, 2, 3)) DEFAULT 1, -- 1 = pas acceptée | 2 = en cours | 3 = terminée
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ
 );

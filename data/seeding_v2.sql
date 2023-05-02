@@ -65,15 +65,15 @@ INSERT INTO transaction(name, amount, budget_id) VALUES
 
 
 
-INSERT INTO user_has_quest(user_id, quest_id) VALUES
-(1,1),
-(1,2),
-(2,4),
-(2,1),
-(6,1),
-(6,2),
-(6,3),
-(6,4);
+INSERT INTO user_has_quest(user_id, quest_id, state) VALUES
+(1,1,2),
+(1,2,2),
+(2,4,2),
+(2,1,2),
+(6,1,2),
+(6,2,2),
+(6,3,1),
+(6,4,3);
 
 
 

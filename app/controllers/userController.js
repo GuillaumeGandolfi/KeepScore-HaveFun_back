@@ -206,14 +206,18 @@ const userController = {
                 replacements: { userId, questExp },
                 type: User.sequelize.QueryTypes.SELECT
               });
-            console.log('ICIIIIIIIIIIIIIIIII')
-            const userQuest = await UserQuest.findOne({ where: { user_id: userId, quest_id: questId } });
-            
-            // // Supprimer le lien user_has_quest
-            // await UserQuest.destroy({ where: { userId, questId } });
-            // console.log(User.findByPk(userId))
 
-            res.status(200).json({ message: 'Quest completed', result });
+            
+            const questToChange = await UserQuest.findOne({where: {user_id:userId, quest_id:questId}})
+
+            if(questToChange.state === 2){
+                questToChange.state = 3;
+            } else {
+                res.status(500).json(error.toString());
+            }
+            await questToChange.save();
+
+            res.status(200).json({ message: 'Quest completed', questToChange });
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Error completing quest' });
