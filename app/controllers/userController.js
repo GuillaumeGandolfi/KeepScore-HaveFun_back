@@ -181,6 +181,34 @@ const userController = {
         }
     },
 
+    userFinishQuest: async (req, res) => {
+        // Je récupère l'userId grâce au token d'authentification
+        const token = req.headers.authorization.split(' ')[1];
+        const decodedToken = jwt.verify(token, 'secret-key');
+        const userId = decodedToken?.userId;
+
+        const questId = req.params.id; 
+
+        try {
+
+            // !TODO Possibilité de faire avec des sqlqueries ??
+            // Mettre à jour la table user_has_quest pour retirer la quete finie
+            await pool.query('DELETE FROM user_has_quest WHERE user_id = $1 AND quest_id = $2', [userId, questId]);
+            // Récupérer la récompense d'expérience de la quête terminée
+            const result = await pool.query('SELECT reward_exp FROM quest WHERE id = $1', [questId]);
+            const questExp = result.rows[0].reward_exp;
+            // Appeler la fonction de calcul de niveau
+            const result2 = await pool.query('SELECT calculate_level($1, $2)', [userId, questExp]);
+            const newLevel = result2.rows[0].calculate_level;
+
+            // !TODO Possibilité de faire depuis un datamapper ?
+
+            res.status(200).json({ message: 'Quest completed', newLevel: newLevel });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Error completing quest' });
+        }
+    },
 };
 
 module.exports = userController;
