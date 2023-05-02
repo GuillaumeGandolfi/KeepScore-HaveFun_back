@@ -40,9 +40,6 @@ class UserQuest extends Model {
         );
     }
 
-    static associate(models) {
-        // définit les relations avec d'autres modèles
-    }
 }
 
 
