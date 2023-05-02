@@ -16,7 +16,7 @@ const budgetController = {
         }
     },
 
-    getOneBudgetFromOneUser : async (req, res) => {
+    getAllBudgetsFromOneUser : async (req, res) => {
         try {
             const userId = req.params.userId;
             const budgets = await Budget.findAll({

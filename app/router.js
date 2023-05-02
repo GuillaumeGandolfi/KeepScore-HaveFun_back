@@ -71,7 +71,7 @@ router.delete('/transaction/:id',  transactionController.deleteTransaction);
 /** Budget */
 router.get('/budgets', budgetController.getAllBudgets);
 router.get('/budget/:id', budgetController.getOneBudget);
-router.get('/budget-user/:userId', budgetController.getOneBudgetFromOneUser);
+router.get('/budget-user/:userId', budgetController.getAllBudgetsFromOneUser);
 router.post('/budget', budgetController.createBudget);
 router.put('/budget/:id', budgetController.modifyBudget);
 router.delete('/budget/:id', budgetController.deleteBudget);
