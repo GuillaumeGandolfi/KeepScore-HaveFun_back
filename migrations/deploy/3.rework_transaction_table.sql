@@ -4,8 +4,9 @@ BEGIN;
 
 CREATE TABLE budget (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    label text NOT NULL,
-    value int NOT NULL,
+    name text NOT NULL,
+    amount int NOT NULL,
+    color text NOT NULL,
     user_id int REFERENCES "user"(id),
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ

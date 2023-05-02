@@ -5,8 +5,9 @@ const sequelize = require("../database");
 class Budget extends Model { }
 
 Budget.init({
-    value: DataTypes.INTEGER,
-    label: DataTypes.TEXT
+    amount: DataTypes.INTEGER,
+    name: DataTypes.TEXT,
+    color: DataTypes.TEXT,
 
 }, {
     sequelize,

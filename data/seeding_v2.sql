@@ -47,10 +47,10 @@ INSERT INTO shop(price, collection_id) VALUES
 INSERT INTO user_has_collection(collection_id,user_id) 
 VALUES (1,1),(2,1),(3,2),(4,2),(5,2);
 
-INSERT INTO budget(label, value, user_id) VALUES
-('Voiture', 1000, 6),
-('Courses', 750, 6),
-('Vacances', 2000, 6);
+INSERT INTO budget(name, amount, color, user_id) VALUES
+('Voiture', 1000, 'green', 6),
+('Courses', 750, 'red', 6),
+('Vacances', 2000, 'orange', 6);
 
 
 INSERT INTO transaction(label, operation, budget_id) VALUES

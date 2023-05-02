@@ -26,7 +26,7 @@ CREATE DOMAIN positive_value AS int
 ALTER TABLE "shop" ALTER COLUMN price SET DATA TYPE positive_value;
 ALTER TABLE "quest" ALTER COLUMN reward_exp SET DATA TYPE positive_value;
 ALTER TABLE "quest" ALTER COLUMN reward_coin SET DATA TYPE positive_value;
-ALTER TABLE "budget" ALTER COLUMN value SET DATA TYPE positive_value;
+ALTER TABLE "budget" ALTER COLUMN amount SET DATA TYPE positive_value;
 
 -- domain email
 CREATE DOMAIN email AS TEXT 

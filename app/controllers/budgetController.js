@@ -1,4 +1,5 @@
-const { Budget } = require('../models');
+const { Budget, User } = require('../models');
+const { associations } = require('../models/User');
 
 const budgetController = {
 
@@ -11,6 +12,22 @@ const budgetController = {
         } catch (error) {
             console.error(error);
             console.trace(error);
+            res.status(500).json(error);
+        }
+    },
+
+    getOneBudgetFromOneUser : async (req, res) => {
+        try {
+            const userId = req.params.userId;
+            const budgets = await Budget.findAll({
+                attributes: ['id', 'name', 'amount', 'color'],
+                where: {
+                    user_id: userId
+                }
+            });
+            res.status(200).json(budgets);
+        } catch (error) {
+            console.error(error);
             res.status(500).json(error);
         }
     },
