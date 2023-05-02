@@ -27,7 +27,7 @@ router.post('/user',  userController.createUser);
 router.put('/user/:id',  userController.modifyUser);
 router.delete('/user/:id',  userController.deleteUser);
 router.post('/user/add-friend', tokenMiddleware,  userController.addFriend);
-
+router.post('/user/finish-quest/:id', tokenMiddleware, userController.userFinishQuest);
 
 /** Families */
 router.get('/families',  familyController.getAllFamilies);

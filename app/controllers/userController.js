@@ -1,6 +1,7 @@
-const { User } = require("../models");
+const { User, Quest, UserQuest } = require("../models");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
+const jwt = require('jsonwebtoken');
 
 // Schema du mot de passe
 const schema = Joi.object({
@@ -190,20 +191,29 @@ const userController = {
         const questId = req.params.id; 
 
         try {
+            // Trouver la quête correspondante : 
+            const quest = await Quest.findOne({ where: { id: questId }});
 
-            // !TODO Possibilité de faire avec des sqlqueries ??
-            // Mettre à jour la table user_has_quest pour retirer la quete finie
-            await pool.query('DELETE FROM user_has_quest WHERE user_id = $1 AND quest_id = $2', [userId, questId]);
+            if (!quest) {
+                return res.status(404).json({message: 'Quest not found'});
+            };
+
             // Récupérer la récompense d'expérience de la quête terminée
-            const result = await pool.query('SELECT reward_exp FROM quest WHERE id = $1', [questId]);
-            const questExp = result.rows[0].reward_exp;
+            const questExp = quest.reward_exp;
+
             // Appeler la fonction de calcul de niveau
-            const result2 = await pool.query('SELECT calculate_level($1, $2)', [userId, questExp]);
-            const newLevel = result2.rows[0].calculate_level;
+            const result = await User.sequelize.query('SELECT calculate_level(:userId, :questExp)', {
+                replacements: { userId, questExp },
+                type: User.sequelize.QueryTypes.SELECT
+              });
+            console.log('ICIIIIIIIIIIIIIIIII')
+            const userQuest = await UserQuest.findOne({ where: { user_id: userId, quest_id: questId } });
+            
+            // // Supprimer le lien user_has_quest
+            // await UserQuest.destroy({ where: { userId, questId } });
+            // console.log(User.findByPk(userId))
 
-            // !TODO Possibilité de faire depuis un datamapper ?
-
-            res.status(200).json({ message: 'Quest completed', newLevel: newLevel });
+            res.status(200).json({ message: 'Quest completed', result });
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Error completing quest' });

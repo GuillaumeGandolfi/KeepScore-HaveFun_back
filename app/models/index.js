@@ -7,6 +7,7 @@ const Shop = require("./Shop");
 const Transaction = require("./Transaction");
 const Family = require("./Family");
 const Budget = require("./Budget");
+const UserQuest = require("./UserQuest");
 
 // Family <-> User (One-To-Many)
 User.belongsTo(Family, {
@@ -114,4 +115,4 @@ Collection.hasMany(Shop, {
     as: 'items_shop'
 });
 
-module.exports = { User, Collection, Quest, Shop, Transaction, Budget, Family };
+module.exports = { User, Collection, Quest, Shop, Transaction, Budget, Family, UserQuest};
