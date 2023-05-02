@@ -1,7 +1,7 @@
 %syntax-version=1.0.0
 %project=kshf
 
-1.create_tables_v2 2023-05-02T08:13:49Z Etudiant O'clock <student@teleporter> # création des tables
-2.add_constraint_delete 2023-05-02T08:13:50Z Etudiant O'clock <student@teleporter> # Ajout des contraintes ON DELETE CASCADE
-3.rework_transaction_table 2023-05-02T08:13:51Z Etudiant O'clock <student@teleporter> # Ajout d'une table budget lié a user, la table transaction lié a budget
-4.domain_index_check 2023-05-02T08:13:52Z Etudiant O'clock <student@teleporter> # Ajout d'index, de check, etc...
+1.create_tables_v2 2023-05-02T09:30:18Z Etudiant O'clock <student@teleporter> # création des tables
+2.add_constraint_delete 2023-05-02T09:30:18Z Etudiant O'clock <student@teleporter> # Ajout des contraintes ON DELETE CASCADE
+3.rework_transaction_table 2023-05-02T09:30:20Z Etudiant O'clock <student@teleporter> # Ajout d'une table budget lié a user, la table transaction lié a budget
+4.domain_index_check 2023-05-02T09:30:21Z Etudiant O'clock <student@teleporter> # Ajout d'index, de check, etc...

@@ -20,7 +20,7 @@ const budgetController = {
         try {
             const userId = req.params.userId;
             const budgets = await Budget.findAll({
-                attributes: ['id', 'name', 'amount', 'color'],
+                attributes: ['id', 'name', 'amount', 'color', 'created_at'],
                 where: {
                     user_id: userId
                 }

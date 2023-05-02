@@ -60,6 +60,7 @@ router.delete('/shop/:id',  shopController.deleteItemFromShop);
 router.get('/transactions',  transactionController.getAllTransactions);
 router.get('/transactions/budget/:id', transactionController.getAllTransactionsOfBudget);
 router.get('/transaction/:id',  transactionController.getOneTransaction);
+router.get('/transactions/user/:id', transactionController.getAllTransactionsOfUser);
 router.get('/transaction/day/:id',tokenMiddleware, transactionController.getTransactionOfToday);
 router.get('/transaction/week/:id',tokenMiddleware, transactionController.getTransactionOfWeek);
 router.get('/transaction/month/:id',tokenMiddleware, transactionController.getTransactionOfMonth);

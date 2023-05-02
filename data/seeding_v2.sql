@@ -53,7 +53,7 @@ INSERT INTO budget(name, amount, color, user_id) VALUES
 ('Vacances', 2000, 'orange', 6);
 
 
-INSERT INTO transaction(label, operation, budget_id) VALUES
+INSERT INTO transaction(name, amount, budget_id) VALUES
 ('Auchan', 150, 2),
 ('Leclerc',85, 2),
 ('Intermarché', 100, 2),

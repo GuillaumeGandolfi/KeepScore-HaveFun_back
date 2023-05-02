@@ -23,6 +23,26 @@ const transactionController = {
             res.status(500).json(error.toString());
         }
     },
+
+    getAllTransactionsOfUser: async (req, res) => {
+        try {
+            const userId = req.params.id;
+            const transactions = await Transaction.findAll({
+                attributes: ['id', 'name', 'amount', 'created_at', 'budget_id'],
+                include: [{
+                    model: Budget,
+                    as: 'budget',
+                    where: {user_id: userId},
+                    attributes: []
+                }],
+            });
+            res.status(200).json(transactions);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json(error);
+        }
+    },
+
     getAllTransactionsOfBudget: async (req, res) => {
         try {
             const budgetId = req.params.id;
