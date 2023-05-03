@@ -181,12 +181,7 @@ const userController = {
             res.status(500).json('Error adding friend');
         }
     },
-
     userFinishQuest: async (req, res) => {
-
-        // !TODO La méthode fonctionne que sur les quêtes de state = 2. Si le state n'est pas le bon , l'application crash !!!
-        // !TODO Il faut donc corriger ça. La réponse est envoyé avec les informations du user, envoyer que le level.
-
 
         // Je récupère l'userId grâce au token d'authentification
         const token = req.headers.authorization.split(' ')[1];
@@ -202,7 +197,7 @@ const userController = {
             if (!quest) {
                 return res.status(404).json({message: 'Quest not found'});
             };
-
+            // Trouver l'user correspondant : 
             const user = await User.findOne({where: { id:userId }});
             if(!user){
                 return res.status(404).json({message: 'User not found'});
@@ -217,22 +212,38 @@ const userController = {
                 type: User.sequelize.QueryTypes.SELECT
               });
 
-            
+            // trouver le lien 
             const questToChange = await UserQuest.findOne({where: {user_id:userId, quest_id:questId}})
-
+            
+            // Vérifier le lien, et le changer si besoin :
             if(questToChange.state === 2){
                 questToChange.state = 3;
             } else {
-                res.status(500).json('Can not finish this quest');
+                return res.status(400).json({message: 'Quest cannot be completed'});
             }
-            await questToChange.save();
 
+            await questToChange.save();
             res.status(200).json({ message: 'Quest completed', questToChange, user  });
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Error completing quest' });
         }
     },
+    getAllQuestOfOneUser: async (req, res) => {
+        // Je récupère l'userId grâce au token d'authentification
+        const token = req.headers.authorization.split(' ')[1];
+        const decodedToken = jwt.verify(token, 'secret-key');
+        const userId = decodedToken?.userId;
+
+        try {
+            const userQuests = await UserQuest.findAll({where: {'$user_id$': userId}})
+            res.status(200).json(userQuests);
+        } catch (error) {
+            console.trace(error);
+            res.status(500).json(error.toString())
+        }  
+    }
+    
 };
 
 module.exports = userController;

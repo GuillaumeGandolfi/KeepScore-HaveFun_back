@@ -23,6 +23,7 @@ const router = express.Router();
 /** Users */
 router.get('/users',  userController.getAllUsers);
 router.get('/user/:id',  userController.getOneUser);
+router.get('/user-quest', tokenMiddleware, userController.getAllQuestOfOneUser);
 router.post('/user',  userController.createUser);
 router.put('/user/:id',  userController.modifyUser);
 router.delete('/user/:id',  userController.deleteUser);
@@ -42,6 +43,7 @@ router.get('/quest/:id',  questController.getOneQuest);
 router.post('/quest',  questController.createQuest);
 router.put('/quest/:id',  questController.modifyQuest);
 router.delete('/quest/:id',  questController.deleteQuest);
+
 
 /** Collections */
 router.get('/collections',  collectionController.getAllCollections);
@@ -65,9 +67,10 @@ router.get('/transaction/day/:id',tokenMiddleware, transactionController.getTran
 router.get('/transaction/week/:id',tokenMiddleware, transactionController.getTransactionOfWeek);
 router.get('/transaction/month/:id',tokenMiddleware, transactionController.getTransactionOfMonth);
 router.get('/transaction/year/:id',tokenMiddleware, transactionController.getTransactionOfYear);
-router.post('/transaction',  transactionController.createTransaction);
+router.post('/transaction/',  transactionController.createTransaction);
 router.put('/transaction/:id', transactionController.modifyTransaction);
 router.delete('/transaction/:id',  transactionController.deleteTransaction);
+
 
 /** Budget */
 router.get('/budgets', budgetController.getAllBudgets);

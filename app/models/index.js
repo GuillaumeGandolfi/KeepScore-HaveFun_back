@@ -9,6 +9,7 @@ const Family = require("./Family");
 const Budget = require("./Budget");
 const UserQuest = require("./UserQuest");
 
+
 // Family <-> User (One-To-Many)
 User.belongsTo(Family, {
     foreignKey: 'family_id',
@@ -28,10 +29,6 @@ User.belongsToMany(User, {
     through: "user_has_friend"
 });
 
-// // User <-> Transaction (One-To-Many)
-// User.belongsTo(Transaction, {
-//     foreignKey:
-// })
 
 // Budget <-> User (One-To-Many)
 Budget.belongsTo(User, {

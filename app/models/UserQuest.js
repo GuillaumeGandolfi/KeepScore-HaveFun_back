@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require("../database");
 
-class UserQuest extends Model { }
+class UserQuest extends Model {}
 
 UserQuest.init({
     user_id: {

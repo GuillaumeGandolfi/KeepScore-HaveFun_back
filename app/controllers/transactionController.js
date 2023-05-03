@@ -86,16 +86,12 @@ const transactionController = {
         const token = req.headers.authorization.split(' ')[1];
         const decodedToken = jwt.verify(token, 'secret-key');
         const userId = decodedToken?.userId;
+        
         try {
             console.log(req.body)
-            const {
-                name,
-                amount,
-                budget_id
-            } = req.body.lastExpense;
+            const { name, amount } = req.body.lastExpense;
             // Je crée un array qui récupère mes erreurs : 
             const bodyErrors = [];
-            console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',budget_id)
             if (!name) {
                 bodyErrors.push('name can not be empty');
             }
@@ -148,16 +144,16 @@ const transactionController = {
             } else {
                 // On récupère les nouvelles infos dans le body :
                 const {
-                    operation,
-                    label,
+                    name,
+                    amount,
                     budget_id
                 } = req.body;
                 // Et on change que les params présent dans le body :
-                if (operation) {
-                    transaction.operation = operation;
+                if (name) {
+                    transaction.name = name;
                 }
-                if (label) {
-                    transaction.label = label;
+                if (amount) {
+                    transaction.amount = amount;
                 }
                 if (budget_id) {
                     transaction.budget_id = budget_id;
