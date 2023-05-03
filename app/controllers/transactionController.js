@@ -82,22 +82,25 @@ const transactionController = {
         }
     },
     createTransaction: async (req, res) => {
+        // Je récupère l'userId grâce au token d'authentification
+        const token = req.headers.authorization.split(' ')[1];
+        const decodedToken = jwt.verify(token, 'secret-key');
+        const userId = decodedToken?.userId;
         try {
-            // console.log(req.body)
+            console.log(req.body)
             const {
-                label,
-                operation,
-                user_id,
+                name,
+                amount,
                 budget_id
-            } = req.body;
+            } = req.body.lastExpense;
             // Je crée un array qui récupère mes erreurs : 
             const bodyErrors = [];
-
-            if (!operation) {
-                bodyErrors.push('operation can not be empty');
+            console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',budget_id)
+            if (!name) {
+                bodyErrors.push('name can not be empty');
             }
-            if (!user_id) {
-                bodyErrors.push('user_id can not be empty');
+            if (!amount) {
+                bodyErrors.push('amount can not be empty');
             }
             if (!budget_id) {
                 bodyErrors.push('budget_id can not be empty')
@@ -107,14 +110,28 @@ const transactionController = {
                 res.status(404).json(bodyErrors);
             } else {
                 let newTransaction = Transaction.build({
-                    operation,
-                    label,
-                    user_id,
+                    name,
+                    amount,
+                    user_id:userId,
                     budget_id
                 });
-
                 await newTransaction.save();
-                res.status(200).json(newTransaction);
+
+                const transactions = await Transaction.findAll({
+                    attributes: ['id', 'name', 'amount', 'created_at', 'budget_id'],
+                    include: [{
+                        model: Budget,
+                        as: 'budget',
+                        where: {user_id: userId},
+                        attributes: []
+                    }],
+                }); 
+
+                // Je trie les valeurs qui m'intéresse 
+                const allTransactions = transactions.map(transaction => transaction.dataValues)
+
+
+                res.status(200).json(allTransactions);
             }
         } catch (error) {
             console.trace(error);

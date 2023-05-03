@@ -1,5 +1,5 @@
 const { Budget, User } = require('../models');
-const { associations } = require('../models/User');
+const jwt = require('jsonwebtoken');
 
 const budgetController = {
 
@@ -51,27 +51,47 @@ const budgetController = {
     },
 
     createBudget: async (req, res) => {
+        // Je récupère l'userId grâce au token d'authentification
+        const token = req.headers.authorization.split(' ')[1];
+        const decodedToken = jwt.verify(token, 'secret-key');
+        const userId = decodedToken?.userId;
+
+
         try  {
-            const { value, label } = req.body;
+            const { name, amount, color} = req.body.lastBudget;
             const errors = [];
-    
-            if (!value) {
-                errors.push('value can not be empty');
+            
+            if (!name) {
+                errors.push('name can not be empty');
             }
-            if (!label) {
-                errors.push('label can not be empty');
+            if (!amount) {
+                errors.push('amount can not be empty');
             }
+            if (!color) {
+                errors.push('color can not be empty');
+            }
+
 
             if (errors.length) {
                 res.status(400).json(errors);
             } else {
                 let newBudget = Budget.build({
-                    value,
-                    label
+                    name,
+                    amount,
+                    color,
+                    user_id:userId,
                 });
+            await newBudget.save();
+            const budgets = await Budget.findAll({
+                attributes: ['id', 'name', 'amount', 'color', 'created_at'],
+                where: {
+                    user_id: userId
+                }
+            });
 
-                await newBudget.save();
-                res.status(200).json(newBudget);
+            const allBudgets = budgets.map(budget => budget.dataValues)
+
+            res.status(200).json(allBudgets);
             }
         } catch (error) {
             console.error(error);
@@ -88,13 +108,13 @@ const budgetController = {
             if (!budget) {
                 res.status(404).json('Budget with the id: ' + questId + ' does not exist');
             } else {
-                const { value, label } = req.body;
+                const { name, amount, } = req.body;
 
-                if (value) {
-                    budget.value = value;
+                if (name) {
+                    budget.name = name;
                 }
-                if (label) {
-                    budget.label = label;
+                if (amount) {
+                    budget.amount = amount;
                 }
 
                 await budget.save();
