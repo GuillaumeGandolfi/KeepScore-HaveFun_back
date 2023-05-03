@@ -56,9 +56,13 @@ const budgetController = {
         const decodedToken = jwt.verify(token, 'secret-key');
         const userId = decodedToken?.userId;
 
+        // Je randomise des valeurs HSL pour la couleur du budget
+        const hue = Math.floor(Math.random() * 360);
+        const saturation = Math.floor(Math.random() * 100);
+        const lightness = Math.floor(Math.random() * 50) + 25;
 
         try  {
-            const { name, amount, color} = req.body.lastBudget;
+            const { name, amount} = req.body.lastBudget;
             const errors = [];
             
             if (!name) {
@@ -67,10 +71,9 @@ const budgetController = {
             if (!amount) {
                 errors.push('amount can not be empty');
             }
-            if (!color) {
-                errors.push('color can not be empty');
-            }
-
+            
+            // J'attribue une couleur randomisé au budget
+            const color = `${hue} ${saturation}% ${lightness}%`;
 
             if (errors.length) {
                 res.status(400).json(errors);

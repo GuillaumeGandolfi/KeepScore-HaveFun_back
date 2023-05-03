@@ -48,9 +48,9 @@ INSERT INTO user_has_collection(collection_id,user_id)
 VALUES (1,1),(2,1),(3,2),(4,2),(5,2);
 
 INSERT INTO budget(name, amount, color, user_id) VALUES
-('Voiture', 1000, 'green', 6),
-('Courses', 750, 'red', 6),
-('Vacances', 2000, 'orange', 6);
+('Voiture', 1000, '204 65% 50%', 6),
+('Courses', 750, '135 65% 50%', 6),
+('Vacances', 2000, '350 65% 50%', 6);
 
 
 INSERT INTO transaction(name, amount, budget_id) VALUES

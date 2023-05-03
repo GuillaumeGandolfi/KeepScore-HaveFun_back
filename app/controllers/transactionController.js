@@ -89,7 +89,7 @@ const transactionController = {
         
         try {
             console.log(req.body)
-            const { name, amount } = req.body.lastExpense;
+            const { name, amount, budget_id } = req.body.lastExpense;
             // Je crée un array qui récupère mes erreurs : 
             const bodyErrors = [];
             if (!name) {
