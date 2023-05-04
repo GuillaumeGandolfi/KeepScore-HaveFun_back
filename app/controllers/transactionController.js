@@ -186,9 +186,9 @@ const transactionController = {
     },
     getTransactionOfToday: async (req, res) => {
         const userId = getUserId(req);
+        console.log(userId);
 
         try {
-           
             const now = new Date();
             // On instancie une journée
             const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
