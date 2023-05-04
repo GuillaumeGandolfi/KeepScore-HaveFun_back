@@ -28,7 +28,6 @@ const budgetController = {
                     user_id: userId
                 }
             });
-            console.log(bugdets);
             res.status(200).json(budgets);
         } catch (error) {
             console.error(error);
