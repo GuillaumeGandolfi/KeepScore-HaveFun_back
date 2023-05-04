@@ -29,7 +29,7 @@ router.put('/user/:id',  userController.modifyUser);
 router.delete('/user/:id',  userController.deleteUser);
 router.post('/user/add-friend', tokenMiddleware,  userController.addFriend);
 router.post('/user/finish-quest/:id', tokenMiddleware, userController.userFinishQuest);
-router.delete('user/transaction-budget-delete', userController.deleteAllTransactionBudgetFromOneUser);
+router.delete('user/transaction-budget-delete', tokenMiddleware, userController.deleteAllTransactionBudgetFromOneUser);
 
 /** Families */
 router.get('/families',  familyController.getAllFamilies);
