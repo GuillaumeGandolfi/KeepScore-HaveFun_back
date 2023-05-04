@@ -17,7 +17,9 @@ const budgetController = {
     },
 
     getAllBudgetsFromOneUser : async (req, res) => {
+        console.log(req);
         try {
+            console.log("let's gooo");
             const userId = req.params.userId;
             const budgets = await Budget.findAll({
                 attributes: ['id', 'name', 'amount', 'color', 'created_at'],
@@ -25,6 +27,7 @@ const budgetController = {
                     user_id: userId
                 }
             });
+            console.log(bugdets);
             res.status(200).json(budgets);
         } catch (error) {
             console.error(error);
@@ -62,7 +65,6 @@ const budgetController = {
         const lightness = Math.floor(Math.random() * 50) + 25;
 
         try  {
-            console.log(req.body);
             const { name, amount} = req.body.lastBudget;
             const errors = [];
             
