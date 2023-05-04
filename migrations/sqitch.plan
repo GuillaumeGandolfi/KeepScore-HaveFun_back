@@ -1,7 +1,4 @@
 %syntax-version=1.0.0
 %project=kshf
 
-1.create_tables_v2 2023-05-04T11:39:28Z Etudiant O'clock <student@teleporter> # création des tables
-2.add_constraint_delete 2023-05-04T11:39:30Z Etudiant O'clock <student@teleporter> # Ajout des contraintes ON DELETE CASCADE
-3.rework_transaction_table 2023-05-04T11:39:31Z Etudiant O'clock <student@teleporter> # Ajout d'une table budget lié a user, la table transaction lié a budget
-4.domain_index_check 2023-05-04T11:39:33Z Etudiant O'clock <student@teleporter> # Ajout d'index, de check, etc...
+5.create_tables_v3 2023-05-04T12:59:10Z Etudiant O'clock <student@teleporter> # Version 3 de la base de donnée
