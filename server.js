@@ -20,7 +20,7 @@ const sessionMiddleware = session({
     resave: true,
     saveUninitialized : true,
     cookie : {
-        secure : false ,// http mode doesn't require it 
+        secure : true ,// http mode doesn't require it 
         maxAge : (10006060) // durée de la session en millisecondes - 1 heure
     }
 });
@@ -51,6 +51,6 @@ app.use(express.static('public'));
 
 
 const PORT = process.env.PORT ?? 3000;
-app.listen(3000, ()=>{
+app.listen(PORT, ()=>{
     console.log(`Le serveur tourne sur le port : ${PORT}`);
 });
