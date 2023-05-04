@@ -68,7 +68,7 @@ router.get('/transaction/day/:id',tokenMiddleware, transactionController.getTran
 router.get('/transaction/week/:id',tokenMiddleware, transactionController.getTransactionOfWeek);
 router.get('/transaction/month/:id',tokenMiddleware, transactionController.getTransactionOfMonth);
 router.get('/transaction/year/:id',tokenMiddleware, transactionController.getTransactionOfYear);
-router.post('/transaction',  transactionController.createTransaction);
+router.post('/transaction', tokenMiddleware, transactionController.createTransaction);
 router.put('/transaction/:id', transactionController.modifyTransaction);
 router.delete('/transaction/:id',  transactionController.deleteTransaction);
 
