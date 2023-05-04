@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 
-const PG_URL = process.env.DATABASE_URL || "postgresql://postgres:8ugfcb6DvJlRenGPJA2t@containers-us-west-173.railway.app:5735/railway";
+const PG_URL = process.env.DATABASE_URL || "postgresql://postgres:QPQ1SUGQ5IHxkJ5CAqFv@containers-us-west-129.railway.app:6128/railway";
 
 const defineAttributes = {
     define: {

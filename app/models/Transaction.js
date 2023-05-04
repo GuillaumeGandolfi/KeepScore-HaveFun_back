@@ -5,7 +5,7 @@ const sequelize = require("../database");
 class Transaction extends Model { }
 
 Transaction.init({
-    amount: DataTypes.INTEGER,
+    amount: DataTypes.DECIMAL,
     name: DataTypes.TEXT
 
 }, {

@@ -65,8 +65,8 @@ CREATE TABLE budget (
 
 CREATE TABLE transaction (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name text,
-    amount int NOT NULL,
+    name text NOT NULL,
+    amount numeric NOT NULL,
     budget_id int REFERENCES budget(id),
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ
