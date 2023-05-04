@@ -34,18 +34,8 @@ app.use(cors('*')); // On autorise tout les domaines à faire du Cross Origin Re
 app.use(bodyParser.none()); // permet de traduire les données du front
 
 
-
-// app.set('view engine', 'ejs');
-// app.set('views', './app/view');
-
-// app.use(express.static('public'));
-
-
-
-
 // intégration du middleware pour les sessions
 app.use(sessionMiddleware);
-
 
 
 app.use(bodyParser.none());
