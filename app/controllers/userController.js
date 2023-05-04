@@ -2,6 +2,7 @@ const { User, Quest, UserQuest, Transaction, Budget } = require("../models");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 const jwt = require('jsonwebtoken');
+const getUserId = require('../utils/utils');
 
 // Schema du mot de passe
 const schema = Joi.object({
@@ -26,9 +27,8 @@ const userController = {
     },
 
     getOneUser: async (req, res) => {
+        const userId = getUserId(req);
         try {
-            const userId = req.params.id;
-            console.log(userId)
             const user = await User.findByPk(userId, {
                 include: [
                     {association: "budget",
@@ -97,9 +97,9 @@ const userController = {
         }
     },
     modifyUser: async (req, res) => {
-        try {
-            // On récupère les infos d'un utilisteur : 
-            const userId = req.params.id;
+        const userId = getUserId(req);
+
+        try {            
             const user = await User.findByPk(userId);
             // On test si cet utilisateur existe, si il n'existe pas on retourne une 404
             if (!user) {
@@ -150,8 +150,9 @@ const userController = {
         }
     },
     deleteUser: async (req, res) => {
+        const userId = getUserId(req);
+
         try {
-            const userId = req.params.id;
             const user = await User.findByPk(userId); // On instancie la liste a partir de la bdd
             await user.destroy();  // On utilise destroy() pour supprimer l'enregistrement de la bdd
             res.status(200).json('User deleted');
@@ -183,10 +184,8 @@ const userController = {
     },
     userFinishQuest: async (req, res) => {
 
-        // Je récupère l'userId grâce au token d'authentification
-        const token = req.headers.authorization.split(' ')[1];
-        const decodedToken = jwt.verify(token, 'secret-key');
-        const userId = decodedToken?.userId;
+        const userId = getUserId(req);
+
 
         const questId = req.params.id; 
 
@@ -230,10 +229,8 @@ const userController = {
         }
     },
     getAllQuestOfOneUser: async (req, res) => {
-        // Je récupère l'userId grâce au token d'authentification
-        const token = req.headers.authorization.split(' ')[1];
-        const decodedToken = jwt.verify(token, 'secret-key');
-        const userId = decodedToken?.userId;
+        const userId = getUserId(req);
+
 
         try {
             const userQuests = await UserQuest.findAll({where: {'$user_id$': userId}})
@@ -245,9 +242,8 @@ const userController = {
     },
 
     deleteAllTransactionBudgetFromOneUser: async (req, res) => {
-        const token = req.headers.authorization.split(' ')[1];
-        const decodedToken = jwt.verify(token, 'secret-key');
-        const userId = decodedToken?.userId;
+        const userId = getUserId(req);
+
 
         try {
             // Récupération des transactions de l'user

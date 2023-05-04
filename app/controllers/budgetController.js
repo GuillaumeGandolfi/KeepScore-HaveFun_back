@@ -17,10 +17,10 @@ const budgetController = {
     },
 
     getAllBudgetsFromOneUser : async (req, res) => {
+        const userId = getUserId(req);
         console.log(req);
         try {
             console.log("let's gooo");
-            const userId = req.params.userId;
             const budgets = await Budget.findAll({
                 attributes: ['id', 'name', 'amount', 'color', 'created_at'],
                 where: {
@@ -54,11 +54,8 @@ const budgetController = {
     },
 
     createBudget: async (req, res) => {
-        // Je récupère l'userId grâce au token d'authentification
-        const token = req.headers.authorization.split(' ')[1];
-        const decodedToken = jwt.verify(token, 'secret-key');
-        const userId = decodedToken?.userId;
-
+        const userId = getUserId(req);
+        
         // Je randomise des valeurs HSL pour la couleur du budget
         const hue = Math.floor(Math.random() * 360);
         const saturation = Math.floor(Math.random() * 100);

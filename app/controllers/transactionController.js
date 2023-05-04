@@ -10,6 +10,8 @@ const {
 const { Op } = require('sequelize');
 const dayjs = require('dayjs');
 const jwt = require('jsonwebtoken');
+const getUserId = require('../utils/utils');
+
 
 
 
@@ -25,8 +27,9 @@ const transactionController = {
     },
 
     getAllTransactionsOfUser: async (req, res) => {
+        const userId = getUserId(req);
+
         try {
-            const userId = req.params.id;
             const transactions = await Transaction.findAll({
                 attributes: ['id', 'name', 'amount', 'created_at', 'budget_id'],
                 include: [{
@@ -82,10 +85,7 @@ const transactionController = {
         }
     },
     createTransaction: async (req, res) => {
-        // Je récupère l'userId grâce au token d'authentification
-        const token = req.headers.authorization.split(' ')[1];
-        const decodedToken = jwt.verify(token, 'secret-key');
-        const userId = decodedToken?.userId;
+        const userId = getUserId(req);
         
         try {
             console.log(req.body)
@@ -185,14 +185,10 @@ const transactionController = {
         }
     },
     getTransactionOfToday: async (req, res) => {
-        try {
-            // Je récupère l'userId grâce au token d'authentification
-            const token = req.headers.authorization.split(' ')[1];
-            const decodedToken = jwt.verify(token, 'secret-key');
-            const userId = decodedToken?.userId ;
-            
-            
+        const userId = getUserId(req);
 
+        try {
+           
             const now = new Date();
             // On instancie une journée
             const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -222,13 +218,10 @@ const transactionController = {
         }
     },
     getTransactionOfWeek: async (req, res) => {
+        const userId = getUserId(req);
+
         try {
-            // Je récupère l'userId grâce au token d'authentification
-            const token = req.headers.authorization.split(' ')[1];
-            const decodedToken = jwt.verify(token, 'secret-key');
-            const userId = decodedToken?.userId;
-
-
+            
             // Trouver la date du lundi le plus proche avant la date actuelle
             const startOfWeek = dayjs().startOf('week').add(1, 'day').startOf('day');
             // console.log('start of week',startOfWeek)
@@ -259,12 +252,9 @@ const transactionController = {
         }
     },
     getTransactionOfMonth: async (req, res) => {
+        const userId = getUserId(req);
+
         try {
-            
-            // Je récupère l'userId grâce au token d'authentification
-            const token = req.headers.authorization.split(' ')[1];
-            const decodedToken = jwt.verify(token, 'secret-key');
-            const userId = decodedToken?.userId;
             
             const now = new Date();
 
@@ -300,11 +290,9 @@ const transactionController = {
         }
     },
     getTransactionOfYear: async (req, res) => {
+        const userId = getUserId(req);
+
         try {
-            // Je récupère l'userId grâce au token d'authentification
-            const token = req.headers.authorization.split(' ')[1];
-            const decodedToken = jwt.verify(token, 'secret-key');
-            const userId = decodedToken?.userId;
 
             const now = new Date();
 

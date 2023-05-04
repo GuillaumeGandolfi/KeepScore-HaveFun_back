@@ -22,13 +22,13 @@ const router = express.Router();
 
 /** Users */
 router.get('/users',  userController.getAllUsers);
-router.get('/user/:id',  userController.getOneUser);
+router.get('/user', tokenMiddleware, userController.getOneUser);
 router.get('/user-quest', tokenMiddleware, userController.getAllQuestOfOneUser);
 router.post('/user',  userController.createUser);
-router.put('/user/:id',  userController.modifyUser);
-router.delete('/user/:id',  userController.deleteUser);
+router.put('/user', tokenMiddleware, userController.modifyUser);
+router.delete('/user', tokenMiddleware,  userController.deleteUser);
 router.post('/user/add-friend', tokenMiddleware,  userController.addFriend);
-router.post('/user/finish-quest/:id', tokenMiddleware, userController.userFinishQuest);
+router.post('/user/finish-quest', tokenMiddleware, userController.userFinishQuest);
 router.delete('user/transaction-budget-delete', tokenMiddleware, userController.deleteAllTransactionBudgetFromOneUser);
 
 /** Families */
@@ -76,7 +76,7 @@ router.delete('/transaction/:id',  transactionController.deleteTransaction);
 /** Budget */
 router.get('/budgets', budgetController.getAllBudgets);
 router.get('/budget/:id', budgetController.getOneBudget);
-router.get('/budget-user/:userId', budgetController.getAllBudgetsFromOneUser);
+router.get('/budget-user', tokenMiddleware, budgetController.getAllBudgetsFromOneUser);
 router.post('/budget', budgetController.createBudget);
 router.put('/budget/:id', budgetController.modifyBudget);
 router.delete('/budget/:id', budgetController.deleteBudget);
