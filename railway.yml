@@ -1,8 +1,0 @@
-name: godly-winter
-services:
-  app:
-    build: .
-    env:
-      PG_URL: postgres://admin_kshf:kshf@localhost:5432/kshf
-      PORT: 3000
-      NODE_ENV: production
