@@ -62,6 +62,7 @@ const budgetController = {
         const lightness = Math.floor(Math.random() * 50) + 25;
 
         try  {
+            console.log(req.body);
             const { name, amount} = req.body.lastBudget;
             const errors = [];
             
