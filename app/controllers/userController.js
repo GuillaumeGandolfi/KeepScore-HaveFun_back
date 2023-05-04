@@ -1,4 +1,4 @@
-const { User, Quest, UserQuest } = require("../models");
+const { User, Quest, UserQuest, Transaction, Budget } = require("../models");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 const jwt = require('jsonwebtoken');
@@ -242,8 +242,30 @@ const userController = {
             console.trace(error);
             res.status(500).json(error.toString())
         }  
-    }
-    
-};
+    },
+
+    deleteAllTransactionBudgetFromOneUser: async (req, res) => {
+        const token = req.headers.authorization.split(' ')[1];
+        const decodedToken = jwt.verify(token, 'secret-key');
+        const userId = decodedToken?.userId;
+
+        try {
+            // Récupération des transactions de l'user
+            const transactions = await Transaction.findAll({
+                where: {user_id: userId}
+            });
+            const budgets = await Budget.findAll({
+                where: {user_id: userId}
+            });
+
+            await transactions.destroy();
+            await budgets.destroy();
+            res.status(200).json('Transactions & budges deleted');
+        } catch (error) {
+            console.trace(error);
+            res.status(500).json(error);
+        }    
+    },
+}
 
 module.exports = userController;
