@@ -1,5 +1,6 @@
 const { Budget, User } = require('../models');
 const jwt = require('jsonwebtoken');
+const getUserId = require('../utils/utils');
 
 const budgetController = {
 

@@ -28,6 +28,7 @@ const transactionController = {
 
     getAllTransactionsOfUser: async (req, res) => {
         const userId = getUserId(req);
+        console.log(userId);
 
         try {
             const transactions = await Transaction.findAll({
@@ -186,7 +187,7 @@ const transactionController = {
     },
     getTransactionOfToday: async (req, res) => {
         const userId = getUserId(req);
-        console.log(userId);
+        console.log("DAAAAYYYYYY", userId);
 
         try {
             const now = new Date();
@@ -219,6 +220,7 @@ const transactionController = {
     },
     getTransactionOfWeek: async (req, res) => {
         const userId = getUserId(req);
+        console.log("WEEEKY", userId);
 
         try {
             
@@ -253,6 +255,7 @@ const transactionController = {
     },
     getTransactionOfMonth: async (req, res) => {
         const userId = getUserId(req);
+        console.log("moonths", userId);
 
         try {
             
@@ -291,7 +294,7 @@ const transactionController = {
     },
     getTransactionOfYear: async (req, res) => {
         const userId = getUserId(req);
-
+        console.log("TEEAR", userId);
         try {
 
             const now = new Date();
