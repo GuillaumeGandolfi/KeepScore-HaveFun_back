@@ -96,7 +96,7 @@ const shop = {
                 console.log('Supprimer', item.id);
                 if (confirm("Voulez vous vraiment supprimer cet élément ?")) {
                     try {
-                        const response = await fetch(`http://localhost:3000/collection/${item.id}`, {
+                        const response = await fetch(`/collection/${item.id}`, {
                             method: 'DELETE',
                         });
                         if (!response.ok) {
@@ -205,7 +205,7 @@ const shop = {
 
         if (confirm("Voulez vous vraiment modifier cet élément ?")) {
             try {
-                const response = await fetch(`http://localhost:3000/collection/${shop.elementId}`, {
+                const response = await fetch(`/collection/${shop.elementId}`, {
                     method: 'PUT',
                     body: json,
                     headers: {
