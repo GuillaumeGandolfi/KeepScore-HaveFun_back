@@ -24,7 +24,7 @@ const router = express.Router();
 router.get('/users', userController.getAllUsers);
 router.get('/user', tokenMiddleware, userController.getOneUser);
 router.get('/user-quest', tokenMiddleware, userController.getAllQuestOfOneUser);
-router.post('/user', userController.createUser);
+router.post('/user', tokenMiddleware, userController.createUser);
 router.put('/user', tokenMiddleware, userController.modifyUser);
 router.delete('/user', tokenMiddleware, userController.deleteUser);
 router.post('/user/add-friend', tokenMiddleware, userController.addFriend);
